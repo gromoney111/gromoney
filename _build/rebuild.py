@@ -99,6 +99,7 @@ HEADER = f"""<div class="utility-bar">
         <ul class="submenu">
           <li><a href="tools.html">All Calculators</a></li>
           <li><a href="emi-sip-calculator.html">EMI + SIP Freedom</a></li>
+          <li><a href="emi-mutual-fund-benefits.html">EMI Mutual Fund Guide</a></li>
         </ul>
       </li>
       <li><a href="contact.html">Contact</a></li>
@@ -140,6 +141,7 @@ FOOTER = f"""<footer class="site-footer">
       <a href="testimonials.html">Client Reviews</a>
       <a href="tools.html">Calculators</a>
       <a href="emi-sip-calculator.html">EMI + SIP Freedom</a>
+      <a href="emi-mutual-fund-benefits.html">EMI MF Benefits Guide</a>
       <a href="{LOGIN_URL}" target="_blank" rel="noopener">Client Login</a>
     </div>
     <div>
