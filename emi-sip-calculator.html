@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- SEO Meta Tags -->
+  <title>EMI SIP Freedom Calculator | Loan Se Azaadi – EMI + SIP Return Calculator 2026 | GroMoney Capital</title>
+  <meta name="description" content="Calculate how much SIP investment you need to recover your total EMI payments. Compare home loan, car loan, personal loan EMI with mutual fund SIP returns. Free EMI SIP Calculator with Top-up SIP option. Hindi & English support. By GroMoney Capital, AMFI ARN 270739." />
+  <meta name="keywords" content="EMI SIP calculator, loan vs SIP, SIP return calculator, home loan EMI calculator, SIP investment calculator, mutual fund SIP, EMI calculator India, SIP top-up calculator, loan freedom calculator, EMI se azaadi, SIP se loan wapas, best SIP for loan, SIP to recover EMI, loan SIP comparison calculator, GroMoney Capital, NJ Wealth Partner" />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="GroMoney Capital" />
+  <link rel="canonical" href="https://gromoneycapital.com/emi-sip-calculator.html" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="EMI SIP Freedom Calculator – Loan Ki Poori Rakam SIP Se Wapas Paayein" />
+  <meta property="og:description" content="Jaaniye kitni SIP karne se aapka poora loan amount + interest wapas aa sakta hai. Home loan, car loan, personal loan ke liye free calculator." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://gromoneycapital.com/emi-sip-calculator.html" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="EMI SIP Freedom Calculator | GroMoney Capital" />
+  <meta name="twitter:description" content="Calculate how SIP investments can recover your full loan + interest amount. Free, fast, bilingual." />
+
+  <!-- Favicon (matches main site) -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b3d6b'/%3E%3Ctext x='32' y='42' font-family='Arial' font-size='32' font-weight='bold' fill='%23f5a623' text-anchor='middle'%3EG%3C/text%3E%3C/svg%3E">
+
+  <!-- Schema.org Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "EMI SIP Freedom Calculator",
+    "url": "https://gromoneycapital.com/emi-sip-calculator.html",
+    "description": "A dual calculator that shows how much SIP is needed to recover total EMI payments including interest over the loan tenure.",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" },
+    "inLanguage": ["hi", "en"],
+    "publisher": { "@type": "Organization", "name": "GroMoney Capital", "url": "https://gromoneycapital.com" }
+  }
+  </script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Noto+Sans+Devanagari:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #0a0f1e;
+      --surface: #111827;
+      --surface2: #1a2235;
+      --surface3: #212d42;
+      --accent: #f59e0b;
+      --accent2: #10b981;
+      --accent3: #6366f1;
+      --danger: #ef4444;
+      --text: #f1f5f9;
+      --muted: #94a3b8;
+      --border: rgba(255,255,255,0.08);
+      --glow: rgba(245,158,11,0.15);
+      --glow2: rgba(16,185,129,0.15);
+      --radius: 16px;
+      --font: 'Sora', 'Noto Sans Devanagari', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font); background: var(--bg); color: var(--text); min-height: 100vh; overflow-x: hidden; }
+
+    body::before {
+      content: ''; position: fixed; inset: 0;
+      background:
+        radial-gradient(ellipse 80% 50% at 20% 10%, rgba(99,102,241,0.12) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 80% 80%, rgba(245,158,11,0.1) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 60% at 50% 50%, rgba(16,185,129,0.06) 0%, transparent 70%);
+      pointer-events: none; z-index: 0;
+    }
+
+    /* TOP THIN NAV BAR linking back to main site */
+    .topnav {
+      background: #07294a; color: #fff; padding: 8px 16px;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 8px; font-size: 12.5px;
+      position: relative; z-index: 200;
+      border-bottom: 1px solid rgba(245,158,11,.2);
+    }
+    .topnav a { color: var(--accent); text-decoration: none; font-weight: 700; }
+    .topnav a:hover { color: #fff; }
+    .topnav .credentials { color: rgba(255,255,255,.7); font-size: 11.5px; }
+
+    .wrap { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; padding: 0 16px; }
+
+    header {
+      padding: 28px 16px 20px; text-align: center;
+      border-bottom: 1px solid var(--border);
+      background: rgba(10,15,30,0.7); backdrop-filter: blur(12px);
+      position: sticky; top: 0; z-index: 100;
+    }
+    .lang-toggle { position: absolute; right: 20px; top: 50%; transform: translateY(-50%); display: flex; gap: 4px; }
+    .lang-btn { background: var(--surface2); border: 1px solid var(--border); color: var(--muted); padding: 6px 14px; border-radius: 8px; cursor: pointer; font-family: var(--font); font-size: 13px; transition: all 0.2s; }
+    .lang-btn.active { background: var(--accent); color: #000; border-color: var(--accent); font-weight: 600; }
+    .header-badge { display: inline-block; background: linear-gradient(135deg, rgba(245,158,11,0.2), rgba(99,102,241,0.2)); border: 1px solid rgba(245,158,11,0.3); color: var(--accent); font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; padding: 4px 14px; border-radius: 20px; margin-bottom: 10px; }
+    h1 { font-size: clamp(20px, 4vw, 32px); font-weight: 800; background: linear-gradient(135deg, #f1f5f9 30%, var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1.2; }
+    .subtitle { color: var(--muted); font-size: 13px; margin-top: 6px; }
+
+    .main-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; padding: 28px 0; }
+
+    @media (max-width: 768px) {
+      .main-grid { grid-template-columns: 1fr; }
+      .lang-toggle { position: relative; right: auto; top: auto; transform: none; justify-content: center; margin-top: 10px; }
+      header { position: relative; }
+    }
+
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; position: relative; overflow: hidden; transition: border-color 0.3s; }
+    .card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+    .card.emi-card::before { background: linear-gradient(90deg, var(--accent3), var(--accent)); }
+    .card.sip-card::before { background: linear-gradient(90deg, var(--accent), var(--accent2)); }
+    .card-title { font-size: 16px; font-weight: 700; display: flex; align-items: center; gap: 10px; margin-bottom: 20px; }
+    .card-icon { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+    .emi-card .card-icon { background: rgba(99,102,241,0.15); }
+    .sip-card .card-icon { background: rgba(16,185,129,0.15); }
+
+    .field { margin-bottom: 16px; }
+    label { display: block; font-size: 12px; font-weight: 600; letter-spacing: 0.5px; color: var(--muted); text-transform: uppercase; margin-bottom: 7px; }
+    .input-row { display: flex; align-items: center; background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; transition: border-color 0.2s; }
+    .input-row:focus-within { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(245,158,11,0.1); }
+    .input-prefix, .input-suffix { padding: 0 12px; color: var(--accent); font-size: 14px; font-weight: 700; background: rgba(245,158,11,0.08); height: 44px; display: flex; align-items: center; border-right: 1px solid var(--border); white-space: nowrap; }
+    .input-suffix { border-right: none; border-left: 1px solid var(--border); }
+    input[type="number"], select { flex: 1; background: transparent; border: none; outline: none; color: var(--text); font-family: var(--font); font-size: 15px; font-weight: 600; padding: 0 14px; height: 44px; width: 100%; }
+    select { cursor: pointer; } select option { background: var(--surface2); }
+    input[type="range"] { width: 100%; accent-color: var(--accent); height: 4px; cursor: pointer; }
+    .range-row { display: flex; justify-content: space-between; font-size: 11px; color: var(--muted); margin-top: 4px; }
+
+    .loan-types { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+    .loan-pill { background: var(--surface2); border: 1px solid var(--border); color: var(--muted); padding: 5px 12px; border-radius: 20px; font-size: 12px; cursor: pointer; transition: all 0.2s; font-family: var(--font); }
+    .loan-pill.active { background: rgba(245,158,11,0.15); border-color: var(--accent); color: var(--accent); font-weight: 600; }
+
+    .result-panel { margin-top: 20px; background: var(--surface2); border-radius: 12px; padding: 18px; border: 1px solid var(--border); }
+    .result-title { font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; }
+    .result-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+    .result-row:last-child { border-bottom: none; }
+    .result-label { font-size: 12px; color: var(--muted); }
+    .result-value { font-size: 15px; font-weight: 700; color: var(--text); }
+    .result-value.highlight { color: var(--accent); font-size: 18px; }
+    .result-value.green { color: var(--accent2); }
+    .result-value.purple { color: var(--accent3); }
+    .result-value.red, .result-value[style*="color:var(--danger)"] { color: var(--danger); }
+
+    .chart-row { display: flex; align-items: center; gap: 20px; margin: 16px 0 0; }
+    .donut-wrap { position: relative; min-width: 100px; }
+    .donut-wrap svg { display: block; }
+    .donut-center { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 11px; color: var(--muted); text-align: center; }
+    .donut-center strong { font-size: 15px; color: var(--text); }
+    .chart-legend { flex: 1; }
+    .legend-item { display: flex; align-items: center; gap: 8px; font-size: 12px; margin-bottom: 8px; }
+    .legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+
+    .full-result-card { background: linear-gradient(135deg, rgba(16,185,129,0.1), rgba(99,102,241,0.1)); border: 1px solid rgba(16,185,129,0.25); border-radius: var(--radius); padding: 24px; margin-top: 0; position: relative; overflow: hidden; }
+    .full-result-card::before { content: '✨'; position: absolute; right: 20px; top: 20px; font-size: 40px; opacity: 0.15; }
+    .freedom-title { font-size: 13px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--accent2); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+    .freedom-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 14px; }
+    .freedom-stat { background: rgba(255,255,255,0.05); border-radius: 10px; padding: 14px; text-align: center; }
+    .freedom-stat-label { font-size: 11px; color: var(--muted); margin-bottom: 6px; }
+    .freedom-stat-val { font-size: 18px; font-weight: 800; }
+    .freedom-stat-val.amber { color: var(--accent); }
+    .freedom-stat-val.green { color: var(--accent2); }
+    .freedom-stat-val.purple { color: var(--accent3); }
+    .freedom-stat-val.red { color: var(--danger); }
+
+    .calc-btn { width: 100%; margin-top: 18px; background: linear-gradient(135deg, var(--accent), #d97706); color: #000; font-family: var(--font); font-size: 14px; font-weight: 800; border: none; border-radius: 12px; padding: 14px; cursor: pointer; letter-spacing: 0.5px; transition: all 0.25s; box-shadow: 0 4px 20px rgba(245,158,11,0.25); }
+    .calc-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(245,158,11,0.4); }
+    .calc-btn:active { transform: translateY(0); }
+
+    .disclaimer { text-align: center; font-size: 11px; color: var(--muted); padding: 16px 0 32px; line-height: 1.6; }
+
+    .toggle-row { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; margin-bottom: 4px; }
+    .toggle-label { font-size: 13px; font-weight: 600; color: var(--text); }
+    .toggle-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
+    .toggle-switch { position: relative; width: 44px; height: 24px; }
+    .toggle-switch input { opacity: 0; width: 0; height: 0; }
+    .toggle-slider { position: absolute; inset: 0; background: var(--surface3); border-radius: 24px; cursor: pointer; transition: 0.3s; }
+    .toggle-slider::before { content: ''; position: absolute; width: 18px; height: 18px; left: 3px; top: 3px; background: var(--muted); border-radius: 50%; transition: 0.3s; }
+    input:checked + .toggle-slider { background: var(--accent2); }
+    input:checked + .toggle-slider::before { transform: translateX(20px); background: #fff; }
+    .topup-section { display: none; padding: 14px; background: rgba(16,185,129,0.06); border-radius: 10px; border: 1px solid rgba(16,185,129,0.15); margin-bottom: 12px; }
+    .topup-section.visible { display: block; }
+
+    .progress-bar { height: 6px; background: var(--surface3); border-radius: 6px; overflow: hidden; margin-top: 10px; }
+    .progress-fill { height: 100%; border-radius: 6px; background: linear-gradient(90deg, var(--accent2), var(--accent)); transition: width 0.6s ease; }
+
+    .section-connector { display: flex; align-items: center; justify-content: center; gap: 12px; padding: 8px 0; }
+    .connector-line { flex: 1; height: 1px; background: var(--border); }
+    .connector-badge { background: var(--surface2); border: 1px solid var(--border); color: var(--accent); font-size: 11px; font-weight: 700; padding: 6px 14px; border-radius: 20px; letter-spacing: 1px; text-transform: uppercase; }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+    .animate-in { animation: fadeUp 0.5s ease forwards; }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--surface3); border-radius: 6px; }
+
+    input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
+    input[type=number] { -moz-appearance: textfield; }
+
+    #action-bar { position: sticky; bottom: 0; z-index: 50; padding: 12px 16px; background: rgba(10,15,30,0.92); backdrop-filter: blur(16px); border-top: 1px solid var(--border); }
+    .action-bar-inner { max-width: 1100px; margin: 0 auto; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+    .action-btn { display: flex; align-items: center; gap: 8px; padding: 11px 22px; border-radius: 10px; font-family: var(--font); font-size: 13px; font-weight: 700; border: none; cursor: pointer; transition: all 0.22s; letter-spacing: 0.3px; }
+    .download-btn { background: var(--surface2); border: 1px solid var(--border); color: var(--text); }
+    .download-btn:hover { background: var(--surface3); border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+    .whatsapp-btn { background: #128c7e; color: #fff; box-shadow: 0 4px 14px rgba(18,140,126,0.3); }
+    .whatsapp-btn:hover { background: #075e54; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(18,140,126,0.5); }
+    .email-btn { background: var(--surface2); border: 1px solid var(--border); color: var(--text); }
+    .email-btn:hover { background: var(--surface3); border-color: var(--accent3); color: var(--accent3); transform: translateY(-2px); }
+
+    footer { margin-top: 0; }
+    .footer-cta { background: linear-gradient(135deg, #0f2027, #1a3a2a, #0f2027); border-top: 1px solid rgba(16,185,129,0.2); padding: 28px 16px; }
+    .footer-cta-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+    .footer-cta-title { font-size: 20px; font-weight: 800; color: var(--text); margin-bottom: 4px; }
+    .footer-cta-sub { font-size: 13px; color: var(--muted); }
+    .cta-btn { display: inline-flex; align-items: center; background: linear-gradient(135deg, var(--accent2), #059669); color: #fff; text-decoration: none; font-family: var(--font); font-size: 14px; font-weight: 800; padding: 14px 28px; border-radius: 12px; white-space: nowrap; flex-shrink: 0; box-shadow: 0 4px 24px rgba(16,185,129,0.35); transition: all 0.25s; letter-spacing: 0.3px; }
+    .cta-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 32px rgba(16,185,129,0.55); }
+
+    .footer-bottom { background: rgba(5,8,16,0.95); border-top: 1px solid var(--border); padding: 16px; }
+    .footer-bottom-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+    .footer-disclaimer { font-size: 11px; color: var(--muted); line-height: 1.5; max-width: 600px; }
+    .footer-credits { font-size: 12px; color: var(--muted); display: flex; align-items: center; gap: 8px; white-space: nowrap; }
+    .footer-sep { color: rgba(255,255,255,0.2); }
+    .footer-link { color: var(--accent); text-decoration: none; font-weight: 600; transition: color 0.2s; }
+    .footer-link:hover { color: var(--accent2); }
+
+    @media (max-width: 600px) {
+      .footer-cta-inner { flex-direction: column; text-align: center; }
+      .footer-cta-inner .cta-btn { width: 100%; justify-content: center; }
+      .footer-bottom-inner { flex-direction: column; text-align: center; }
+      .footer-credits { justify-content: center; }
+    }
+
+    @media print {
+      .topnav, header, #action-bar, footer, .lang-toggle, .calc-btn, .loan-pill, input[type=range] { display: none !important; }
+      body { background: #fff !important; color: #000 !important; }
+      .card, .full-result-card { border: 1px solid #ddd !important; background: #fff !important; break-inside: avoid; }
+      .result-value, .freedom-stat-val { color: #000 !important; }
+      .result-label, .freedom-stat-label { color: #555 !important; }
+      * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+
+    .info-note { background: rgba(99,102,241,0.08); border: 1px solid rgba(99,102,241,0.2); border-radius: 8px; padding: 10px 14px; font-size: 12px; color: var(--muted); margin-top: 10px; line-height: 1.6; }
+    .info-note strong { color: var(--accent3); }
+  </style>
+</head>
+<body>
+
+<!-- THIN TOP NAV - links back to main GroMoney site -->
+<div class="topnav">
+  <a href="index.html">← Back to GroMoney Capital</a>
+  <span class="credentials">AMFI ARN: 270739 · IRDA Registered · NJ Wealth Partner · 📞 +91 96640 19564</span>
+</div>
+
+<header>
+  <div class="header-badge" id="badge">⚡ Dual Calculator Tool</div>
+  <h1 id="main-title">EMI + SIP Freedom Calculator</h1>
+  <p class="subtitle" id="main-subtitle">Apna Poora Loan Amount + Interest SIP Se Wapas Paayein</p>
+  <div class="lang-toggle">
+    <button class="lang-btn active" onclick="setLang('hi')">हि</button>
+    <button class="lang-btn" onclick="setLang('en')">EN</button>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="main-grid">
+
+    <div class="card emi-card animate-in">
+      <div class="card-title">
+        <div class="card-icon">🏦</div>
+        <span id="emi-card-title">EMI Calculator (Loan)</span>
+      </div>
+
+      <div class="field">
+        <label id="lbl-loantype">Loan Ka Prakar Chuniye</label>
+        <div class="loan-types" id="loan-types">
+          <button class="loan-pill active" onclick="selectLoanType(this, 8.5)">🏠 Home</button>
+          <button class="loan-pill" onclick="selectLoanType(this, 9.5)">🚗 Car</button>
+          <button class="loan-pill" onclick="selectLoanType(this, 14)">💼 Personal</button>
+          <button class="loan-pill" onclick="selectLoanType(this, 12)">📊 Business</button>
+          <button class="loan-pill" onclick="selectLoanType(this, 10)">🏢 Mortgage</button>
+        </div>
+      </div>
+
+      <div class="field">
+        <label id="lbl-amount">Loan Ki Rakam</label>
+        <div class="input-row">
+          <span class="input-prefix">₹</span>
+          <input type="number" id="loanAmount" value="2000000" min="10000" max="100000000" oninput="syncSlider('loanAmount','slLoan',10000,100000000)" />
+        </div>
+        <input type="range" id="slLoan" min="10000" max="100000000" step="10000" value="2000000" oninput="syncInput('slLoan','loanAmount')" />
+        <div class="range-row"><span>₹10K</span><span>₹10Cr</span></div>
+      </div>
+
+      <div class="field">
+        <label id="lbl-roi">Interest Rate (% per annum)</label>
+        <div class="input-row">
+          <input type="number" id="loanROI" value="8.5" min="1" max="30" step="0.1" oninput="syncSlider('loanROI','slROI',1,30)" />
+          <span class="input-suffix">%</span>
+        </div>
+        <input type="range" id="slROI" min="1" max="30" step="0.1" value="8.5" oninput="syncInput('slROI','loanROI')" />
+        <div class="range-row"><span>1%</span><span>30%</span></div>
+      </div>
+
+      <div class="field">
+        <label id="lbl-tenure">Loan Ki Avadhi (Saal)</label>
+        <div class="input-row">
+          <input type="number" id="loanTenure" value="20" min="1" max="30" oninput="syncSlider('loanTenure','slTenure',1,30)" />
+          <span class="input-suffix" id="lbl-years">Saal</span>
+        </div>
+        <input type="range" id="slTenure" min="1" max="30" step="1" value="20" oninput="syncInput('slTenure','loanTenure')" />
+        <div class="range-row"><span>1 <span class="lbl-yr">Yr</span></span><span>30 <span class="lbl-yr">Yr</span></span></div>
+      </div>
+
+      <button class="calc-btn" onclick="calculateExplicit()" id="calc-btn-main">🔢 Calculate Karen</button>
+
+      <div class="result-panel" id="emi-result" style="display:none">
+        <div class="result-title" id="emi-res-title">📊 Loan Ki Puri Jankari</div>
+        <div class="result-row"><span class="result-label" id="lbl-emi-monthly">Monthly EMI</span><span class="result-value highlight" id="val-emi">—</span></div>
+        <div class="result-row"><span class="result-label" id="lbl-principal">Muddal (Principal)</span><span class="result-value purple" id="val-principal">—</span></div>
+        <div class="result-row"><span class="result-label" id="lbl-interest-paid">Kul Byaaj Bhugtan</span><span class="result-value red" id="val-interest" style="color:var(--danger)">—</span></div>
+        <div class="result-row"><span class="result-label" id="lbl-total-paid">Kul Bhugtan (Loan + Byaaj)</span><span class="result-value green" id="val-total">—</span></div>
+
+        <div class="chart-row">
+          <div class="donut-wrap">
+            <svg width="100" height="100" viewBox="0 0 100 100">
+              <circle cx="50" cy="50" r="38" fill="none" stroke="var(--surface3)" stroke-width="12"/>
+              <circle id="donut-interest" cx="50" cy="50" r="38" fill="none" stroke="var(--danger)" stroke-width="12" stroke-dasharray="0 239" stroke-dashoffset="60" stroke-linecap="round" style="transition:stroke-dasharray 0.8s ease"/>
+              <circle id="donut-principal" cx="50" cy="50" r="38" fill="none" stroke="var(--accent3)" stroke-width="12" stroke-dasharray="0 239" stroke-dashoffset="60" stroke-linecap="round" style="transition:stroke-dasharray 0.8s ease; opacity:0.5"/>
+            </svg>
+            <div class="donut-center"><span id="donut-pct">—</span><strong id="donut-label">Interest</strong></div>
+          </div>
+          <div class="chart-legend">
+            <div class="legend-item"><div class="legend-dot" style="background:var(--accent3)"></div><span id="leg-principal">Principal</span></div>
+            <div class="legend-item"><div class="legend-dot" style="background:var(--danger)"></div><span id="leg-interest">Total Interest</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card sip-card animate-in" style="animation-delay:0.1s">
+      <div class="card-title">
+        <div class="card-icon">📈</div>
+        <span id="sip-card-title">SIP Calculator (Investment)</span>
+      </div>
+
+      <div class="field">
+        <label id="lbl-sip-roi">Expected SIP Return (% per annum)</label>
+        <div class="input-row">
+          <input type="number" id="sipROI" value="12" min="1" max="30" step="0.1" oninput="syncSlider('sipROI','slSipROI',1,30)" />
+          <span class="input-suffix">%</span>
+        </div>
+        <input type="range" id="slSipROI" min="1" max="30" step="0.1" value="12" oninput="syncInput('slSipROI','sipROI')" />
+        <div class="range-row"><span>1%</span><span id="govt-note">12% (Govt. Guideline)</span><span>30%</span></div>
+      </div>
+
+      <div class="field">
+        <label id="lbl-inflation">Inflation Rate (% per annum)</label>
+        <div class="input-row">
+          <input type="number" id="inflationRate" value="6" min="0" max="20" step="0.5" oninput="syncSlider('inflationRate','slInfl',0,20)" />
+          <span class="input-suffix">%</span>
+        </div>
+        <input type="range" id="slInfl" min="0" max="20" step="0.5" value="6" oninput="syncInput('slInfl','inflationRate')" />
+        <div class="range-row"><span>0%</span><span id="lbl-infl-note">~6% India avg</span><span>20%</span></div>
+      </div>
+
+      <div class="field">
+        <label id="lbl-buffer">Profit Margin Target (%)</label>
+        <div class="input-row">
+          <input type="number" id="targetBuffer" value="7" min="0" max="50" step="1" oninput="syncSlider('targetBuffer','slBuffer',0,50)" />
+          <span class="input-suffix">%</span>
+        </div>
+        <input type="range" id="slBuffer" min="0" max="50" step="1" value="7" oninput="syncInput('slBuffer','targetBuffer')" />
+        <div class="range-row"><span>0%</span><span id="lbl-buffer-note">5-10% Recommended</span><span>50%</span></div>
+        <div class="info-note" id="buffer-note-text"><strong>🎯 Formula:</strong> SIP Maturity ≥ (EMI Total + SIP Invested + Inflation Cover) × (1 + Profit %) — poora paisa wapas + gain.</div>
+      </div>
+
+      <div class="toggle-row">
+        <div>
+          <div class="toggle-label" id="lbl-topup">Yearly SIP Top-up?</div>
+          <div class="toggle-sub" id="lbl-topup-sub">Har saal SIP amount badhayein</div>
+        </div>
+        <label class="toggle-switch">
+          <input type="checkbox" id="topupToggle" onchange="toggleTopup()" />
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+
+      <div class="topup-section" id="topupSection">
+        <div class="field" style="margin-bottom:12px">
+          <label id="lbl-topup-type">Top-up Type</label>
+          <div class="input-row">
+            <select id="topupType" style="height:44px; padding: 0 14px;">
+              <option value="pct" id="opt-pct">Percentage (%)</option>
+              <option value="fixed" id="opt-fixed">Fixed Amount (₹)</option>
+            </select>
+          </div>
+        </div>
+        <div class="field" style="margin-bottom:0">
+          <label id="lbl-topup-val">Top-up Value</label>
+          <div class="input-row">
+            <input type="number" id="topupValue" value="10" min="0" max="100" step="1" />
+            <span class="input-suffix" id="topup-suffix">%/Year</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="result-panel" id="sip-result" style="display:none">
+        <div class="result-title" id="sip-res-title">📈 SIP Jankari</div>
+        <div class="result-row" style="align-items:flex-start">
+          <span class="result-label" id="lbl-sip-needed">Required Monthly SIP</span>
+          <div style="text-align:right">
+            <span class="result-value highlight" id="val-sip">—</span>
+            <div id="topup-effect-badge" style="display:none;margin-top:4px;font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;background:rgba(16,185,129,0.15);color:var(--accent2);letter-spacing:0.5px"></div>
+          </div>
+        </div>
+        <div class="result-row"><span class="result-label" id="lbl-sip-invested">Total SIP Invested</span><span class="result-value purple" id="val-sip-invested">—</span></div>
+        <div class="result-row"><span class="result-label" id="lbl-sip-return">Total SIP Return (Maturity)</span><span class="result-value green" id="val-sip-return">—</span></div>
+        <div class="result-row"><span class="result-label" id="lbl-target-amount">Target Amount</span><span class="result-value" id="val-target" style="color:var(--accent)">—</span></div>
+
+        <div style="margin-top:10px">
+          <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-bottom:4px">
+            <span id="lbl-coverage">Coverage</span>
+            <span id="val-coverage-pct">—</span>
+          </div>
+          <div class="progress-bar"><div class="progress-fill" id="coverage-bar" style="width:0%"></div></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="section-connector" id="connector" style="display:none">
+    <div class="connector-line"></div>
+    <div class="connector-badge" id="freedom-badge">🎯 Freedom Report</div>
+    <div class="connector-line"></div>
+  </div>
+
+  <div class="full-result-card animate-in" id="freedom-card" style="display:none;margin-bottom:28px">
+    <div class="freedom-title">🚀 <span id="freedom-title-text">Complete Financial Freedom Report</span></div>
+    <div class="freedom-grid">
+      <div class="freedom-stat"><div class="freedom-stat-label" id="lbl-total-outgo">Total EMI Paid</div><div class="freedom-stat-val red" id="stat-outgo">—</div></div>
+      <div class="freedom-stat"><div class="freedom-stat-label" id="lbl-total-sip-invest">Total SIP Invested</div><div class="freedom-stat-val purple" id="stat-sip-inv">—</div></div>
+      <div class="freedom-stat"><div class="freedom-stat-label" id="lbl-combined-cost">Total Out-of-Pocket</div><div class="freedom-stat-val amber" id="stat-combined">—</div></div>
+      <div class="freedom-stat"><div class="freedom-stat-label" id="lbl-infl-cover">Inflation Cover</div><div class="freedom-stat-val" style="color:var(--accent3)" id="stat-infl">—</div></div>
+      <div class="freedom-stat"><div class="freedom-stat-label" id="lbl-sip-maturity">SIP Maturity Value</div><div class="freedom-stat-val green" id="stat-maturity">—</div></div>
+      <div class="freedom-stat"><div class="freedom-stat-label" id="lbl-net-profit">Net Surplus (Over Pocket)</div><div class="freedom-stat-val green" id="stat-profit">—</div></div>
+      <div class="freedom-stat"><div class="freedom-stat-label" id="lbl-freedom-ratio">Return on Pocket (%)</div><div class="freedom-stat-val amber" id="stat-ratio">—</div></div>
+    </div>
+
+    <div style="margin-top:20px;background:rgba(0,0,0,0.2);border-radius:12px;padding:16px;border:1px solid rgba(255,255,255,0.06)">
+      <div style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:12px" id="lbl-breakdown">📋 Step-by-Step Breakdown</div>
+      <div class="result-row"><span class="result-label" id="bd-lbl1">① EMI Total (Loan + Interest)</span><span class="result-value" style="color:var(--danger)" id="bd-emi-total">—</span></div>
+      <div class="result-row"><span class="result-label" id="bd-lbl2">② SIP Invested (Your Cost)</span><span class="result-value" style="color:var(--accent3)" id="bd-sip-cost">—</span></div>
+      <div class="result-row" style="border-bottom:1px solid rgba(245,158,11,0.3);padding-bottom:10px"><span class="result-label" id="bd-lbl3">③ Total Out-of-Pocket (①+②)</span><span class="result-value" style="color:var(--accent);font-size:17px" id="bd-pocket">—</span></div>
+      <div class="result-row" style="padding-top:10px"><span class="result-label" id="bd-lbl4">④ Inflation Buffer on EMI</span><span class="result-value" style="color:var(--accent3)" id="bd-infl">—</span></div>
+      <div class="result-row"><span class="result-label" id="bd-lbl5">⑤ Profit Margin Goal</span><span class="result-value" style="color:var(--accent3)" id="bd-profit">—</span></div>
+      <div class="result-row" style="border-bottom:1px solid rgba(16,185,129,0.3);padding-bottom:10px"><span class="result-label" id="bd-lbl6">🎯 SIP Must Return (Target)</span><span class="result-value" style="color:var(--accent);font-size:17px" id="bd-target">—</span></div>
+      <div class="result-row" style="padding-top:10px"><span class="result-label" id="bd-lbl7">✅ Actual SIP Maturity</span><span class="result-value green" style="font-size:19px" id="bd-maturity">—</span></div>
+      <div class="result-row"><span class="result-label" id="bd-lbl8">🏆 Surplus Over Pocket</span><span class="result-value green" id="bd-surplus">—</span></div>
+    </div>
+
+    <div class="info-note" style="margin-top:16px" id="freedom-msg"></div>
+  </div>
+
+  <div id="action-bar" style="display:none">
+    <div class="action-bar-inner">
+      <button class="action-btn download-btn" onclick="downloadPDF()" title="Download PDF">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <span id="btn-download">Download PDF</span>
+      </button>
+      <button class="action-btn whatsapp-btn" onclick="shareWhatsApp()" title="Share on WhatsApp">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+        <span id="btn-whatsapp">WhatsApp</span>
+      </button>
+      <button class="action-btn email-btn" onclick="shareEmail()" title="Share via Email">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        <span id="btn-email">Email</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="disclaimer" id="disclaimer-text">
+    ⚠️ Ye calculator sirf shaikshik uddeshyon ke liye hai. Mutual fund returns guaranteed nahi hote.
+    Invest karne se pehle kisi SEBI registered financial advisor se zaroor salah lein.
+    Past performance future returns ki guarantee nahi deta.
+  </div>
+</div>
+
+<footer>
+  <div class="footer-cta">
+    <div class="footer-cta-inner">
+      <div class="footer-cta-text">
+        <div class="footer-cta-title" id="cta-title">💰 Paisa Kaam Kare, Aap Nahi!</div>
+        <div class="footer-cta-sub" id="cta-sub">EMI bharein, SIP karein — dono ka fayda uthayein. Aaj hi apna pehla SIP shuru karein, bilkul free.</div>
+      </div>
+      <a href="http://p.njw.bz/29511" target="_blank" rel="noopener" class="cta-btn" id="cta-btn-text">
+        🚀 Apna SIP Aaj Hi Shuru Karein →
+      </a>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="footer-bottom-inner">
+      <div class="footer-disclaimer" id="footer-disc">
+        ⚠️ Mutual Fund investments are subject to market risks. Past performance is not indicative of future results. This tool is for educational purposes only. GroMoney Capital — AMFI Reg. ARN: 270739 · IRDA Registered.
+      </div>
+      <div class="footer-credits">
+        <span>Powered by <a href="index.html" class="footer-link">GroMoney Capital</a></span>
+        <span class="footer-sep">·</span>
+        <span>Built by <a href="https://prosoftwaretools.com/" target="_blank" rel="noopener" class="footer-link">ProSoftwareTools</a></span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const strings = {
+    hi: {
+      badge: "⚡ Dual Calculator Tool", mainTitle: "EMI + SIP Freedom Calculator",
+      mainSubtitle: "Loan + SIP ka poora paisa SIP maturity se wapas paayein — inflation + profit ke saath",
+      emiCardTitle: "EMI Calculator (Loan)", sipCardTitle: "SIP Calculator (Investment)",
+      lblLoanType: "Loan Ka Prakar Chuniye", lblAmount: "Loan Ki Rakam",
+      lblRoi: "Interest Rate (% per annum)", lblTenure: "Loan Ki Avadhi (Saal)",
+      lblYears: "Saal", calcBtn: "🔢 Calculate Karen",
+      emiResTitle: "📊 Loan Ki Puri Jankari", lblEmiMonthly: "Monthly EMI",
+      lblPrincipal: "Muddal (Principal)", lblInterestPaid: "Kul Byaaj Bhugtan",
+      lblTotalPaid: "Kul Bhugtan (Loan + Byaaj)", legPrincipal: "Muddal", legInterest: "Kul Byaaj",
+      lblSipRoi: "Expected SIP Return (% per annum)", govtNote: "12% (Govt. Guideline)",
+      lblInflation: "Inflation Rate (% per annum)", lblInflNote: "~6% India avg",
+      lblBuffer: "Profit Margin Target (%)", lblBufferNote: "5-10% Recommended",
+      bufferNoteText: "🎯 Formula: SIP Maturity ≥ (EMI Total + SIP Invested + Inflation Cover) × (1 + Profit %) — poora paisa wapas + gain.",
+      lblTopup: "Yearly SIP Top-up?", lblTopupSub: "Har saal SIP amount badhayein",
+      lblTopupType: "Top-up Ka Prakar", optPct: "Percentage (%)", optFixed: "Fixed Rakam (₹)",
+      lblTopupVal: "Top-up Kitna", sipResTitle: "📈 SIP Jankari",
+      lblSipNeeded: "Zaroori Monthly SIP", lblSipInvested: "Total SIP Nivesh (Aapka Kharcha)",
+      lblSipReturn: "SIP Maturity Value", lblTargetAmount: "🎯 Target (EMI+SIP+Infl+Profit)",
+      lblCoverage: "Target Coverage", freedomBadge: "🎯 Freedom Report",
+      freedomTitle: "Poora Financial Freedom Report",
+      lblTotalOutgo: "① EMI Total (Loan + Byaaj)", lblTotalSipInvest: "② SIP Nivesh (Aapka Kharcha)",
+      lblCombinedCost: "③ Total Out-of-Pocket (①+②)", lblInflCover: "④ Inflation Buffer",
+      lblSipMaturity: "✅ SIP Maturity Value", lblNetProfit: "🏆 Surplus Over Pocket",
+      lblFreedomRatio: "Return on Pocket (%)", lblBreakdown: "📋 Step-by-Step Breakdown",
+      bdLbl1: "① EMI Total (Loan + Byaaj)", bdLbl2: "② SIP Invested (Aapka Kharcha)",
+      bdLbl3: "③ Total Out-of-Pocket (①+②)", bdLbl4: "④ Inflation Buffer on EMI",
+      bdLbl5: "⑤ Profit Margin Goal", bdLbl6: "🎯 SIP Must Return (Target)",
+      bdLbl7: "✅ Actual SIP Maturity", bdLbl8: "🏆 Surplus Over Pocket",
+      disclaimer: "⚠️ Ye calculator sirf shaikshik uddeshyon ke liye hai. Mutual fund returns guaranteed nahi hote. Invest karne se pehle kisi SEBI registered financial advisor se zaroor salah lein.",
+      freedomMsgGood: "🎉 Shabaash! Aapki SIP maturity {surplus} ka surplus de rahi hai jo aapke poore out-of-pocket cost se {pct}% zyada hai. Loan ka boj + SIP kharcha + inflation + profit — sab cover ho gaya!",
+      freedomMsgBad: "⚠️ SIP return abhi target se {short} kam hai. SIP ROI badhayein, ya top-up use karein, ya profit margin thoda kam karein."
+    },
+    en: {
+      badge: "⚡ Dual Calculator Tool", mainTitle: "EMI + SIP Freedom Calculator",
+      mainSubtitle: "Recover Loan + SIP Investment + Inflation + Profit — All Through SIP Maturity",
+      emiCardTitle: "EMI Calculator (Loan)", sipCardTitle: "SIP Calculator (Investment)",
+      lblLoanType: "Select Loan Type", lblAmount: "Loan Amount",
+      lblRoi: "Interest Rate (% per annum)", lblTenure: "Loan Tenure (Years)",
+      lblYears: "Years", calcBtn: "🔢 Calculate Now",
+      emiResTitle: "📊 Loan Summary", lblEmiMonthly: "Monthly EMI",
+      lblPrincipal: "Principal Amount", lblInterestPaid: "Total Interest Paid",
+      lblTotalPaid: "Total Payment (Loan + Interest)", legPrincipal: "Principal", legInterest: "Total Interest",
+      lblSipRoi: "Expected SIP Return (% per annum)", govtNote: "12% (Govt. Guideline)",
+      lblInflation: "Inflation Rate (% per annum)", lblInflNote: "~6% India avg",
+      lblBuffer: "Profit Margin Target (%)", lblBufferNote: "5-10% Recommended",
+      bufferNoteText: "🎯 Formula: SIP Maturity ≥ (EMI Total + SIP Invested + Inflation Cover) × (1 + Profit %) — every rupee back + gain.",
+      lblTopup: "Yearly SIP Top-up?", lblTopupSub: "Increase SIP amount every year",
+      lblTopupType: "Top-up Type", optPct: "Percentage (%)", optFixed: "Fixed Amount (₹)",
+      lblTopupVal: "Top-up Value", sipResTitle: "📈 SIP Summary",
+      lblSipNeeded: "Required Monthly SIP", lblSipInvested: "Total SIP Invested (Your Cost)",
+      lblSipReturn: "SIP Maturity Value", lblTargetAmount: "🎯 Target (EMI+SIP+Infl+Profit)",
+      lblCoverage: "Target Coverage", freedomBadge: "🎯 Freedom Report",
+      freedomTitle: "Complete Financial Freedom Report",
+      lblTotalOutgo: "① Total EMI Paid", lblTotalSipInvest: "② Total SIP Invested",
+      lblCombinedCost: "③ Total Out-of-Pocket (①+②)", lblInflCover: "④ Inflation Cover",
+      lblSipMaturity: "✅ SIP Maturity Value", lblNetProfit: "🏆 Surplus Over Pocket",
+      lblFreedomRatio: "Return on Pocket (%)", lblBreakdown: "📋 Step-by-Step Breakdown",
+      bdLbl1: "① EMI Total (Loan + Interest)", bdLbl2: "② SIP Invested (Your Cost)",
+      bdLbl3: "③ Total Out-of-Pocket (①+②)", bdLbl4: "④ Inflation Buffer on EMI",
+      bdLbl5: "⑤ Profit Margin Goal", bdLbl6: "🎯 SIP Must Return (Target)",
+      bdLbl7: "✅ Actual SIP Maturity", bdLbl8: "🏆 Surplus Over Pocket",
+      disclaimer: "⚠️ This calculator is for educational purposes only. Mutual fund returns are not guaranteed. Consult a SEBI registered financial advisor before investing.",
+      freedomMsgGood: "🎉 Excellent! Your SIP maturity gives a surplus of {surplus}, which is {pct}% more than your total out-of-pocket cost. Loan burden + SIP cost + inflation + profit — all covered!",
+      freedomMsgBad: "⚠️ SIP return is {short} short of target. Increase SIP ROI, use top-up, or reduce the profit margin slightly."
+    }
+  };
+  let lang = 'hi'; let lastResult = null;
+
+  function setLang(l) {
+    lang = l;
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+    document.querySelector('.lang-btn:' + (l === 'hi' ? 'first-child' : 'last-child')).classList.add('active');
+    document.documentElement.lang = l;
+    applyStrings(); updateActionBarLabels();
+    if (lastResult) renderResults(lastResult);
+  }
+  function applyStrings() {
+    const s = strings[lang];
+    const set = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+    set('badge', s.badge); set('main-title', s.mainTitle); set('main-subtitle', s.mainSubtitle);
+    set('emi-card-title', s.emiCardTitle); set('sip-card-title', s.sipCardTitle);
+    set('lbl-loantype', s.lblLoanType); set('lbl-amount', s.lblAmount); set('lbl-roi', s.lblRoi);
+    set('lbl-tenure', s.lblTenure); set('lbl-years', s.lblYears); set('calc-btn-main', s.calcBtn);
+    set('emi-res-title', s.emiResTitle); set('lbl-emi-monthly', s.lblEmiMonthly);
+    set('lbl-principal', s.lblPrincipal); set('lbl-interest-paid', s.lblInterestPaid);
+    set('lbl-total-paid', s.lblTotalPaid); set('leg-principal', s.legPrincipal);
+    set('leg-interest', s.legInterest); set('lbl-sip-roi', s.lblSipRoi);
+    set('govt-note', s.govtNote); set('lbl-inflation', s.lblInflation);
+    set('lbl-infl-note', s.lblInflNote); set('lbl-buffer', s.lblBuffer);
+    set('lbl-buffer-note', s.lblBufferNote); set('buffer-note-text', s.bufferNoteText);
+    set('lbl-topup', s.lblTopup); set('lbl-topup-sub', s.lblTopupSub);
+    set('lbl-topup-type', s.lblTopupType); set('opt-pct', s.optPct);
+    set('opt-fixed', s.optFixed); set('lbl-topup-val', s.lblTopupVal);
+    set('sip-res-title', s.sipResTitle); set('lbl-sip-needed', s.lblSipNeeded);
+    set('lbl-sip-invested', s.lblSipInvested); set('lbl-sip-return', s.lblSipReturn);
+    set('lbl-target-amount', s.lblTargetAmount); set('lbl-coverage', s.lblCoverage);
+    set('freedom-badge', s.freedomBadge); set('freedom-title-text', s.freedomTitle);
+    set('lbl-total-outgo', s.lblTotalOutgo); set('lbl-total-sip-invest', s.lblTotalSipInvest);
+    set('lbl-combined-cost', s.lblCombinedCost); set('lbl-infl-cover', s.lblInflCover);
+    set('lbl-sip-maturity', s.lblSipMaturity); set('lbl-net-profit', s.lblNetProfit);
+    set('lbl-freedom-ratio', s.lblFreedomRatio); set('lbl-breakdown', s.lblBreakdown);
+    set('bd-lbl1', s.bdLbl1); set('bd-lbl2', s.bdLbl2); set('bd-lbl3', s.bdLbl3);
+    set('bd-lbl4', s.bdLbl4); set('bd-lbl5', s.bdLbl5); set('bd-lbl6', s.bdLbl6);
+    set('bd-lbl7', s.bdLbl7); set('bd-lbl8', s.bdLbl8); set('disclaimer-text', s.disclaimer);
+    updateTopupSuffix();
+  }
+
+  let _calcTimer = null; let _scrollOnCalc = false;
+  function debouncedCalc() { _scrollOnCalc = false; clearTimeout(_calcTimer); _calcTimer = setTimeout(calculate, 180); }
+  function debouncedCalcWithScroll() { _scrollOnCalc = true; clearTimeout(_calcTimer); _calcTimer = setTimeout(calculate, 80); }
+  function syncSlider(inputId, sliderId, min, max) {
+    const val = parseFloat(document.getElementById(inputId).value);
+    if (!isNaN(val)) document.getElementById(sliderId).value = Math.min(Math.max(val, min), max);
+    debouncedCalc();
+  }
+  function syncInput(sliderId, inputId) {
+    document.getElementById(inputId).value = document.getElementById(sliderId).value;
+    debouncedCalcWithScroll();
+  }
+  function selectLoanType(el, rate) {
+    document.querySelectorAll('.loan-pill').forEach(p => p.classList.remove('active'));
+    el.classList.add('active');
+    document.getElementById('loanROI').value = rate;
+    document.getElementById('slROI').value = rate;
+    _scrollOnCalc = true; calculate();
+  }
+  function toggleTopup() {
+    const on = document.getElementById('topupToggle').checked;
+    document.getElementById('topupSection').classList.toggle('visible', on);
+    updateTopupSuffix(); _scrollOnCalc = true; calculate();
+  }
+  function updateTopupSuffix() {
+    const type = document.getElementById('topupType').value;
+    const suffix = document.getElementById('topup-suffix');
+    if (suffix) suffix.textContent = type === 'pct' ? '%/Year' : '₹/Year';
+  }
+  document.getElementById('topupType').addEventListener('change', () => { updateTopupSuffix(); _scrollOnCalc = true; calculate(); });
+  document.getElementById('topupValue').addEventListener('input', debouncedCalc);
+
+  function fmt(n) {
+    if (n >= 10000000) return '₹' + (n / 10000000).toFixed(2) + ' Cr';
+    if (n >= 100000) return '₹' + (n / 100000).toFixed(2) + ' L';
+    return '₹' + Math.round(n).toLocaleString('en-IN');
+  }
+
+  function calcEMI(P, annualRate, months) {
+    const r = annualRate / 100 / 12;
+    if (r === 0) return P / months;
+    return P * r * Math.pow(1 + r, months) / (Math.pow(1 + r, months) - 1);
+  }
+
+  function calcSIP(monthSIP, annualReturn, months, hasTopup, topupType, topupVal) {
+    const r = annualReturn / 100 / 12;
+    let corpus = 0; let invested = 0; let sip = monthSIP;
+    for (let m = 1; m <= months; m++) {
+      corpus = (corpus + sip) * (1 + r); invested += sip;
+      if (hasTopup && m % 12 === 0 && m < months) {
+        if (topupType === 'pct') sip = sip * (1 + topupVal / 100);
+        else sip = sip + topupVal;
+      }
+    }
+    return { maturity: corpus, invested };
+  }
+
+  function findRequiredSIP(totalEMI, sipROI, months, hasTopup, topupType, topupVal, inflationRate, profitMargin) {
+    const infl = inflationRate / 100; const profit = profitMargin / 100;
+    let sipAmount = totalEMI / months;
+    for (let iter = 0; iter < 60; iter++) {
+      const prevSIP = sipAmount;
+      const { invested: estInvested } = calcSIP(prevSIP, sipROI, months, hasTopup, topupType, topupVal);
+      const trueTarget = (totalEMI * (1 + infl) + estInvested) * (1 + profit);
+      let lo = 1, hi = trueTarget;
+      for (let b = 0; b < 80; b++) {
+        const mid = (lo + hi) / 2;
+        const { maturity } = calcSIP(mid, sipROI, months, hasTopup, topupType, topupVal);
+        if (maturity < trueTarget) lo = mid; else hi = mid;
+      }
+      sipAmount = (lo + hi) / 2;
+      if (Math.abs(sipAmount - prevSIP) < 0.01) break;
+    }
+    const { maturity, invested } = calcSIP(sipAmount, sipROI, months, hasTopup, topupType, topupVal);
+    const trueTarget = (totalEMI * (1 + infl) + invested) * (1 + profit);
+    return {
+      sipAmount, sipInvested: invested, sipMaturity: maturity, trueTarget,
+      inflationBuffer: totalEMI * infl,
+      profitGoal: (totalEMI * (1 + infl) + invested) * profit,
+      netGain: maturity - invested
+    };
+  }
+
+  function calculateExplicit() { _scrollOnCalc = true; calculate(); }
+
+  function calculate() {
+    const P = parseFloat(document.getElementById('loanAmount').value);
+    const loanROI = parseFloat(document.getElementById('loanROI').value);
+    const years = parseInt(document.getElementById('loanTenure').value);
+    const sipROI = parseFloat(document.getElementById('sipROI').value);
+    const inflRate = parseFloat(document.getElementById('inflationRate').value) || 6;
+    const profitM = parseFloat(document.getElementById('targetBuffer').value) || 7;
+    const hasTopup = document.getElementById('topupToggle').checked;
+    const topupType = document.getElementById('topupType').value;
+    const topupVal = parseFloat(document.getElementById('topupValue').value) || 0;
+    if (!P || !loanROI || !years || !sipROI) return;
+    const months = years * 12;
+    const emi = calcEMI(P, loanROI, months);
+    const totalEMI = emi * months;
+    const totalInterest = totalEMI - P;
+    const interestPct = (totalInterest / totalEMI * 100).toFixed(1);
+    const res = findRequiredSIP(totalEMI, sipROI, months, hasTopup, topupType, topupVal, inflRate, profitM);
+    const totalOutOfPocket = totalEMI + res.sipInvested;
+    const surplusOverPocket = res.sipMaturity - totalOutOfPocket;
+    const coveragePct = Math.min((res.sipMaturity / res.trueTarget) * 100, 100);
+    const freedomRatio = (res.sipMaturity / totalOutOfPocket * 100).toFixed(1);
+    lastResult = {
+      P, loanROI, years, months, emi, totalEMI, totalInterest, interestPct,
+      sipROI, inflRate, profitM,
+      sipAmount: res.sipAmount, sipInvested: res.sipInvested, sipMaturity: res.sipMaturity,
+      trueTarget: res.trueTarget, inflationBuffer: res.inflationBuffer,
+      profitGoal: res.profitGoal, netGain: res.netGain,
+      totalOutOfPocket, surplusOverPocket, coveragePct, freedomRatio
+    };
+    renderResults(lastResult);
+  }
+
+  function renderResults(r) {
+    document.getElementById('emi-result').style.display = 'block';
+    document.getElementById('sip-result').style.display = 'block';
+    document.getElementById('connector').style.display = 'flex';
+    document.getElementById('freedom-card').style.display = 'block';
+    document.getElementById('val-emi').textContent = fmt(r.emi);
+    document.getElementById('val-principal').textContent = fmt(r.P);
+    document.getElementById('val-interest').textContent = fmt(r.totalInterest);
+    document.getElementById('val-total').textContent = fmt(r.totalEMI);
+    const circ = 2 * Math.PI * 38;
+    const interestArc = (r.totalInterest / r.totalEMI) * circ;
+    const principalArc = (r.P / r.totalEMI) * circ;
+    setTimeout(() => {
+      document.getElementById('donut-interest').setAttribute('stroke-dasharray', interestArc + ' ' + (circ - interestArc));
+      document.getElementById('donut-principal').setAttribute('stroke-dasharray', principalArc + ' ' + (circ - principalArc));
+      document.getElementById('donut-principal').setAttribute('stroke-dashoffset', 60 - interestArc);
+    }, 100);
+    document.getElementById('donut-pct').textContent = r.interestPct + '%';
+    document.getElementById('donut-label').textContent = lang === 'hi' ? 'Byaaj' : 'Interest';
+    document.getElementById('val-sip').textContent = fmt(r.sipAmount);
+    const tuBadge = document.getElementById('topup-effect-badge');
+    const tuOn = document.getElementById('topupToggle').checked;
+    if (tuOn && tuBadge) {
+      tuBadge.style.display = 'inline-block';
+      tuBadge.textContent = lang === 'hi' ? '⬇ Top-up se SIP kam hua' : '⬇ Lower due to top-up';
+    } else if (tuBadge) { tuBadge.style.display = 'none'; }
+    document.getElementById('val-sip-invested').textContent = fmt(r.sipInvested);
+    document.getElementById('val-sip-return').textContent = fmt(r.sipMaturity);
+    document.getElementById('val-target').textContent = fmt(r.trueTarget);
+    document.getElementById('val-coverage-pct').textContent = r.coveragePct.toFixed(1) + '%';
+    setTimeout(() => { document.getElementById('coverage-bar').style.width = r.coveragePct + '%'; }, 200);
+    document.getElementById('stat-outgo').textContent = fmt(r.totalEMI);
+    document.getElementById('stat-sip-inv').textContent = fmt(r.sipInvested);
+    document.getElementById('stat-combined').textContent = fmt(r.totalOutOfPocket);
+    document.getElementById('stat-maturity').textContent = fmt(r.sipMaturity);
+    document.getElementById('stat-infl').textContent = fmt(r.inflationBuffer);
+    document.getElementById('stat-profit').textContent = fmt(r.surplusOverPocket);
+    document.getElementById('stat-ratio').textContent = r.freedomRatio + '%';
+    const s = strings[lang];
+    const pct = ((r.surplusOverPocket / r.totalOutOfPocket) * 100).toFixed(1);
+    const isGood = r.sipMaturity >= r.trueTarget;
+    let msg = isGood ? s.freedomMsgGood.replace('{surplus}', fmt(r.surplusOverPocket)).replace('{pct}', pct)
+                     : s.freedomMsgBad.replace('{short}', fmt(r.trueTarget - r.sipMaturity));
+    const msgEl = document.getElementById('freedom-msg');
+    msgEl.textContent = msg;
+    msgEl.style.borderColor = isGood ? 'rgba(16,185,129,0.35)' : 'rgba(245,158,11,0.35)';
+    msgEl.style.background = isGood ? 'rgba(16,185,129,0.08)' : 'rgba(245,158,11,0.08)';
+    document.getElementById('bd-emi-total').textContent = fmt(r.totalEMI);
+    document.getElementById('bd-sip-cost').textContent = fmt(r.sipInvested);
+    document.getElementById('bd-pocket').textContent = fmt(r.totalOutOfPocket);
+    document.getElementById('bd-infl').textContent = fmt(r.inflationBuffer);
+    document.getElementById('bd-profit').textContent = fmt(r.profitGoal);
+    document.getElementById('bd-target').textContent = fmt(r.trueTarget);
+    document.getElementById('bd-maturity').textContent = fmt(r.sipMaturity);
+    document.getElementById('bd-surplus').textContent = fmt(r.surplusOverPocket);
+    if (_scrollOnCalc) {
+      setTimeout(() => { document.getElementById('connector').scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 50);
+      _scrollOnCalc = false;
+    }
+    showActionBar();
+  }
+
+  function getShareText() {
+    if (!lastResult) return '';
+    const r = lastResult; const hi = lang === 'hi';
+    const topupOn = document.getElementById('topupToggle').checked;
+    const topupVal = document.getElementById('topupValue').value;
+    const topupType = document.getElementById('topupType').value;
+    const topupLine = topupOn ? ('🔄 Yearly Top-up: ' + (topupType === 'pct' ? topupVal + '%' : '₹' + Number(topupVal).toLocaleString('en-IN') + '/yr') + '\n') : '';
+    const divider = '─────────────────────\n';
+    const lines = [
+      '📊 *EMI + SIP Freedom Calculator*',
+      hi ? '_Loan ka poora paisa SIP se wapas paayein_' : '_Recover your loan cost through SIP investment_',
+      '', divider, '🏦 *LOAN DETAILS*',
+      'Loan Amount  : ' + fmt(r.P),
+      'Interest Rate: ' + r.loanROI + '% p.a.',
+      'Tenure       : ' + r.years + (hi ? ' Saal' : ' Years') + ' (' + r.months + (hi ? ' Mahine' : ' Months') + ')',
+      'Monthly EMI  : *' + fmt(r.emi) + '*',
+      'Total Interest: ' + fmt(r.totalInterest),
+      'Total EMI Paid: *' + fmt(r.totalEMI) + '*',
+      '', divider, '📈 *SIP DETAILS*',
+      'SIP Return   : ' + r.sipROI + '% p.a.',
+      'Inflation    : ' + r.inflRate + '% p.a.',
+      'Profit Margin: ' + r.profitM + '%',
+      topupLine + 'Monthly SIP  : *' + fmt(r.sipAmount) + '*',
+      'Total Invested: ' + fmt(r.sipInvested),
+      'SIP Maturity : *' + fmt(r.sipMaturity) + '*',
+      '', divider, '🎯 *FREEDOM REPORT*',
+      '① EMI Total    : ' + fmt(r.totalEMI),
+      '② SIP Invested : ' + fmt(r.sipInvested),
+      '③ Out-of-Pocket: *' + fmt(r.totalOutOfPocket) + '*',
+      '④ Inflation Buf: ' + fmt(r.inflationBuffer),
+      '⑤ Profit Goal  : ' + fmt(r.profitGoal),
+      '🎯 Target       : *' + fmt(r.trueTarget) + '*',
+      '✅ SIP Maturity : *' + fmt(r.sipMaturity) + '*',
+      '🏆 Surplus Gain : *' + fmt(r.surplusOverPocket) + '*',
+      '📊 Return on Pocket: *' + r.freedomRatio + '%*',
+      '', divider,
+      hi ? '🚀 *Abhi SIP Shuru Karein!*' : '🚀 *Start Your SIP Today!*',
+      '👉 https://gromoneycapital.com',
+      '',
+      '🔗 Calculator: https://gromoneycapital.com/emi-sip-calculator.html',
+      hi ? '⚠️ MF investments market risk ke adhin hain.' : '⚠️ MF investments are subject to market risks.'
+    ];
+    return lines.join('\n');
+  }
+
+  function shareWhatsApp() {
+    if (!lastResult) { calculate(); return; }
+    window.open('https://api.whatsapp.com/send?text=' + encodeURIComponent(getShareText()), '_blank');
+  }
+
+  function shareEmail() {
+    if (!lastResult) { calculate(); return; }
+    const r = lastResult; const hi = lang === 'hi';
+    const lines = [
+      'EMI + SIP Freedom Calculator — Result', '',
+      'LOAN DETAILS',
+      (hi ? 'Loan Rakam    : ' : 'Loan Amount   : ') + fmt(r.P),
+      (hi ? 'Byaaj Dar     : ' : 'Interest Rate : ') + r.loanROI + '% p.a.',
+      (hi ? 'Avadhi        : ' : 'Tenure        : ') + r.years + (hi ? ' Saal' : ' Years'),
+      'Monthly EMI   : ' + fmt(r.emi),
+      (hi ? 'Kul Byaaj     : ' : 'Total Interest: ') + fmt(r.totalInterest),
+      (hi ? 'Kul EMI Paid  : ' : 'Total EMI Paid: ') + fmt(r.totalEMI), '',
+      'SIP DETAILS',
+      'SIP Return    : ' + r.sipROI + '% p.a.',
+      'Inflation     : ' + r.inflRate + '% p.a.',
+      'Profit Target : ' + r.profitM + '%',
+      'Monthly SIP   : ' + fmt(r.sipAmount),
+      (hi ? 'SIP Invested  : ' : 'SIP Invested  : ') + fmt(r.sipInvested),
+      'SIP Maturity  : ' + fmt(r.sipMaturity), '',
+      'FREEDOM REPORT',
+      (hi ? 'Kul Kharcha   : ' : 'Out-of-Pocket : ') + fmt(r.totalOutOfPocket),
+      'SIP Maturity  : ' + fmt(r.sipMaturity),
+      'Net Surplus   : ' + fmt(r.surplusOverPocket),
+      'Return/Pocket : ' + r.freedomRatio + '%', '',
+      (hi ? 'Abhi SIP Shuru Karein: ' : 'Start Your SIP: ') + 'https://gromoneycapital.com',
+      'Calculator: https://gromoneycapital.com/emi-sip-calculator.html', '',
+      (hi ? 'Savdhaan: MF returns guaranteed nahi hote. SEBI registered advisor se salah lein.' : 'Disclaimer: MF investments are subject to market risks.')
+    ];
+    const subject = encodeURIComponent('EMI+SIP Freedom Report — ' + fmt(r.P) + ' Loan | SIP: ' + fmt(r.sipAmount) + '/mo');
+    const body = encodeURIComponent(lines.join('\n'));
+    const a = document.createElement('a');
+    a.href = 'mailto:?subject=' + subject + '&body=' + body;
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  }
+
+  function downloadPDF() {
+    if (!lastResult) return;
+    const r = lastResult; const hi = lang === 'hi';
+    const btn = document.querySelector('.download-btn span');
+    const orig = btn.textContent;
+    btn.textContent = hi ? 'Taiyaar ho raha hai...' : 'Preparing...';
+    const topupOn = document.getElementById('topupToggle').checked;
+    const topupVal = document.getElementById('topupValue').value;
+    const topupType = document.getElementById('topupType').value;
+    const topupLine = topupOn ? ('<tr><td>' + (hi ? 'Yearly Top-up' : 'Yearly Top-up') + '</td><td>' + (topupType === 'pct' ? topupVal + '%' : '&#8377;' + Number(topupVal).toLocaleString('en-IN') + '/yr') + '</td></tr>') : '';
+
+    const html = '<!DOCTYPE html><html><head><meta charset="UTF-8"/><title>EMI SIP Freedom Report</title>' +
+      '<style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:Arial,sans-serif;background:#fff;color:#1a1a2e;padding:28px 32px;font-size:13px}' +
+      '.logo-bar{display:flex;align-items:center;justify-content:space-between;border-bottom:3px solid #f59e0b;padding-bottom:14px;margin-bottom:20px}' +
+      '.logo-title{font-size:20px;font-weight:900;color:#1a1a2e}.logo-sub{font-size:11px;color:#64748b;margin-top:3px}' +
+      '.badge{background:#f59e0b;color:#000;font-size:10px;font-weight:800;padding:4px 12px;border-radius:20px;letter-spacing:1px}' +
+      'h2{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#64748b;margin:16px 0 8px;padding-bottom:4px;border-bottom:1px solid #e2e8f0}' +
+      '.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:4px}table{width:100%;border-collapse:collapse}' +
+      'td{padding:7px 10px;border-bottom:1px solid #f1f5f9;font-size:12px}td:first-child{color:#475569;width:62%}td:last-child{font-weight:700;text-align:right}' +
+      '.amber{color:#d97706}.green{color:#059669}.purple{color:#6366f1}.red{color:#dc2626}' +
+      '.total-row td{background:#f8fafc;font-weight:800;font-size:13px;border-bottom:2px solid #e2e8f0}' +
+      '.summary{background:linear-gradient(135deg,#f0fdf4,#eff6ff);border:2px solid #10b981;border-radius:10px;padding:14px;margin:14px 0;display:grid;grid-template-columns:repeat(3,1fr);gap:10px;text-align:center}' +
+      '.sv{font-size:16px;font-weight:900;margin-bottom:2px}.sl{font-size:10px;color:#64748b;text-transform:uppercase}' +
+      '.cta{background:linear-gradient(135deg,#10b981,#059669);color:#fff;border-radius:10px;padding:14px 18px;margin-top:16px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}' +
+      '@media print{@page{margin:16mm}body{padding:0}}</style></head><body>' +
+      '<div class="logo-bar"><div><div class="logo-title">📊 EMI + SIP Freedom Calculator</div><div class="logo-sub">GroMoney Capital · AMFI ARN: 270739 · IRDA Registered</div></div>' +
+      '<div style="text-align:right"><div class="badge">FREEDOM REPORT</div><div style="font-size:10px;color:#94a3b8;margin-top:4px">' + new Date().toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' }) + '</div></div></div>' +
+      '<div class="grid"><div><h2>Loan Details</h2><table>' +
+      '<tr><td>Loan Amount</td><td class="purple">' + fmt(r.P) + '</td></tr>' +
+      '<tr><td>Interest Rate</td><td>' + r.loanROI + '% p.a.</td></tr>' +
+      '<tr><td>Tenure</td><td>' + r.years + ' Yrs (' + r.months + ' Mo)</td></tr>' +
+      '<tr><td>Monthly EMI</td><td class="amber">' + fmt(r.emi) + '</td></tr>' +
+      '<tr><td>Total Interest</td><td class="red">' + fmt(r.totalInterest) + '</td></tr>' +
+      '<tr class="total-row"><td>Total EMI Paid</td><td class="red">' + fmt(r.totalEMI) + '</td></tr>' +
+      '</table></div><div><h2>SIP Details</h2><table>' +
+      '<tr><td>SIP Return</td><td>' + r.sipROI + '% p.a.</td></tr>' +
+      '<tr><td>Inflation</td><td>' + r.inflRate + '% p.a.</td></tr>' +
+      '<tr><td>Profit Target</td><td>' + r.profitM + '%</td></tr>' +
+      topupLine +
+      '<tr><td>Required SIP/mo</td><td class="amber">' + fmt(r.sipAmount) + '</td></tr>' +
+      '<tr><td>Total SIP Invested</td><td class="purple">' + fmt(r.sipInvested) + '</td></tr>' +
+      '<tr class="total-row"><td>SIP Maturity</td><td class="green">' + fmt(r.sipMaturity) + '</td></tr>' +
+      '</table></div></div>' +
+      '<h2>Freedom Report — Step by Step</h2><table>' +
+      '<tr><td>① Total EMI Paid</td><td class="red">' + fmt(r.totalEMI) + '</td></tr>' +
+      '<tr><td>② SIP Invested (Your Cost)</td><td class="purple">' + fmt(r.sipInvested) + '</td></tr>' +
+      '<tr class="total-row"><td>③ Total Out-of-Pocket (①+②)</td><td class="amber">' + fmt(r.totalOutOfPocket) + '</td></tr>' +
+      '<tr><td>④ Inflation Buffer</td><td>' + fmt(r.inflationBuffer) + '</td></tr>' +
+      '<tr><td>⑤ Profit Margin Goal</td><td>' + fmt(r.profitGoal) + '</td></tr>' +
+      '<tr class="total-row"><td>🎯 SIP Must Return (Target)</td><td class="amber">' + fmt(r.trueTarget) + '</td></tr>' +
+      '<tr class="total-row"><td>✅ Actual SIP Maturity</td><td class="green">' + fmt(r.sipMaturity) + '</td></tr>' +
+      '<tr class="total-row"><td>🏆 Net Surplus</td><td class="green">' + fmt(r.surplusOverPocket) + '</td></tr>' +
+      '</table>' +
+      '<div class="summary"><div><div class="sv red">' + fmt(r.totalOutOfPocket) + '</div><div class="sl">Out-of-Pocket</div></div>' +
+      '<div><div class="sv green">' + fmt(r.sipMaturity) + '</div><div class="sl">SIP Maturity</div></div>' +
+      '<div><div class="sv amber">' + r.freedomRatio + '%</div><div class="sl">Return on Pocket</div></div></div>' +
+      '<div class="cta"><div><div style="font-size:14px;font-weight:800">🚀 Start Investing Today!</div>' +
+      '<div style="font-size:11px;opacity:0.85;margin-top:3px">GroMoney Capital — Free MF Account, AMFI ARN: 270739</div></div>' +
+      '<div style="font-size:12px;font-weight:700;opacity:0.9">gromoneycapital.com →</div></div>' +
+      '<div style="margin-top:16px;padding-top:10px;border-top:1px solid #e2e8f0;display:flex;justify-content:space-between;font-size:10px;color:#94a3b8">' +
+      '<span>⚠️ For educational purposes only. MF returns are not guaranteed.</span>' +
+      '<span>gromoneycapital.com/emi-sip-calculator.html</span></div></body></html>';
+
+    try {
+      const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = 'EMI-SIP-Freedom-Report-' + new Date().toISOString().slice(0, 10) + '.html';
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      setTimeout(() => URL.revokeObjectURL(url), 4000);
+      _showToast(hi ? '✅ Report download ho gayi! File browser mein kholein → Print → Save as PDF' : '✅ Report downloaded! Open the file in browser → Print → Save as PDF', 5000);
+    } catch (e) {
+      _showToast(hi ? '❌ Download fail hua. Please dobara try karein.' : '❌ Download failed. Please try again.', 3000);
+    }
+    setTimeout(() => { btn.textContent = orig; }, 1200);
+  }
+
+  function _showToast(msg, duration) {
+    let t = document.getElementById('_toast');
+    if (!t) {
+      t = document.createElement('div'); t.id = '_toast';
+      t.style.cssText = 'position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(20px);background:rgba(15,20,40,0.97);color:#f1f5f9;border:1px solid rgba(245,158,11,0.4);border-radius:12px;padding:12px 20px;font-size:13px;font-weight:600;max-width:90vw;text-align:center;z-index:9999;box-shadow:0 8px 32px rgba(0,0,0,0.5);transition:opacity 0.4s,transform 0.4s;opacity:0;font-family:var(--font);';
+      document.body.appendChild(t);
+    }
+    t.textContent = msg;
+    requestAnimationFrame(() => { t.style.opacity = '1'; t.style.transform = 'translateX(-50%) translateY(0)'; });
+    clearTimeout(t._timer);
+    t._timer = setTimeout(() => { t.style.opacity = '0'; t.style.transform = 'translateX(-50%) translateY(20px)'; }, duration || 4000);
+  }
+
+  function showActionBar() { document.getElementById('action-bar').style.display = 'block'; }
+
+  function updateActionBarLabels() {
+    const hi = lang === 'hi';
+    const dl = document.getElementById('btn-download');
+    const wa = document.getElementById('btn-whatsapp');
+    const em = document.getElementById('btn-email');
+    const ct = document.getElementById('cta-btn-text');
+    const ctitle = document.getElementById('cta-title');
+    const csub = document.getElementById('cta-sub');
+    if (dl) dl.textContent = hi ? 'PDF Download' : 'Download PDF';
+    if (wa) wa.textContent = 'WhatsApp';
+    if (em) em.textContent = hi ? 'Email Karen' : 'Share Email';
+    if (ct) ct.textContent = hi ? '🚀 Apna SIP Aaj Hi Shuru Karein →' : '🚀 Start Your First SIP Today →';
+    if (ctitle) ctitle.textContent = hi ? '💰 Paisa Kaam Kare, Aap Nahi!' : '💰 Make Money Work For You!';
+    if (csub) csub.textContent = hi ? 'EMI bharein, SIP karein — dono ka fayda uthayein. Aaj hi pehla SIP shuru karein.' : 'Pay EMI, invest SIP — recover everything & earn more. Open your free account now.';
+  }
+
+  ['loanAmount','loanROI','loanTenure','sipROI','inflationRate','targetBuffer'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener('input', debouncedCalc);
+  });
+
+  applyStrings(); updateActionBarLabels();
+  _scrollOnCalc = false; calculate();
+</script>
+</body>
+</html>

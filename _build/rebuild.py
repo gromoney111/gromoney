@@ -95,7 +95,12 @@ HEADER = f"""<div class="utility-bar">
         </ul>
       </li>
       <li><a href="financial-products.html">Apply Online</a></li>
-      <li><a href="tools.html">Tools</a></li>
+      <li class="has-sub"><a href="tools.html">Tools</a>
+        <ul class="submenu">
+          <li><a href="tools.html">All Calculators</a></li>
+          <li><a href="emi-sip-calculator.html">EMI + SIP Freedom</a></li>
+        </ul>
+      </li>
       <li><a href="contact.html">Contact</a></li>
       <li class="nav-cta"><a class="btn btn-primary" href="{NJ_LINK}" target="_blank" rel="noopener">Open MF A/c</a></li>
     </ul>
@@ -134,6 +139,7 @@ FOOTER = f"""<footer class="site-footer">
       <a href="contact.html">Contact</a>
       <a href="testimonials.html">Client Reviews</a>
       <a href="tools.html">Calculators</a>
+      <a href="emi-sip-calculator.html">EMI + SIP Freedom</a>
       <a href="{LOGIN_URL}" target="_blank" rel="noopener">Client Login</a>
     </div>
     <div>
