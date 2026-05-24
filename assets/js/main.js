@@ -190,8 +190,12 @@ function initGoalCalc() {
     entries.forEach(e => {
       if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
     });
-  }, { threshold: 0.15 });
+  }, { threshold: 0, rootMargin: '0px 0px -10% 0px' });
   els.forEach(e => io.observe(e));
+  // Safety: anything still hidden after 1.5s gets revealed (handles tall sections, low-power devices, etc.)
+  setTimeout(() => {
+    document.querySelectorAll('.reveal:not(.in)').forEach(e => e.classList.add('in'));
+  }, 1500);
 })();
 
 /* ===== Animated Counter (count up) ===== */
