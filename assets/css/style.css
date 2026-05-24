@@ -463,8 +463,10 @@ textarea.form-control { min-height: 130px; resize: vertical; }
   border-radius: 50%;
   display: grid; place-items: center;
   padding: 0; color: #fff;
+  transition: all var(--transition);
 }
-.social a:hover { background: var(--color-accent); }
+.social a:hover { background: var(--color-accent); transform: translateY(-3px); color: #07294a; }
+.social a svg { display: block; }
 .footer-bottom {
   border-top: 1px solid rgba(255,255,255,.1);
   padding: 20px 0;
