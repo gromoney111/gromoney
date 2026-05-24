@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free SIP, Lumpsum &amp; EMI Calculator | GroMoney Capital</title>
+<meta name="description" content="Free online calculators for SIP, Lumpsum mutual fund returns, loan EMI and goal-based investment planning.">
+<meta name="keywords" content="SIP calculator, EMI calculator, lumpsum calculator, mutual fund calculator India">
+<link rel="canonical" href="https://gromoneycapital.com/tools.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Free SIP, Lumpsum &amp; EMI Calculator | GroMoney Capital">
+<meta property="og:description" content="Free online calculators for SIP, Lumpsum mutual fund returns, loan EMI and goal-based investment planning.">
+<meta property="og:url" content="https://gromoneycapital.com/tools.html">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b3d6b'/%3E%3Ctext x='32' y='42' font-family='Arial' font-size='32' font-weight='bold' fill='%23f5a623' text-anchor='middle'%3EG%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+
+</head>
+<body>
+<header class="site-header">
+  <div class="container nav-bar">
+    <a class="brand" href="index.html"><span class="brand-logo">G</span><span>GroMoney Capital<small>NJ Wealth Partner</small></span></a>
+    <button class="menu-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="mutual-funds.html">Mutual Funds</a></li>
+      <li class="has-sub"><a href="insurance.html">Insurance</a>
+        <ul class="submenu">
+          <li><a href="insurance.html">All Insurance</a></li>
+          <li><a href="life-insurance.html">Life Insurance</a></li>
+          <li><a href="term-insurance.html">Term Insurance</a></li>
+          <li><a href="health-insurance.html">Health Insurance</a></li>
+          <li><a href="travel-insurance.html">Travel Insurance</a></li>
+        </ul>
+      </li>
+      <li class="has-sub"><a href="loans.html">Loans &amp; Cards</a>
+        <ul class="submenu">
+          <li><a href="loans.html">All Products</a></li>
+          <li><a href="credit-card.html">Credit Cards</a></li>
+          <li><a href="personal-loan.html">Personal Loan</a></li>
+          <li><a href="home-loan.html">Home Loan</a></li>
+          <li><a href="auto-loan.html">Auto Loan</a></li>
+          <li><a href="cibil-check.html">Free CIBIL Check</a></li>
+        </ul>
+      </li>
+      <li><a href="tools.html" class="active">Tools</a></li>
+      <li><a href="testimonials.html">Reviews</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li class="nav-cta"><a class="btn btn-primary" href="http://p.njw.bz/29511" target="_blank" rel="noopener">Open MF A/c</a></li>
+</ul>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="container">
+    <div class="breadcrumb"><a href="index.html">Home</a> / Tools</div>
+    <h1>Financial Calculators</h1>
+    <p>Free, accurate calculators for SIP, lumpsum, EMI &amp; goal planning. Get instant insights on your money.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="tabs">
+      <button class="tab-btn active" data-target="tab-sip">SIP Calculator</button>
+      <button class="tab-btn" data-target="tab-ls">Lumpsum</button>
+      <button class="tab-btn" data-target="tab-emi">EMI Calculator</button>
+      <button class="tab-btn" data-target="tab-goal">Goal Planner</button>
+    </div>
+
+    <div id="tab-sip" class="tab-pane active">
+      <form id="sipCalc" class="calc">
+        <h3>SIP Calculator — How much will my SIP grow?</h3>
+        <div class="calc-row">
+          <label>Monthly Investment <span id="sipAmountVal">5,000</span></label>
+          <input id="sipAmount" type="range" min="500" max="200000" step="500" value="5000">
+          <label>Investment Period <span id="sipYearsVal">15 yr</span></label>
+          <input id="sipYears" type="range" min="1" max="40" value="15">
+          <label>Expected Return (p.a.) <span id="sipReturnVal">12%</span></label>
+          <input id="sipReturn" type="range" min="1" max="25" step="0.5" value="12">
+        </div>
+        <div class="calc-result">
+          <div class="item"><small>Total Invested</small><strong id="sipInv">—</strong></div>
+          <div class="item"><small>Wealth Gained</small><strong id="sipGain">—</strong></div>
+          <div class="item"><small>Future Value</small><strong id="sipFV">—</strong></div>
+        </div>
+      </form>
+    </div>
+
+    <div id="tab-ls" class="tab-pane">
+      <form id="lumpsumCalc" class="calc">
+        <h3>Lumpsum Calculator — One-time investment growth</h3>
+        <div class="calc-row">
+          <label>Investment Amount <span id="lsAmountVal">100,000</span></label>
+          <input id="lsAmount" type="range" min="1000" max="10000000" step="1000" value="100000">
+          <label>Investment Period <span id="lsYearsVal">10 yr</span></label>
+          <input id="lsYears" type="range" min="1" max="40" value="10">
+          <label>Expected Return (p.a.) <span id="lsReturnVal">12%</span></label>
+          <input id="lsReturn" type="range" min="1" max="25" step="0.5" value="12">
+        </div>
+        <div class="calc-result">
+          <div class="item"><small>Invested</small><strong id="lsInv">—</strong></div>
+          <div class="item"><small>Wealth Gained</small><strong id="lsGain">—</strong></div>
+          <div class="item"><small>Future Value</small><strong id="lsFV">—</strong></div>
+        </div>
+      </form>
+    </div>
+
+    <div id="tab-emi" class="tab-pane">
+      <form id="emiCalc" class="calc">
+        <h3>EMI Calculator — Monthly loan EMI</h3>
+        <div class="calc-row">
+          <label>Loan Amount <span id="emiAmountVal">2,500,000</span></label>
+          <input id="emiAmount" type="range" min="50000" max="50000000" step="10000" value="2500000">
+          <label>Loan Tenure <span id="emiYearsVal">20 yr</span></label>
+          <input id="emiYears" type="range" min="1" max="30" value="20">
+          <label>Interest Rate (p.a.) <span id="emiRateVal">8.5%</span></label>
+          <input id="emiRate" type="range" min="5" max="20" step="0.1" value="8.5">
+        </div>
+        <div class="calc-result">
+          <div class="item"><small>Monthly EMI</small><strong id="emiVal">—</strong></div>
+          <div class="item"><small>Total Interest</small><strong id="emiInterest">—</strong></div>
+          <div class="item"><small>Total Payable</small><strong id="emiTotal">—</strong></div>
+        </div>
+      </form>
+    </div>
+
+    <div id="tab-goal" class="tab-pane">
+      <form id="goalCalc" class="calc">
+        <h3>Goal Planner — How much SIP do I need?</h3>
+        <div class="calc-row">
+          <label>Target Amount <span id="goalAmountVal">10,000,000</span></label>
+          <input id="goalAmount" type="range" min="100000" max="100000000" step="50000" value="10000000">
+          <label>Years to Goal <span id="goalYearsVal">15 yr</span></label>
+          <input id="goalYears" type="range" min="1" max="40" value="15">
+          <label>Expected Return (p.a.) <span id="goalReturnVal">12%</span></label>
+          <input id="goalReturn" type="range" min="1" max="25" step="0.5" value="12">
+        </div>
+        <div class="calc-result">
+          <div class="item"><small>Required Monthly SIP</small><strong id="goalSIP">—</strong></div>
+          <div class="item"><small>Total You'll Invest</small><strong id="goalInv">—</strong></div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section class="container">
+  <div class="cta-banner">
+    <h2>Numbers look good? Start now.</h2>
+    <p>Open your mutual fund account in 10 minutes and start your SIP today.</p>
+    <a class="btn btn-primary" href="http://p.njw.bz/29511" target="_blank" rel="noopener">Open MF Account</a>
+    <a class="btn btn-light" href="contact.html">Get Free Plan</a>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <div class="brand" style="color:#fff;"><span class="brand-logo">G</span><span style="color:#fff;">GroMoney Capital<small style="color:rgba(255,255,255,.7);">NJ Wealth Partner</small></span></div>
+      <p>Empowering Indian families to invest, protect and grow their wealth — one financial decision at a time.</p>
+      <div class="social"><a href="#" aria-label="Facebook">f</a><a href="#" aria-label="Twitter">t</a><a href="#" aria-label="LinkedIn">in</a><a href="#" aria-label="WhatsApp">w</a></div>
+    </div>
+    <div><h4>Quick Links</h4><a href="index.html">Home</a><a href="about.html">About Us</a><a href="contact.html">Contact</a><a href="testimonials.html">Reviews</a><a href="tools.html">Calculators</a></div>
+    <div><h4>Products</h4><a href="mutual-funds.html">Mutual Funds</a><a href="insurance.html">Insurance</a><a href="loans.html">Loans &amp; Cards</a><a href="cibil-check.html">CIBIL Check</a></div>
+    <div><h4>Legal</h4><a href="privacy-policy.html">Privacy Policy</a><a href="terms.html">Terms of Service</a><a href="disclaimer.html">Disclaimer</a></div>
+  </div>
+  <div class="footer-bottom container">© <span id="year"></span> GroMoney Capital. All rights reserved.
+    <a href="privacy-policy.html">Privacy</a>·<a href="terms.html">Terms</a>·<a href="disclaimer.html">Disclaimer</a>
+  </div>
+  <div class="disclaimer-strip"><div class="container">Mutual fund investments are subject to market risks. Read all scheme-related documents carefully. Insurance is a subject matter of solicitation. GroMoney Capital is a distributor and does not provide investment advice. We earn referral/commission from partner products.</div></div>
+</footer>
+<script src="assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /_build/
+
+Sitemap: https://gromoneycapital.com/sitemap.xml
