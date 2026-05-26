@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Daily SIP EMI Recovery Calculator | GroMoney Capital</title>
+<meta name="description" content="Calculate how much daily SIP investment you need to recover your complete EMI amount. Free tool for home loan, car loan, personal loan recovery through daily SIP."/>
+<meta name="keywords" content="daily SIP calculator, rozana SIP, daily SIP EMI recovery, SIP per day calculator, loan recovery daily SIP, GroMoney Capital"/>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b3d6b'/%3E%3Ctext x='32' y='42' font-family='Arial' font-size='32' font-weight='bold' fill='%23f5a623' text-anchor='middle'%3EG%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#060b18;--surface:#0e1726;--surface2:#162035;--surface3:#1c2a44;--accent:#f59e0b;--accent2:#10b981;--accent3:#6366f1;--accent4:#ec4899;--danger:#ef4444;--text:#f1f5f9;--muted:#94a3b8;--border:rgba(255,255,255,0.07);--radius:16px;--font:'Sora',sans-serif}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
+.wrap{max-width:900px;margin:0 auto;padding:20px 16px}
+header{padding:20px 16px;text-align:center;border-bottom:1px solid var(--border);margin-bottom:24px}
+h1{font-size:clamp(20px,4vw,32px);font-weight:800;background:linear-gradient(135deg,#f1f5f9 20%,var(--accent4) 60%,var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.subtitle{color:var(--muted);font-size:13px;margin-top:6px}
+.back-link{display:inline-flex;align-items:center;gap:6px;color:var(--accent2);text-decoration:none;font-size:13px;font-weight:600;margin-bottom:12px}
+.back-link:hover{color:var(--accent)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media(max-width:768px){.grid{grid-template-columns:1fr}}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:22px}
+.card-title{font-size:15px;font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.field{margin-bottom:14px}
+label{display:block;font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px}
+.input-row{display:flex;align-items:center;background:var(--surface2);border:1px solid var(--border);border-radius:10px;overflow:hidden}
+.input-row:focus-within{border-color:var(--accent2)}
+.input-prefix,.input-suffix{padding:0 12px;font-size:13px;font-weight:700;height:44px;display:flex;align-items:center;color:var(--accent2);background:rgba(16,185,129,0.08)}
+input[type="number"]{flex:1;background:transparent;border:none;outline:none;color:var(--text);font-family:var(--font);font-size:15px;font-weight:600;padding:0 14px;height:44px}
+input[type="number"]::-webkit-inner-spin-button{-webkit-appearance:none}
+input[type="number"]{-moz-appearance:textfield}
+input[type="range"]{width:100%;accent-color:var(--accent2);margin-top:6px}
+.range-labels{display:flex;justify-content:space-between;font-size:10px;color:var(--muted);margin-top:3px}
+.calc-btn{width:100%;margin-top:16px;background:linear-gradient(135deg,var(--accent2),#059669);color:#fff;font-family:var(--font);font-size:14px;font-weight:800;border:none;border-radius:12px;padding:14px;cursor:pointer;transition:all 0.25s}
+.calc-btn:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(16,185,129,0.3)}
+.result-box{margin-top:16px;background:var(--surface2);border-radius:12px;padding:16px;border:1px solid var(--border);display:none}
+.result-box.show{display:block}
+.result-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.04)}
+.result-row:last-child{border-bottom:none}
+.result-label{font-size:12px;color:var(--muted)}.result-value{font-size:14px;font-weight:700}
+.big-result{text-align:center;padding:16px;background:linear-gradient(135deg,rgba(16,185,129,0.12),rgba(236,72,153,0.08));border:1px solid rgba(16,185,129,0.25);border-radius:12px;margin-top:12px}
+.big-result-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.big-result-val{font-size:36px;font-weight:900;color:var(--accent2)}
+.big-result-sub{font-size:11px;color:var(--muted);margin-top:4px}
+.green{color:var(--accent2)}.red{color:var(--danger)}.amber{color:var(--accent)}.purple{color:var(--accent3)}.pink{color:var(--accent4)}
+.benefits{padding:40px 0;border-top:1px solid var(--border);margin-top:30px}
+.benefits h2{font-size:clamp(18px,3vw,24px);font-weight:800;color:var(--text);text-align:center;margin-bottom:6px}
+.benefits-sub{font-size:13px;color:var(--muted);text-align:center;margin-bottom:24px}
+.benefits-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.benefit-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:18px;transition:all 0.3s}
+.benefit-card:hover{border-color:var(--accent2);transform:translateY(-3px)}
+.benefit-icon{font-size:26px;margin-bottom:8px}
+.benefit-title{font-size:14px;font-weight:700;margin-bottom:5px}
+.benefit-desc{font-size:12px;color:var(--muted);line-height:1.6}
+.footer-bar{text-align:center;padding:20px;border-top:1px solid var(--border);margin-top:30px;font-size:11px;color:var(--muted)}
+.footer-bar a{color:var(--accent);text-decoration:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+<a href="index.html" class="back-link">&#8592; Back to GroMoney Capital</a>
+<header>
+<h1>&#128197; Daily SIP EMI Recovery Calculator</h1>
+<p class="subtitle">Rozana Thoda SIP Karein &#8212; Poora Loan + Interest + Profit Wapas Paayein</p>
+</header>
+
+<div class="grid">
+<!-- LOAN CARD -->
+<div class="card">
+<div class="card-title">&#127974; EMI Calculator (Loan)</div>
+<div class="field">
+<label>Loan Amount (&#8377;)</label>
+<div class="input-row"><span class="input-prefix">&#8377;</span><input type="number" id="loanAmt" value="2000000" min="10000" max="100000000"/></div>
+<input type="range" id="slLoan" min="10000" max="100000000" step="10000" value="2000000" oninput="document.getElementById('loanAmt').value=this.value;calc()"/>
+<div class="range-labels"><span>&#8377;10K</span><span>&#8377;10Cr</span></div>
+</div>
+<div class="field">
+<label>Interest Rate (% p.a.)</label>
+<div class="input-row"><input type="number" id="loanRate" value="8.5" min="1" max="30" step="0.1"/><span class="input-suffix">%</span></div>
+<input type="range" id="slRate" min="1" max="30" step="0.1" value="8.5" oninput="document.getElementById('loanRate').value=this.value;calc()"/>
+</div>
+<div class="field">
+<label>Tenure (Years)</label>
+<div class="input-row"><input type="number" id="loanYrs" value="20" min="1" max="30"/><span class="input-suffix">Yrs</span></div>
+<input type="range" id="slYrs" min="1" max="30" value="20" oninput="document.getElementById('loanYrs').value=this.value;calc()"/>
+</div>
+<div class="result-box" id="emiResult">
+<div class="result-row"><span class="result-label">Monthly EMI</span><span class="result-value pink" id="rEmi">-</span></div>
+<div class="result-row"><span class="result-label">Daily EMI Equivalent</span><span class="result-value amber" id="rDailyEmi">-</span></div>
+<div class="result-row"><span class="result-label">Total Interest</span><span class="result-value red" id="rInt">-</span></div>
+<div class="result-row"><span class="result-label">Total EMI Paid</span><span class="result-value red" id="rTotal">-</span></div>
+</div>
+</div>
+
+<!-- SIP CARD -->
+<div class="card">
+<div class="card-title">&#128197; Daily SIP Recovery</div>
+<div class="field">
+<label>Expected SIP Return (% p.a.)</label>
+<div class="input-row"><input type="number" id="sipRate" value="12" min="1" max="30" step="0.5"/><span class="input-suffix">%</span></div>
+<input type="range" id="slSip" min="1" max="30" step="0.5" value="12" oninput="document.getElementById('sipRate').value=this.value;calc()"/>
+<div class="range-labels"><span>1%</span><span>12% Govt Guideline</span><span>30%</span></div>
+</div>
+<div class="field">
+<label>Inflation Rate (% p.a.)</label>
+<div class="input-row"><input type="number" id="inflRate" value="6" min="0" max="15" step="0.5"/><span class="input-suffix">%</span></div>
+</div>
+<div class="field">
+<label>Profit Margin Target (%)</label>
+<div class="input-row"><input type="number" id="profitRate" value="7" min="0" max="50" step="1"/><span class="input-suffix">%</span></div>
+</div>
+<button class="calc-btn" onclick="calc()">&#128290; Calculate Daily SIP</button>
+<div class="big-result" id="bigResult" style="display:none">
+<div class="big-result-label">Required Daily SIP</div>
+<div class="big-result-val" id="rDailySip">-</div>
+<div class="big-result-sub">per day | Monthly: <span id="rMonthly">-</span></div>
+</div>
+<div class="result-box" id="sipResult">
+<div class="result-row"><span class="result-label">Total SIP Invested</span><span class="result-value purple" id="rSipInv">-</span></div>
+<div class="result-row"><span class="result-label">SIP Maturity Value</span><span class="result-value green" id="rMat">-</span></div>
+<div class="result-row"><span class="result-label">&#127919; Target Amount</span><span class="result-value pink" id="rTarget">-</span></div>
+<div class="result-row"><span class="result-label">&#127942; Net Surplus</span><span class="result-value green" id="rSurplus">-</span></div>
+<div class="result-row"><span class="result-label">Return on Pocket</span><span class="result-value amber" id="rRop">-</span></div>
+</div>
+</div>
+</div>
+
+<!-- BENEFITS SECTION -->
+<div class="benefits">
+<h2>&#128176; Benefits of Daily SIP Investment</h2>
+<p class="benefits-sub">Why investing every day beats monthly SIP &#8212; backed by math and discipline</p>
+<div class="benefits-grid">
+<div class="benefit-card"><div class="benefit-icon">&#128200;</div><div class="benefit-title">Extra Compounding Power</div><div class="benefit-desc">Daily SIP compounds 365 times/year vs 12 times for monthly SIP. Over 20 years, this gives 3-8% extra returns on the same investment amount.</div></div>
+<div class="benefit-card"><div class="benefit-icon">&#9749;</div><div class="benefit-title">Chai Money = Wealth</div><div class="benefit-desc">Just &#8377;100-500/day (cost of chai + snack) can build &#8377;1 Cr+ corpus over 20 years at 12% return. Small daily habit, massive long-term result.</div></div>
+<div class="benefit-card"><div class="benefit-icon">&#128170;</div><div class="benefit-title">Rupee Cost Averaging (Daily)</div><div class="benefit-desc">Daily SIP buys units at 365 different NAVs per year vs 12. This smooths out market volatility far better than monthly investing.</div></div>
+<div class="benefit-card"><div class="benefit-icon">&#128640;</div><div class="benefit-title">Recover Full EMI Cost</div><div class="benefit-desc">A parallel daily SIP alongside your EMI can recover your entire loan cost (principal + interest) by the time your loan ends. Free house/car!</div></div>
+<div class="benefit-card"><div class="benefit-icon">&#128176;</div><div class="benefit-title">Beat Inflation Automatically</div><div class="benefit-desc">At 12% SIP return vs 6% inflation, your real wealth grows at 6% p.a. Daily investing ensures you never miss a compounding day.</div></div>
+<div class="benefit-card"><div class="benefit-icon">&#127793;</div><div class="benefit-title">Build Discipline Like Brushing</div><div class="benefit-desc">Daily SIP becomes a habit like brushing teeth. No mental burden of big monthly payments. &#8377;200/day feels easier than &#8377;6,000/month psychologically.</div></div>
+<div class="benefit-card"><div class="benefit-icon">&#128202;</div><div class="benefit-title">Lower Market Timing Risk</div><div class="benefit-desc">With 365 entry points per year, you eliminate the risk of investing all your money on a single bad day each month.</div></div>
+<div class="benefit-card"><div class="benefit-icon">&#127775;</div><div class="benefit-title">Start with Just &#8377;100/day</div><div class="benefit-desc">Many AMCs now allow daily SIP starting &#8377;100. No minimum lock-in, fully liquid, 100% online, SEBI regulated. Perfect for beginners.</div></div>
+<div class="benefit-card"><div class="benefit-icon">&#128184;</div><div class="benefit-title">Tax Benefits (ELSS Daily SIP)</div><div class="benefit-desc">Daily SIP in ELSS funds gives Section 80C tax deduction up to &#8377;1.5L/year. Each day's investment has its own 3-year lock-in, providing staggered liquidity.</div></div>
+</div>
+</div>
+
+<div class="footer-bar">
+<p>&#9888;&#65039; This calculator is for educational purposes only. Mutual fund returns are not guaranteed.</p>
+<p style="margin-top:8px">Powered by <a href="index.html">GroMoney Capital</a> | <a href="tools.html">More Calculators</a> | <a href="contact.html">Contact Us</a></p>
+</div>
+</div>
+
+<script>
+function fmt(n){if(n>=10000000)return'\u20B9'+(n/10000000).toFixed(2)+' Cr';if(n>=100000)return'\u20B9'+(n/100000).toFixed(2)+' L';return'\u20B9'+Math.round(n).toLocaleString('en-IN')}
+function fmtD(n){return'\u20B9'+n.toFixed(0)}
+function calcEMI(P,r,n){r=r/100/12;if(r===0)return P/n;return P*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1)}
+function calcDailySIPMaturity(daily,annualR,days){var r=annualR/100/365,corpus=0;for(var d=0;d<days;d++){corpus=(corpus+daily)*(1+r)}return corpus}
+function findDailySIP(totalEMI,sipROI,days,inflRate,profitRate){var infl=inflRate/100,profit=profitRate/100;var lo=0.01,hi=totalEMI/30;for(var i=0;i<80;i++){var mid=(lo+hi)/2;var mat=calcDailySIPMaturity(mid,sipROI,days);var inv=mid*days;var target=(totalEMI*(1+infl)+inv)*(1+profit);if(mat<target)lo=mid;else hi=mid}var sip=(lo+hi)/2;var mat2=calcDailySIPMaturity(sip,sipROI,days);var inv2=sip*days;var target2=(totalEMI*(1+infl)+inv2)*(1+profit);return{sip:sip,maturity:mat2,invested:inv2,target:target2}}
+function calc(){
+var P=parseFloat(document.getElementById('loanAmt').value)||0;
+var rate=parseFloat(document.getElementById('loanRate').value)||0;
+var yrs=parseInt(document.getElementById('loanYrs').value)||0;
+var sipR=parseFloat(document.getElementById('sipRate').value)||12;
+var inflR=parseFloat(document.getElementById('inflRate').value)||6;
+var profR=parseFloat(document.getElementById('profitRate').value)||7;
+if(!P||!rate||!yrs)return;
+var months=yrs*12,days=yrs*365;
+var emi=calcEMI(P,rate,months);
+var totalEMI=emi*months;
+var totalInt=totalEMI-P;
+document.getElementById('rEmi').textContent=fmt(emi);
+document.getElementById('rDailyEmi').textContent=fmtD(totalEMI/days)+'/day';
+document.getElementById('rInt').textContent=fmt(totalInt);
+document.getElementById('rTotal').textContent=fmt(totalEMI);
+document.getElementById('emiResult').classList.add('show');
+var ds=findDailySIP(totalEMI,sipR,days,inflR,profR);
+var pocket=totalEMI+ds.invested;
+var surplus=ds.maturity-pocket;
+var rop=(ds.maturity/pocket*100).toFixed(1);
+document.getElementById('rDailySip').textContent=fmtD(ds.sip);
+document.getElementById('rMonthly').textContent=fmt(ds.sip*30.44);
+document.getElementById('bigResult').style.display='block';
+document.getElementById('rSipInv').textContent=fmt(ds.invested);
+document.getElementById('rMat').textContent=fmt(ds.maturity);
+document.getElementById('rTarget').textContent=fmt(ds.target);
+document.getElementById('rSurplus').textContent=fmt(surplus);
+document.getElementById('rRop').textContent=rop+'%';
+document.getElementById('sipResult').classList.add('show');
+document.getElementById('slLoan').value=P;
+document.getElementById('slRate').value=rate;
+document.getElementById('slYrs').value=yrs;
+document.getElementById('slSip').value=sipR;
+}
+['loanAmt','loanRate','loanYrs','sipRate','inflRate','profitRate'].forEach(function(id){
+document.getElementById(id).addEventListener('input',function(){calc()})});
+calc();
+</script>
+</body>
+</html>
