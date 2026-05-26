@@ -188,6 +188,108 @@ function initGoalCalc() {
 
 
 
+/* ===== Market Ticker — API-ready with fallback static data ===== */
+(function () {
+  const tickerTrack = document.getElementById('tickerTrack');
+  if (!tickerTrack) return;
+
+  // Static data (fallback / default) — replace with live API calls when available
+  const marketData = {
+    indices: [
+      { name: 'SENSEX', price: '79,486.32', change: '+1.12%', direction: 'up' },
+      { name: 'NIFTY 50', price: '24,148.20', change: '+0.98%', direction: 'up' },
+      { name: 'NIFTY BANK', price: '52,312.45', change: '-0.34%', direction: 'down' },
+      { name: 'NIFTY IT', price: '38,921.10', change: '+1.45%', direction: 'up' },
+      { name: 'NIFTY MIDCAP', price: '56,784.30', change: '+0.67%', direction: 'up' }
+    ],
+    mutualFunds: [
+      { name: 'SBI Bluechip Fund', nav: '₹89.42', change: '+0.82%', direction: 'up' },
+      { name: 'HDFC Flexi Cap', nav: '₹1,842.15', change: '+1.05%', direction: 'up' },
+      { name: 'ICICI Pru Bluechip', nav: '₹102.38', change: '+0.74%', direction: 'up' },
+      { name: 'Axis Long Term Equity', nav: '₹94.67', change: '-0.21%', direction: 'down' },
+      { name: 'Mirae Asset Large Cap', nav: '₹112.54', change: '+0.93%', direction: 'up' },
+      { name: 'Kotak Emerging Equity', nav: '₹118.29', change: '+1.34%', direction: 'up' },
+      { name: 'Parag Parikh Flexi Cap', nav: '₹78.91', change: '+0.56%', direction: 'up' },
+      { name: 'Nippon India Small Cap', nav: '₹168.43', change: '+1.87%', direction: 'up' },
+      { name: 'SBI Small Cap Fund', nav: '₹156.72', change: '+1.62%', direction: 'up' },
+      { name: 'HDFC Mid-Cap Opp', nav: '₹142.88', change: '+0.91%', direction: 'up' },
+      { name: 'Axis Midcap Fund', nav: '₹98.15', change: '-0.15%', direction: 'down' },
+      { name: 'UTI Nifty Index Fund', nav: '₹162.30', change: '+0.98%', direction: 'up' },
+      { name: 'Motilal Oswal Nasdaq', nav: '₹42.76', change: '+2.14%', direction: 'up' },
+      { name: 'Tata Digital India', nav: '₹48.93', change: '+1.52%', direction: 'up' },
+      { name: 'DSP Tax Saver Fund', nav: '₹118.64', change: '+0.44%', direction: 'up' },
+      { name: 'Canara Robeco Equity', nav: '₹234.51', change: '-0.08%', direction: 'down' },
+      { name: 'Quant Active Fund', nav: '₹612.87', change: '+1.76%', direction: 'up' },
+      { name: 'HDFC ELSS Tax Saver', nav: '₹1,124.60', change: '+0.69%', direction: 'up' },
+      { name: 'Franklin India Prima', nav: '₹2,345.18', change: '+0.88%', direction: 'up' },
+      { name: 'Aditya Birla Sun Life', nav: '₹1,456.92', change: '+0.53%', direction: 'up' }
+    ]
+  };
+
+  function buildTickerHTML(data) {
+    let html = '';
+    // Indices
+    data.indices.forEach(i => {
+      html += '<div class="ticker-item">' +
+        '<span class="ticker-name">' + i.name + '</span>' +
+        '<span class="ticker-price">' + i.price + '</span>' +
+        '<span class="ticker-change ' + i.direction + '">' + i.change + '</span>' +
+        '</div>';
+    });
+    // MF NAVs
+    data.mutualFunds.forEach(mf => {
+      html += '<div class="ticker-item is-mf">' +
+        '<span class="ticker-name">' + mf.name + '</span>' +
+        '<span class="ticker-nav">NAV</span>' +
+        '<span class="ticker-price">' + mf.nav + '</span>' +
+        '<span class="ticker-change ' + mf.direction + '">' + mf.change + '</span>' +
+        '</div>';
+    });
+    return html;
+  }
+
+  function renderTicker(data) {
+    const content = buildTickerHTML(data);
+    // Duplicate for seamless infinite scroll
+    tickerTrack.innerHTML = content + content;
+  }
+
+  // Try fetching live data from MFAPI (free MF NAV API for India)
+  // API: https://api.mfapi.in/mf/{scheme_code}/latest
+  // Uncomment below and add your preferred market data API for indices
+  /*
+  async function fetchLiveData() {
+    try {
+      const mfCodes = [119598, 118989, 120505, 112323, 118834, 120503, 122639, 113177, 130503, 101762,
+                       125354, 120716, 145552, 135781, 119648, 100356, 120847, 112091, 103504, 109437];
+      const mfPromises = mfCodes.map(code =>
+        fetch('https://api.mfapi.in/mf/' + code + '/latest')
+          .then(r => r.json())
+          .catch(() => null)
+      );
+      const results = await Promise.all(mfPromises);
+      // Process results and update marketData.mutualFunds with live NAVs
+      results.forEach((res, idx) => {
+        if (res && res.data && res.data[0]) {
+          marketData.mutualFunds[idx].nav = '₹' + parseFloat(res.data[0].nav).toLocaleString('en-IN');
+        }
+      });
+      renderTicker(marketData);
+    } catch (e) {
+      // Fallback to static data
+      renderTicker(marketData);
+    }
+  }
+  fetchLiveData();
+  */
+
+  // Use static data (uncomment fetchLiveData() above when API is ready)
+  renderTicker(marketData);
+
+  // Auto-refresh every 5 minutes (when live API is enabled)
+  // setInterval(fetchLiveData, 5 * 60 * 1000);
+})();
+
 /* ===== Scroll Reveal ===== */
 (function () {
   const els = document.querySelectorAll('.reveal');

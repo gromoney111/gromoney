@@ -1077,3 +1077,128 @@ textarea.form-control { min-height: 130px; resize: vertical; }
 /* "click-card" hover state for insurance cards using data-lead */
 .card[data-lead] { cursor: pointer; }
 .card[data-lead]:hover { border-color: var(--color-accent); }
+
+/* ==========================================================================
+   MARKET TICKER — Live index prices & MF NAVs
+   ========================================================================== */
+.market-ticker {
+  background: linear-gradient(90deg, #0a1628, #0f2440);
+  border-bottom: 1px solid rgba(255,255,255,.06);
+  overflow: hidden;
+  position: relative;
+  height: 42px;
+  display: flex;
+  align-items: center;
+}
+.market-ticker::before,
+.market-ticker::after {
+  content: "";
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 60px;
+  z-index: 2;
+  pointer-events: none;
+}
+.market-ticker::before {
+  left: 0;
+  background: linear-gradient(90deg, #0a1628, transparent);
+}
+.market-ticker::after {
+  right: 0;
+  background: linear-gradient(270deg, #0a1628, transparent);
+}
+.market-ticker .ticker-label {
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  background: var(--color-accent);
+  color: var(--color-primary-dark);
+  font-weight: 700;
+  font-size: .72rem;
+  padding: 0 14px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  z-index: 3;
+  letter-spacing: .3px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.market-ticker .ticker-label::after {
+  content: "";
+  position: absolute;
+  right: -12px; top: 0; bottom: 0;
+  width: 12px;
+  background: linear-gradient(90deg, var(--color-accent), transparent);
+}
+.ticker-track {
+  display: flex;
+  gap: 0;
+  animation: tickerScroll 60s linear infinite;
+  padding-left: 110px;
+  width: max-content;
+}
+.ticker-track:hover {
+  animation-play-state: paused;
+}
+.ticker-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 22px;
+  font-size: .8rem;
+  color: rgba(255,255,255,.9);
+  white-space: nowrap;
+  border-right: 1px solid rgba(255,255,255,.08);
+  height: 42px;
+}
+.ticker-item:last-child { border-right: 0; }
+.ticker-item .ticker-name {
+  font-weight: 600;
+  color: #fff;
+  font-size: .78rem;
+}
+.ticker-item .ticker-price {
+  font-weight: 700;
+  font-size: .82rem;
+  color: var(--color-accent);
+}
+.ticker-item .ticker-change {
+  font-size: .72rem;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+.ticker-item .ticker-change.up {
+  color: #22c55e;
+  background: rgba(34,197,94,.1);
+}
+.ticker-item .ticker-change.down {
+  color: #ef4444;
+  background: rgba(239,68,68,.1);
+}
+.ticker-item .ticker-nav {
+  font-size: .68rem;
+  color: rgba(255,255,255,.5);
+  font-weight: 500;
+}
+.ticker-item.is-mf .ticker-name {
+  font-size: .72rem;
+  max-width: 140px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ticker-item.is-mf .ticker-price {
+  color: #60a5fa;
+}
+
+@keyframes tickerScroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@media (max-width: 720px) {
+  .market-ticker { height: 36px; }
+  .ticker-item { font-size: .72rem; padding: 0 16px; height: 36px; }
+  .market-ticker .ticker-label { font-size: .65rem; padding: 0 10px; }
+  .ticker-track { padding-left: 90px; }
+}
