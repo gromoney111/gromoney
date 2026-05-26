@@ -521,6 +521,7 @@ textarea.form-control { min-height: 130px; resize: vertical; }
 @media (max-width: 720px) {
   .menu-toggle { display: block; }
   .nav-links {
+    display: none;
     position: fixed;
     top: 72px; left: 0; right: 0;
     background: #fff;
@@ -528,18 +529,12 @@ textarea.form-control { min-height: 130px; resize: vertical; }
     padding: 14px;
     border-bottom: 1px solid var(--color-border);
     box-shadow: var(--shadow-md);
-    transform: translateY(-110%);
-    transition: transform .3s ease;
     align-items: stretch;
-    max-height: calc(100vh - 110px);
+    max-height: calc(100vh - 72px);
     overflow-y: auto;
+    z-index: 99;
   }
-  /* When utility bar is visible, offset nav below both bars */
-  .utility-bar ~ .site-header .nav-links {
-    top: 110px;
-    max-height: calc(100vh - 110px);
-  }
-  .nav-links.open { transform: translateY(0); }
+  .nav-links.open { display: flex; }
   .nav-links a { padding: 14px; font-size: 1rem; }
   .submenu {
     position: static; opacity: 1; visibility: visible;
@@ -551,7 +546,9 @@ textarea.form-control { min-height: 130px; resize: vertical; }
   }
   .has-sub.open .submenu { display: block; }
   .nav-cta { margin: 10px 0 0; }
-  .nav-cta .btn { display: block; }
+  .nav-cta .btn { display: block; text-align: center; }
+  /* Prevent nav items from being visible outside the dropdown */
+  .site-header { overflow: visible; }
   .menu-toggle.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
   .menu-toggle.active span:nth-child(2) { opacity: 0; }
   .menu-toggle.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
