@@ -10,12 +10,21 @@ document.addEventListener('DOMContentLoaded', () => {
       toggle.classList.toggle('active');
       navLinks.classList.toggle('open');
     });
-    // Sub-menu toggle on mobile
+    // Sub-menu toggle on mobile — first tap opens submenu, second tap navigates
     document.querySelectorAll('.nav-links .has-sub > a').forEach(a => {
       a.addEventListener('click', (e) => {
         if (window.innerWidth <= 720) {
-          e.preventDefault();
-          a.parentElement.classList.toggle('open');
+          const parent = a.parentElement;
+          if (!parent.classList.contains('open')) {
+            // First tap: open submenu, prevent navigation
+            e.preventDefault();
+            // Close other open submenus
+            document.querySelectorAll('.nav-links .has-sub.open').forEach(el => {
+              if (el !== parent) el.classList.remove('open');
+            });
+            parent.classList.add('open');
+          }
+          // Second tap: submenu already open, allow default navigation to parent href
         }
       });
     });
