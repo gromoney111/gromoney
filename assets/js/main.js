@@ -188,13 +188,12 @@ function initGoalCalc() {
 
 
 
-/* ===== Market Ticker — LIVE data from mfapi.in ===== */
+/* ===== ROW 1: MF NAVs ONLY — LIVE data from mfapi.in ===== */
 (function () {
-  const tickerTrack = document.getElementById('tickerTrack');
+  var tickerTrack = document.getElementById('tickerTrack');
   if (!tickerTrack) return;
 
-  // MF scheme codes mapped to display names
-  const mfSchemes = [
+  var mfSchemes = [
     { code: 119598, name: 'SBI Bluechip Fund' },
     { code: 118989, name: 'HDFC Flexi Cap' },
     { code: 120505, name: 'ICICI Pru Bluechip' },
@@ -217,17 +216,7 @@ function initGoalCalc() {
     { code: 109437, name: 'Aditya Birla Sun Life' }
   ];
 
-  // Static fallback data for indices (no free reliable API for live indices)
-  const indices = [
-    { name: 'SENSEX', price: '79,486.32', change: '+1.12%', direction: 'up' },
-    { name: 'NIFTY 50', price: '24,148.20', change: '+0.98%', direction: 'up' },
-    { name: 'NIFTY BANK', price: '52,312.45', change: '-0.34%', direction: 'down' },
-    { name: 'NIFTY IT', price: '38,921.10', change: '+1.45%', direction: 'up' },
-    { name: 'NIFTY MIDCAP', price: '56,784.30', change: '+0.67%', direction: 'up' }
-  ];
-
-  // Fallback MF NAVs (used if API fails)
-  const fallbackMFs = [
+  var fallbackMFs = [
     { name: 'SBI Bluechip Fund', nav: '₹89.42', change: '+0.82%', direction: 'up' },
     { name: 'HDFC Flexi Cap', nav: '₹1,842.15', change: '+1.05%', direction: 'up' },
     { name: 'ICICI Pru Bluechip', nav: '₹102.38', change: '+0.74%', direction: 'up' },
@@ -250,15 +239,8 @@ function initGoalCalc() {
     { name: 'Aditya Birla Sun Life', nav: '₹1,456.92', change: '+0.53%', direction: 'up' }
   ];
 
-  function buildTickerHTML(indicesData, mfData) {
-    let html = '';
-    indicesData.forEach(function(i) {
-      html += '<div class="ticker-item">' +
-        '<span class="ticker-name">' + i.name + '</span>' +
-        '<span class="ticker-price">' + i.price + '</span>' +
-        '<span class="ticker-change ' + i.direction + '">' + i.change + '</span>' +
-        '</div>';
-    });
+  function buildMFTickerHTML(mfData) {
+    var html = '';
     mfData.forEach(function(mf) {
       html += '<div class="ticker-item is-mf">' +
         '<span class="ticker-name">' + mf.name + '</span>' +
@@ -270,8 +252,8 @@ function initGoalCalc() {
     return html;
   }
 
-  function renderTicker(indicesData, mfData) {
-    var content = buildTickerHTML(indicesData, mfData);
+  function renderTicker1(mfData) {
+    var content = buildMFTickerHTML(mfData);
     tickerTrack.innerHTML = content + content;
   }
 
@@ -328,126 +310,105 @@ function initGoalCalc() {
         }
       });
 
-      renderTicker(indices, liveMFs);
+      renderTicker1(liveMFs);
     } catch (e) {
-      // Fallback to static data on any error
-      renderTicker(indices, fallbackMFs);
+      renderTicker1(fallbackMFs);
     }
   }
 
-  // Initial render with fallback (shows immediately while API loads)
-  renderTicker(indices, fallbackMFs);
-
-  // Fetch live data
+  renderTicker1(fallbackMFs);
   fetchLiveMFData();
-
-  // Auto-refresh every 5 minutes
   setInterval(fetchLiveMFData, 5 * 60 * 1000);
 })();
 
-/* ===== Second Ticker — NSE/BSE Top Gainers & Losers ===== */
+/* ===== ROW 2: NSE, BSE, Gold, MCX, Gainers, Losers, Blue-chips ===== */
 (function () {
   var tickerTrack2 = document.getElementById('tickerTrack2');
   if (!tickerTrack2) return;
 
-  // NSE/BSE Top Gainers & Losers — fetched from a proxy-friendly public source
-  // Since there's no free CORS-enabled API for NSE/BSE gainers/losers,
-  // we use curated data that updates periodically
-
-  var fallbackGainers = [
-    { name: 'Tata Motors', price: '₹1,024.50', change: '+4.82%' },
-    { name: 'Adani Ports', price: '₹1,412.30', change: '+3.94%' },
-    { name: 'Bajaj Finance', price: '₹8,945.60', change: '+3.21%' },
-    { name: 'Infosys', price: '₹1,892.15', change: '+2.87%' },
-    { name: 'HDFC Bank', price: '₹1,756.40', change: '+2.45%' }
+  // Market indices, commodities, gainers, losers, blue-chips
+  var marketData = [
+    { name: 'NIFTY 50', price: '24,148.20', change: '+0.98%', direction: 'up', type: 'index' },
+    { name: 'SENSEX', price: '79,486.32', change: '+1.12%', direction: 'up', type: 'index' },
+    { name: 'NIFTY BANK', price: '52,312.45', change: '-0.34%', direction: 'down', type: 'index' },
+    { name: 'GOLD (MCX)', price: '₹72,450', change: '+0.62%', direction: 'up', type: 'commodity' },
+    { name: 'SILVER (MCX)', price: '₹85,320', change: '+1.15%', direction: 'up', type: 'commodity' },
+    { name: 'CRUDE OIL', price: '₹6,245', change: '-0.48%', direction: 'down', type: 'commodity' }
   ];
 
-  var fallbackLosers = [
-    { name: 'Wipro', price: '₹412.80', change: '-3.12%' },
-    { name: 'Coal India', price: '₹378.90', change: '-2.74%' },
-    { name: 'ONGC', price: '₹242.55', change: '-2.38%' },
-    { name: 'NTPC', price: '₹345.60', change: '-1.95%' },
-    { name: 'Power Grid', price: '₹298.20', change: '-1.67%' }
+  var gainers = [
+    { name: 'Tata Motors', price: '₹1,024.50', change: '+4.82%', direction: 'up', type: 'gainer' },
+    { name: 'Adani Ports', price: '₹1,412.30', change: '+3.94%', direction: 'up', type: 'gainer' },
+    { name: 'Bajaj Finance', price: '₹8,945.60', change: '+3.21%', direction: 'up', type: 'gainer' },
+    { name: 'M&M', price: '₹2,876.40', change: '+2.87%', direction: 'up', type: 'gainer' },
+    { name: 'SBI', price: '₹842.15', change: '+2.45%', direction: 'up', type: 'gainer' }
   ];
 
-  function buildGainersLosersHTML(gainers, losers) {
+  var losers = [
+    { name: 'Wipro', price: '₹412.80', change: '-3.12%', direction: 'down', type: 'loser' },
+    { name: 'Coal India', price: '₹378.90', change: '-2.74%', direction: 'down', type: 'loser' },
+    { name: 'ONGC', price: '₹242.55', change: '-2.38%', direction: 'down', type: 'loser' },
+    { name: 'NTPC', price: '₹345.60', change: '-1.95%', direction: 'down', type: 'loser' },
+    { name: 'Power Grid', price: '₹298.20', change: '-1.67%', direction: 'down', type: 'loser' }
+  ];
+
+  var blueChips = [
+    { name: 'Reliance', price: '₹2,945.80', change: '+1.24%', direction: 'up', type: 'bluechip' },
+    { name: 'TCS', price: '₹4,128.60', change: '+0.86%', direction: 'up', type: 'bluechip' },
+    { name: 'HDFC Bank', price: '₹1,756.40', change: '+0.72%', direction: 'up', type: 'bluechip' },
+    { name: 'Infosys', price: '₹1,892.15', change: '-0.34%', direction: 'down', type: 'bluechip' },
+    { name: 'ITC', price: '₹468.90', change: '+0.95%', direction: 'up', type: 'bluechip' },
+    { name: 'L&T', price: '₹3,542.70', change: '+1.42%', direction: 'up', type: 'bluechip' }
+  ];
+
+  function buildRow2HTML() {
     var html = '';
+    // Indices & Commodities
+    marketData.forEach(function(item) {
+      var cls = item.type === 'commodity' ? ' ticker-commodity' : ' ticker-index';
+      html += '<div class="ticker-item' + cls + '">' +
+        '<span class="ticker-name">' + item.name + '</span>' +
+        '<span class="ticker-price">' + item.price + '</span>' +
+        '<span class="ticker-change ' + item.direction + '">' + item.change + '</span></div>';
+    });
+    // Separator
+    html += '<div class="ticker-item ticker-separator"><span class="ticker-divider">│ GAINERS ▲</span></div>';
     // Gainers
     gainers.forEach(function(g) {
       html += '<div class="ticker-item ticker-gainer">' +
         '<span class="ticker-name">' + g.name + '</span>' +
         '<span class="ticker-price">' + g.price + '</span>' +
-        '<span class="ticker-change up">' + g.change + '</span>' +
-        '</div>';
+        '<span class="ticker-change up">' + g.change + '</span></div>';
     });
     // Separator
-    html += '<div class="ticker-item ticker-separator"><span class="ticker-divider">│</span></div>';
+    html += '<div class="ticker-item ticker-separator"><span class="ticker-divider">│ LOSERS ▼</span></div>';
     // Losers
     losers.forEach(function(l) {
       html += '<div class="ticker-item ticker-loser">' +
         '<span class="ticker-name">' + l.name + '</span>' +
         '<span class="ticker-price">' + l.price + '</span>' +
-        '<span class="ticker-change down">' + l.change + '</span>' +
-        '</div>';
+        '<span class="ticker-change down">' + l.change + '</span></div>';
+    });
+    // Separator
+    html += '<div class="ticker-item ticker-separator"><span class="ticker-divider">│ BLUE CHIPS</span></div>';
+    // Blue-chips
+    blueChips.forEach(function(b) {
+      html += '<div class="ticker-item ticker-bluechip">' +
+        '<span class="ticker-name">' + b.name + '</span>' +
+        '<span class="ticker-price">' + b.price + '</span>' +
+        '<span class="ticker-change ' + b.direction + '">' + b.change + '</span></div>';
     });
     return html;
   }
 
-  function renderTicker2(gainers, losers) {
-    var content = buildGainersLosersHTML(gainers, losers);
+  function renderTicker2() {
+    var content = buildRow2HTML();
     tickerTrack2.innerHTML = content + content;
   }
 
-  // Try to fetch live gainers/losers data
-  async function fetchGainersLosers() {
-    try {
-      // Use NSE India unofficial API endpoints for top gainers/losers
-      var gainersRes = await fetch('https://www.nseindia.com/api/live-analysis-variations?index=gainers').catch(function() { return null; });
-      var losersRes = await fetch('https://www.nseindia.com/api/live-analysis-variations?index=losers').catch(function() { return null; });
-
-      var gainers = fallbackGainers;
-      var losers = fallbackLosers;
-
-      if (gainersRes && gainersRes.ok) {
-        var gData = await gainersRes.json();
-        if (gData && gData.NIFTY && gData.NIFTY.data && gData.NIFTY.data.length >= 5) {
-          gainers = gData.NIFTY.data.slice(0, 5).map(function(s) {
-            return {
-              name: s.symbol || s.meta && s.meta.companyName || 'Stock',
-              price: '₹' + parseFloat(s.ltp || s.lastPrice || 0).toLocaleString('en-IN', { minimumFractionDigits: 2 }),
-              change: '+' + parseFloat(s.pChange || 0).toFixed(2) + '%'
-            };
-          });
-        }
-      }
-
-      if (losersRes && losersRes.ok) {
-        var lData = await losersRes.json();
-        if (lData && lData.NIFTY && lData.NIFTY.data && lData.NIFTY.data.length >= 5) {
-          losers = lData.NIFTY.data.slice(0, 5).map(function(s) {
-            return {
-              name: s.symbol || s.meta && s.meta.companyName || 'Stock',
-              price: '₹' + parseFloat(s.ltp || s.lastPrice || 0).toLocaleString('en-IN', { minimumFractionDigits: 2 }),
-              change: parseFloat(s.pChange || 0).toFixed(2) + '%'
-            };
-          });
-        }
-      }
-
-      renderTicker2(gainers, losers);
-    } catch (e) {
-      renderTicker2(fallbackGainers, fallbackLosers);
-    }
-  }
-
-  // Initial render with fallback
-  renderTicker2(fallbackGainers, fallbackLosers);
-
-  // Try live fetch
-  fetchGainersLosers();
-
-  // Refresh every 5 minutes
-  setInterval(fetchGainersLosers, 5 * 60 * 1000);
+  renderTicker2();
+  // Refresh every 5 minutes (placeholder for future live API)
+  setInterval(renderTicker2, 5 * 60 * 1000);
 })();
 
 /* ===== Scroll Reveal ===== */
