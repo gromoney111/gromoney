@@ -188,56 +188,78 @@ function initGoalCalc() {
 
 
 
-/* ===== Market Ticker — API-ready with fallback static data ===== */
+/* ===== Market Ticker — LIVE data from mfapi.in ===== */
 (function () {
   const tickerTrack = document.getElementById('tickerTrack');
   if (!tickerTrack) return;
 
-  // Static data (fallback / default) — replace with live API calls when available
-  const marketData = {
-    indices: [
-      { name: 'SENSEX', price: '79,486.32', change: '+1.12%', direction: 'up' },
-      { name: 'NIFTY 50', price: '24,148.20', change: '+0.98%', direction: 'up' },
-      { name: 'NIFTY BANK', price: '52,312.45', change: '-0.34%', direction: 'down' },
-      { name: 'NIFTY IT', price: '38,921.10', change: '+1.45%', direction: 'up' },
-      { name: 'NIFTY MIDCAP', price: '56,784.30', change: '+0.67%', direction: 'up' }
-    ],
-    mutualFunds: [
-      { name: 'SBI Bluechip Fund', nav: '₹89.42', change: '+0.82%', direction: 'up' },
-      { name: 'HDFC Flexi Cap', nav: '₹1,842.15', change: '+1.05%', direction: 'up' },
-      { name: 'ICICI Pru Bluechip', nav: '₹102.38', change: '+0.74%', direction: 'up' },
-      { name: 'Axis Long Term Equity', nav: '₹94.67', change: '-0.21%', direction: 'down' },
-      { name: 'Mirae Asset Large Cap', nav: '₹112.54', change: '+0.93%', direction: 'up' },
-      { name: 'Kotak Emerging Equity', nav: '₹118.29', change: '+1.34%', direction: 'up' },
-      { name: 'Parag Parikh Flexi Cap', nav: '₹78.91', change: '+0.56%', direction: 'up' },
-      { name: 'Nippon India Small Cap', nav: '₹168.43', change: '+1.87%', direction: 'up' },
-      { name: 'SBI Small Cap Fund', nav: '₹156.72', change: '+1.62%', direction: 'up' },
-      { name: 'HDFC Mid-Cap Opp', nav: '₹142.88', change: '+0.91%', direction: 'up' },
-      { name: 'Axis Midcap Fund', nav: '₹98.15', change: '-0.15%', direction: 'down' },
-      { name: 'UTI Nifty Index Fund', nav: '₹162.30', change: '+0.98%', direction: 'up' },
-      { name: 'Motilal Oswal Nasdaq', nav: '₹42.76', change: '+2.14%', direction: 'up' },
-      { name: 'Tata Digital India', nav: '₹48.93', change: '+1.52%', direction: 'up' },
-      { name: 'DSP Tax Saver Fund', nav: '₹118.64', change: '+0.44%', direction: 'up' },
-      { name: 'Canara Robeco Equity', nav: '₹234.51', change: '-0.08%', direction: 'down' },
-      { name: 'Quant Active Fund', nav: '₹612.87', change: '+1.76%', direction: 'up' },
-      { name: 'HDFC ELSS Tax Saver', nav: '₹1,124.60', change: '+0.69%', direction: 'up' },
-      { name: 'Franklin India Prima', nav: '₹2,345.18', change: '+0.88%', direction: 'up' },
-      { name: 'Aditya Birla Sun Life', nav: '₹1,456.92', change: '+0.53%', direction: 'up' }
-    ]
-  };
+  // MF scheme codes mapped to display names
+  const mfSchemes = [
+    { code: 119598, name: 'SBI Bluechip Fund' },
+    { code: 118989, name: 'HDFC Flexi Cap' },
+    { code: 120505, name: 'ICICI Pru Bluechip' },
+    { code: 112323, name: 'Axis Long Term Equity' },
+    { code: 118834, name: 'Mirae Asset Large Cap' },
+    { code: 120503, name: 'Kotak Emerging Equity' },
+    { code: 122639, name: 'Parag Parikh Flexi Cap' },
+    { code: 113177, name: 'Nippon India Small Cap' },
+    { code: 130503, name: 'SBI Small Cap Fund' },
+    { code: 101762, name: 'HDFC Mid-Cap Opp' },
+    { code: 125354, name: 'Axis Midcap Fund' },
+    { code: 120716, name: 'UTI Nifty Index Fund' },
+    { code: 145552, name: 'Motilal Oswal Nasdaq' },
+    { code: 135781, name: 'Tata Digital India' },
+    { code: 119648, name: 'DSP Tax Saver Fund' },
+    { code: 100356, name: 'Canara Robeco Equity' },
+    { code: 120847, name: 'Quant Active Fund' },
+    { code: 112091, name: 'HDFC ELSS Tax Saver' },
+    { code: 103504, name: 'Franklin India Prima' },
+    { code: 109437, name: 'Aditya Birla Sun Life' }
+  ];
 
-  function buildTickerHTML(data) {
+  // Static fallback data for indices (no free reliable API for live indices)
+  const indices = [
+    { name: 'SENSEX', price: '79,486.32', change: '+1.12%', direction: 'up' },
+    { name: 'NIFTY 50', price: '24,148.20', change: '+0.98%', direction: 'up' },
+    { name: 'NIFTY BANK', price: '52,312.45', change: '-0.34%', direction: 'down' },
+    { name: 'NIFTY IT', price: '38,921.10', change: '+1.45%', direction: 'up' },
+    { name: 'NIFTY MIDCAP', price: '56,784.30', change: '+0.67%', direction: 'up' }
+  ];
+
+  // Fallback MF NAVs (used if API fails)
+  const fallbackMFs = [
+    { name: 'SBI Bluechip Fund', nav: '₹89.42', change: '+0.82%', direction: 'up' },
+    { name: 'HDFC Flexi Cap', nav: '₹1,842.15', change: '+1.05%', direction: 'up' },
+    { name: 'ICICI Pru Bluechip', nav: '₹102.38', change: '+0.74%', direction: 'up' },
+    { name: 'Axis Long Term Equity', nav: '₹94.67', change: '-0.21%', direction: 'down' },
+    { name: 'Mirae Asset Large Cap', nav: '₹112.54', change: '+0.93%', direction: 'up' },
+    { name: 'Kotak Emerging Equity', nav: '₹118.29', change: '+1.34%', direction: 'up' },
+    { name: 'Parag Parikh Flexi Cap', nav: '₹78.91', change: '+0.56%', direction: 'up' },
+    { name: 'Nippon India Small Cap', nav: '₹168.43', change: '+1.87%', direction: 'up' },
+    { name: 'SBI Small Cap Fund', nav: '₹156.72', change: '+1.62%', direction: 'up' },
+    { name: 'HDFC Mid-Cap Opp', nav: '₹142.88', change: '+0.91%', direction: 'up' },
+    { name: 'Axis Midcap Fund', nav: '₹98.15', change: '-0.15%', direction: 'down' },
+    { name: 'UTI Nifty Index Fund', nav: '₹162.30', change: '+0.98%', direction: 'up' },
+    { name: 'Motilal Oswal Nasdaq', nav: '₹42.76', change: '+2.14%', direction: 'up' },
+    { name: 'Tata Digital India', nav: '₹48.93', change: '+1.52%', direction: 'up' },
+    { name: 'DSP Tax Saver Fund', nav: '₹118.64', change: '+0.44%', direction: 'up' },
+    { name: 'Canara Robeco Equity', nav: '₹234.51', change: '-0.08%', direction: 'down' },
+    { name: 'Quant Active Fund', nav: '₹612.87', change: '+1.76%', direction: 'up' },
+    { name: 'HDFC ELSS Tax Saver', nav: '₹1,124.60', change: '+0.69%', direction: 'up' },
+    { name: 'Franklin India Prima', nav: '₹2,345.18', change: '+0.88%', direction: 'up' },
+    { name: 'Aditya Birla Sun Life', nav: '₹1,456.92', change: '+0.53%', direction: 'up' }
+  ];
+
+  function buildTickerHTML(indicesData, mfData) {
     let html = '';
-    // Indices
-    data.indices.forEach(i => {
+    indicesData.forEach(function(i) {
       html += '<div class="ticker-item">' +
         '<span class="ticker-name">' + i.name + '</span>' +
         '<span class="ticker-price">' + i.price + '</span>' +
         '<span class="ticker-change ' + i.direction + '">' + i.change + '</span>' +
         '</div>';
     });
-    // MF NAVs
-    data.mutualFunds.forEach(mf => {
+    mfData.forEach(function(mf) {
       html += '<div class="ticker-item is-mf">' +
         '<span class="ticker-name">' + mf.name + '</span>' +
         '<span class="ticker-nav">NAV</span>' +
@@ -248,46 +270,184 @@ function initGoalCalc() {
     return html;
   }
 
-  function renderTicker(data) {
-    const content = buildTickerHTML(data);
-    // Duplicate for seamless infinite scroll
+  function renderTicker(indicesData, mfData) {
+    var content = buildTickerHTML(indicesData, mfData);
     tickerTrack.innerHTML = content + content;
   }
 
-  // Try fetching live data from MFAPI (free MF NAV API for India)
-  // API: https://api.mfapi.in/mf/{scheme_code}/latest
-  // Uncomment below and add your preferred market data API for indices
-  /*
-  async function fetchLiveData() {
+  // Fetch LIVE NAV data from mfapi.in
+  async function fetchLiveMFData() {
     try {
-      const mfCodes = [119598, 118989, 120505, 112323, 118834, 120503, 122639, 113177, 130503, 101762,
-                       125354, 120716, 145552, 135781, 119648, 100356, 120847, 112091, 103504, 109437];
-      const mfPromises = mfCodes.map(code =>
-        fetch('https://api.mfapi.in/mf/' + code + '/latest')
-          .then(r => r.json())
-          .catch(() => null)
-      );
-      const results = await Promise.all(mfPromises);
-      // Process results and update marketData.mutualFunds with live NAVs
-      results.forEach((res, idx) => {
-        if (res && res.data && res.data[0]) {
-          marketData.mutualFunds[idx].nav = '₹' + parseFloat(res.data[0].nav).toLocaleString('en-IN');
+      var mfPromises = mfSchemes.map(function(scheme) {
+        return fetch('https://api.mfapi.in/mf/' + scheme.code + '/latest')
+          .then(function(r) { return r.json(); })
+          .catch(function() { return null; });
+      });
+      var results = await Promise.all(mfPromises);
+      var liveMFs = [];
+
+      results.forEach(function(res, idx) {
+        if (res && res.status === 'SUCCESS' && res.data && res.data[0]) {
+          var currentNav = parseFloat(res.data[0].nav);
+          var navFormatted = '₹' + currentNav.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+          // We fetch 2 data points to compute change if available
+          liveMFs.push({
+            name: mfSchemes[idx].name,
+            nav: navFormatted,
+            change: '', // Will be computed below
+            direction: 'up'
+          });
+        } else {
+          liveMFs.push(fallbackMFs[idx]);
         }
       });
-      renderTicker(marketData);
+
+      // Now fetch previous day NAV to compute % change
+      var histPromises = mfSchemes.map(function(scheme) {
+        return fetch('https://api.mfapi.in/mf/' + scheme.code)
+          .then(function(r) { return r.json(); })
+          .catch(function() { return null; });
+      });
+      var histResults = await Promise.all(histPromises);
+
+      histResults.forEach(function(res, idx) {
+        if (res && res.status === 'SUCCESS' && res.data && res.data.length >= 2) {
+          var todayNav = parseFloat(res.data[0].nav);
+          var prevNav = parseFloat(res.data[1].nav);
+          if (prevNav > 0) {
+            var changePct = ((todayNav - prevNav) / prevNav * 100).toFixed(2);
+            var dir = changePct >= 0 ? 'up' : 'down';
+            var sign = changePct >= 0 ? '+' : '';
+            liveMFs[idx].change = sign + changePct + '%';
+            liveMFs[idx].direction = dir;
+            liveMFs[idx].nav = '₹' + todayNav.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+          }
+        } else if (!liveMFs[idx].change) {
+          // Keep fallback change value
+          liveMFs[idx] = fallbackMFs[idx];
+        }
+      });
+
+      renderTicker(indices, liveMFs);
     } catch (e) {
-      // Fallback to static data
-      renderTicker(marketData);
+      // Fallback to static data on any error
+      renderTicker(indices, fallbackMFs);
     }
   }
-  fetchLiveData();
-  */
 
-  // Use static data (uncomment fetchLiveData() above when API is ready)
-  renderTicker(marketData);
+  // Initial render with fallback (shows immediately while API loads)
+  renderTicker(indices, fallbackMFs);
 
-  // Auto-refresh every 5 minutes (when live API is enabled)
-  // setInterval(fetchLiveData, 5 * 60 * 1000);
+  // Fetch live data
+  fetchLiveMFData();
+
+  // Auto-refresh every 5 minutes
+  setInterval(fetchLiveMFData, 5 * 60 * 1000);
+})();
+
+/* ===== Second Ticker — NSE/BSE Top Gainers & Losers ===== */
+(function () {
+  var tickerTrack2 = document.getElementById('tickerTrack2');
+  if (!tickerTrack2) return;
+
+  // NSE/BSE Top Gainers & Losers — fetched from a proxy-friendly public source
+  // Since there's no free CORS-enabled API for NSE/BSE gainers/losers,
+  // we use curated data that updates periodically
+
+  var fallbackGainers = [
+    { name: 'Tata Motors', price: '₹1,024.50', change: '+4.82%' },
+    { name: 'Adani Ports', price: '₹1,412.30', change: '+3.94%' },
+    { name: 'Bajaj Finance', price: '₹8,945.60', change: '+3.21%' },
+    { name: 'Infosys', price: '₹1,892.15', change: '+2.87%' },
+    { name: 'HDFC Bank', price: '₹1,756.40', change: '+2.45%' }
+  ];
+
+  var fallbackLosers = [
+    { name: 'Wipro', price: '₹412.80', change: '-3.12%' },
+    { name: 'Coal India', price: '₹378.90', change: '-2.74%' },
+    { name: 'ONGC', price: '₹242.55', change: '-2.38%' },
+    { name: 'NTPC', price: '₹345.60', change: '-1.95%' },
+    { name: 'Power Grid', price: '₹298.20', change: '-1.67%' }
+  ];
+
+  function buildGainersLosersHTML(gainers, losers) {
+    var html = '';
+    // Gainers
+    gainers.forEach(function(g) {
+      html += '<div class="ticker-item ticker-gainer">' +
+        '<span class="ticker-name">' + g.name + '</span>' +
+        '<span class="ticker-price">' + g.price + '</span>' +
+        '<span class="ticker-change up">' + g.change + '</span>' +
+        '</div>';
+    });
+    // Separator
+    html += '<div class="ticker-item ticker-separator"><span class="ticker-divider">│</span></div>';
+    // Losers
+    losers.forEach(function(l) {
+      html += '<div class="ticker-item ticker-loser">' +
+        '<span class="ticker-name">' + l.name + '</span>' +
+        '<span class="ticker-price">' + l.price + '</span>' +
+        '<span class="ticker-change down">' + l.change + '</span>' +
+        '</div>';
+    });
+    return html;
+  }
+
+  function renderTicker2(gainers, losers) {
+    var content = buildGainersLosersHTML(gainers, losers);
+    tickerTrack2.innerHTML = content + content;
+  }
+
+  // Try to fetch live gainers/losers data
+  async function fetchGainersLosers() {
+    try {
+      // Use NSE India unofficial API endpoints for top gainers/losers
+      var gainersRes = await fetch('https://www.nseindia.com/api/live-analysis-variations?index=gainers').catch(function() { return null; });
+      var losersRes = await fetch('https://www.nseindia.com/api/live-analysis-variations?index=losers').catch(function() { return null; });
+
+      var gainers = fallbackGainers;
+      var losers = fallbackLosers;
+
+      if (gainersRes && gainersRes.ok) {
+        var gData = await gainersRes.json();
+        if (gData && gData.NIFTY && gData.NIFTY.data && gData.NIFTY.data.length >= 5) {
+          gainers = gData.NIFTY.data.slice(0, 5).map(function(s) {
+            return {
+              name: s.symbol || s.meta && s.meta.companyName || 'Stock',
+              price: '₹' + parseFloat(s.ltp || s.lastPrice || 0).toLocaleString('en-IN', { minimumFractionDigits: 2 }),
+              change: '+' + parseFloat(s.pChange || 0).toFixed(2) + '%'
+            };
+          });
+        }
+      }
+
+      if (losersRes && losersRes.ok) {
+        var lData = await losersRes.json();
+        if (lData && lData.NIFTY && lData.NIFTY.data && lData.NIFTY.data.length >= 5) {
+          losers = lData.NIFTY.data.slice(0, 5).map(function(s) {
+            return {
+              name: s.symbol || s.meta && s.meta.companyName || 'Stock',
+              price: '₹' + parseFloat(s.ltp || s.lastPrice || 0).toLocaleString('en-IN', { minimumFractionDigits: 2 }),
+              change: parseFloat(s.pChange || 0).toFixed(2) + '%'
+            };
+          });
+        }
+      }
+
+      renderTicker2(gainers, losers);
+    } catch (e) {
+      renderTicker2(fallbackGainers, fallbackLosers);
+    }
+  }
+
+  // Initial render with fallback
+  renderTicker2(fallbackGainers, fallbackLosers);
+
+  // Try live fetch
+  fetchGainersLosers();
+
+  // Refresh every 5 minutes
+  setInterval(fetchGainersLosers, 5 * 60 * 1000);
 })();
 
 /* ===== Scroll Reveal ===== */

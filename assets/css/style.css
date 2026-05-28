@@ -1193,6 +1193,58 @@ textarea.form-control { min-height: 130px; resize: vertical; }
   100% { transform: translateX(-50%); }
 }
 
+/* Second ticker row — Gainers & Losers */
+.market-ticker-2 {
+  background: linear-gradient(90deg, #081420, #0c1e35);
+  border-top: 1px solid rgba(255,255,255,.04);
+  height: 38px;
+}
+.market-ticker-2::before {
+  left: 0;
+  background: linear-gradient(90deg, #081420, transparent);
+}
+.market-ticker-2::after {
+  right: 0;
+  background: linear-gradient(270deg, #081420, transparent);
+}
+.ticker-label-gl {
+  background: linear-gradient(135deg, #22c55e, #16a34a) !important;
+  color: #fff !important;
+  font-size: .68rem !important;
+}
+.ticker-label-gl::after {
+  background: linear-gradient(90deg, #22c55e, transparent) !important;
+}
+.ticker-track-2 {
+  animation: tickerScroll 40s linear infinite;
+}
+.ticker-gainer .ticker-name {
+  color: #4ade80 !important;
+}
+.ticker-gainer .ticker-price {
+  color: #86efac !important;
+}
+.ticker-loser .ticker-name {
+  color: #f87171 !important;
+}
+.ticker-loser .ticker-price {
+  color: #fca5a5 !important;
+}
+.ticker-separator {
+  border-right: none !important;
+  padding: 0 10px !important;
+}
+.ticker-divider {
+  color: rgba(255,255,255,.3);
+  font-size: 1.2rem;
+}
+
+@media (max-width: 720px) {
+  .market-ticker-2 { height: 34px; }
+  .market-ticker-2 .ticker-item { height: 34px; }
+  .ticker-label-gl { font-size: .6rem !important; padding: 0 8px !important; }
+}
+
 @media (max-width: 720px) {
   .market-ticker { height: 36px; }
   .ticker-item { font-size: .72rem; padding: 0 16px; height: 36px; }
