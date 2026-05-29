@@ -1359,3 +1359,20 @@ textarea.form-control { min-height: 130px; resize: vertical; }
 }
   .others-card { padding: 22px 18px; }
 }
+
+
+
+/* TradingView Ticker Widget */
+.tradingview-ticker-wrap {
+  background: #1e222d;
+  border-bottom: 1px solid rgba(255,255,255,.06);
+  overflow: hidden;
+  height: 46px;
+}
+.tradingview-ticker-wrap .tradingview-widget-container {
+  height: 46px;
+}
+@media (max-width: 720px) {
+  .tradingview-ticker-wrap { height: 40px; }
+  .tradingview-ticker-wrap .tradingview-widget-container { height: 40px; }
+}

@@ -321,7 +321,8 @@ function initGoalCalc() {
   setInterval(fetchLiveMFData, 5 * 60 * 1000);
 })();
 
-/* ===== ROW 2: NSE, BSE, Gold, MCX, Gainers, Losers, Blue-chips ===== */
+/* ===== ROW 2: Now handled by TradingView widget (no JS needed) ===== */
+/* Keeping this as placeholder in case widget needs to be replaced later */
 (function () {
   var tickerTrack2 = document.getElementById('tickerTrack2');
   if (!tickerTrack2) return;
