@@ -257,7 +257,7 @@ function initGoalCalc() {
     tickerTrack.innerHTML = content + content;
   }
 
-  // Fetch LIVE NAV data from mfapi.in
+  // Fetch LIVE NAV data from mfapi.in (optimized: only /latest calls)
   async function fetchLiveMFData() {
     try {
       var mfPromises = mfSchemes.map(function(scheme) {
@@ -268,47 +268,47 @@ function initGoalCalc() {
       var results = await Promise.all(mfPromises);
       var liveMFs = [];
 
+      // Read previous NAVs from localStorage
+      var prevNavs = {};
+      try {
+        var stored = localStorage.getItem('gm_prev_navs');
+        if (stored) prevNavs = JSON.parse(stored);
+      } catch (e) {}
+
+      var currentNavs = {};
+
       results.forEach(function(res, idx) {
         if (res && res.status === 'SUCCESS' && res.data && res.data[0]) {
           var currentNav = parseFloat(res.data[0].nav);
           var navFormatted = '₹' + currentNav.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-          // We fetch 2 data points to compute change if available
+          var code = mfSchemes[idx].code;
+          currentNavs[code] = currentNav;
+
+          // Compute % change from stored previous NAV
+          var change = fallbackMFs[idx].change;
+          var direction = fallbackMFs[idx].direction;
+          if (prevNavs[code] && prevNavs[code] > 0) {
+            var changePct = ((currentNav - prevNavs[code]) / prevNavs[code] * 100).toFixed(2);
+            direction = changePct >= 0 ? 'up' : 'down';
+            var sign = changePct >= 0 ? '+' : '';
+            change = sign + changePct + '%';
+          }
+
           liveMFs.push({
             name: mfSchemes[idx].name,
             nav: navFormatted,
-            change: '', // Will be computed below
-            direction: 'up'
+            change: change,
+            direction: direction
           });
         } else {
           liveMFs.push(fallbackMFs[idx]);
         }
       });
 
-      // Now fetch previous day NAV to compute % change
-      var histPromises = mfSchemes.map(function(scheme) {
-        return fetch('https://api.mfapi.in/mf/' + scheme.code + '?limit=2')
-          .then(function(r) { return r.json(); })
-          .catch(function() { return null; });
-      });
-      var histResults = await Promise.all(histPromises);
-
-      histResults.forEach(function(res, idx) {
-        if (res && res.status === 'SUCCESS' && res.data && res.data.length >= 2) {
-          var todayNav = parseFloat(res.data[0].nav);
-          var prevNav = parseFloat(res.data[1].nav);
-          if (prevNav > 0) {
-            var changePct = ((todayNav - prevNav) / prevNav * 100).toFixed(2);
-            var dir = changePct >= 0 ? 'up' : 'down';
-            var sign = changePct >= 0 ? '+' : '';
-            liveMFs[idx].change = sign + changePct + '%';
-            liveMFs[idx].direction = dir;
-            liveMFs[idx].nav = '₹' + todayNav.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-          }
-        } else if (!liveMFs[idx].change) {
-          // Keep fallback change value
-          liveMFs[idx] = fallbackMFs[idx];
-        }
-      });
+      // Store current NAVs to localStorage for next comparison
+      try {
+        localStorage.setItem('gm_prev_navs', JSON.stringify(currentNavs));
+      } catch (e) {}
 
       renderTicker1(liveMFs);
     } catch (e) {

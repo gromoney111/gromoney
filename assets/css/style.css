@@ -818,7 +818,8 @@ textarea.form-control { min-height: 130px; resize: vertical; }
   font-size: 1.1rem;
   color: var(--color-primary-dark);
   margin-bottom: 16px;
-  display: inline-flex;
+  display: flex;
+  justify-content: center;
   align-items: center;
   gap: 10px;
   padding-bottom: 8px;
