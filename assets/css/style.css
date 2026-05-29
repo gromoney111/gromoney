@@ -1270,14 +1270,17 @@ textarea.form-control { min-height: 130px; resize: vertical; }
 }
 .others-cards {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 24px;
+}
+.others-card-wide {
+  grid-column: 1 / -1;
 }
 .others-card {
   background: #fff;
   border: 1.5px solid var(--color-border);
   border-radius: 16px;
-  padding: 28px 22px;
+  padding: 28px 24px;
   transition: all var(--transition);
   position: relative;
   overflow: hidden;
@@ -1295,43 +1298,51 @@ textarea.form-control { min-height: 130px; resize: vertical; }
   box-shadow: 0 12px 32px rgba(11, 61, 107, .12);
   border-color: transparent;
 }
+.others-card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
 .others-card-icon {
-  width: 52px;
-  height: 52px;
+  width: 48px;
+  height: 48px;
   background: linear-gradient(135deg, var(--color-bg-alt), #fff);
   border: 1px solid var(--color-border);
   border-radius: 12px;
   display: grid;
   place-items: center;
-  font-size: 1.5rem;
-  margin-bottom: 14px;
+  font-size: 1.4rem;
+  flex-shrink: 0;
 }
 .others-card h4 {
   color: var(--color-primary-dark);
-  font-size: .95rem;
+  font-size: .9rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: .4px;
-  margin-bottom: 14px;
+  margin: 0;
 }
 .others-card-links {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+  align-items: center;
 }
 .others-card-links a {
   display: inline-block;
-  padding: 7px 14px;
+  padding: 8px 16px;
   background: var(--color-bg-soft);
-  border: 1px solid var(--color-border);
+  border: 1.5px solid var(--color-border);
   border-radius: 50px;
-  font-size: .82rem;
+  font-size: .84rem;
   font-weight: 500;
   color: var(--color-text);
   transition: all var(--transition);
   text-decoration: none;
 }
-.others-card-links a:hover {
+.others-card-links a:hover,
+.others-card-links a.active {
   background: var(--color-primary);
   color: #fff;
   border-color: var(--color-primary);
@@ -1339,8 +1350,11 @@ textarea.form-control { min-height: 130px; resize: vertical; }
 }
 @media (max-width: 900px) {
   .others-cards { grid-template-columns: 1fr 1fr; }
+  .others-card-wide { grid-column: 1 / -1; }
 }
 @media (max-width: 540px) {
   .others-cards { grid-template-columns: 1fr; }
+  .others-card { padding: 22px 18px; }
+}
   .others-card { padding: 22px 18px; }
 }

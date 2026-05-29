@@ -286,7 +286,7 @@ function initGoalCalc() {
 
       // Now fetch previous day NAV to compute % change
       var histPromises = mfSchemes.map(function(scheme) {
-        return fetch('https://api.mfapi.in/mf/' + scheme.code)
+        return fetch('https://api.mfapi.in/mf/' + scheme.code + '?limit=2')
           .then(function(r) { return r.json(); })
           .catch(function() { return null; });
       });
