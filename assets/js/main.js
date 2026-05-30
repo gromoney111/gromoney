@@ -1,5 +1,16 @@
 /* GroMoney Capital - main.js */
 
+// Google Sheets submission (global so both contact form and lead form can use it)
+function submitToGoogleSheets(data) {
+  var GOOGLE_SHEETS_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE'; // User will replace this with their deployed Google Apps Script web app URL
+  fetch(GOOGLE_SHEETS_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data)
+  }).catch(function() {});
+}
+
 document.addEventListener('DOMContentLoaded', () => {
 
   /* ---- Mobile menu toggle ---- */
@@ -50,12 +61,26 @@ document.addEventListener('DOMContentLoaded', () => {
     }));
   });
 
-  /* ---- Contact form (mailto fallback - works without backend) ---- */
+  /* ---- Contact form (Google Sheets + mailto fallback) ---- */
   const contactForm = document.getElementById('contactForm');
   if (contactForm) {
     contactForm.addEventListener('submit', (e) => {
       e.preventDefault();
       const data = new FormData(contactForm);
+
+      // Submit to Google Sheets
+      const formData = {
+        name: data.get('name') || '',
+        email: data.get('email') || '',
+        phone: data.get('phone') || '',
+        service: data.get('service') || '',
+        message: data.get('message') || '',
+        source: 'contact_form',
+        timestamp: new Date().toISOString()
+      };
+      submitToGoogleSheets(formData);
+
+      // Mailto fallback
       const subject = encodeURIComponent('Enquiry from ' + (data.get('name') || 'Website'));
       const body = encodeURIComponent(
         'Name: ' + (data.get('name') || '') + '\n' +
@@ -524,6 +549,22 @@ function initGoalCalc() {
         alert('Please enter your name and a valid 10-digit mobile number.');
         return;
       }
+
+      // Submit to Google Sheets
+      var leadData = {
+        name: fd.get('name') || '',
+        phone: fd.get('phone') || '',
+        email: fd.get('email') || '',
+        interest: fd.get('interest') || '',
+        age: fd.get('age') || '',
+        callTime: fd.get('callTime') || '',
+        message: fd.get('message') || '',
+        source: 'lead_form',
+        timestamp: new Date().toISOString()
+      };
+      submitToGoogleSheets(leadData);
+
+      // Mailto fallback
       const subject = encodeURIComponent('Lead: ' + fd.get('interest') + ' — ' + fd.get('name'));
       const body = encodeURIComponent(buildLeadBody(fd));
       window.location.href = 'mailto:' + EMAIL + '?subject=' + subject + '&body=' + body;
