@@ -2,7 +2,7 @@
 
 // Google Sheets submission (global so both contact form and lead form can use it)
 function submitToGoogleSheets(data) {
-  var GOOGLE_SHEETS_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE'; // User will replace this with their deployed Google Apps Script web app URL
+  var GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbyU7RDnTYyzg6cg_k1udXwBQ06JUWnR3-LExPkPjFi4uLJCei3KUmMI-glTmyU5EV6L/exec'; // User will replace this with their deployed Google Apps Script web app URL
   fetch(GOOGLE_SHEETS_URL, {
     method: 'POST',
     mode: 'no-cors',
