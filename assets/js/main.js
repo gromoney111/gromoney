@@ -218,6 +218,9 @@ function initGoalCalc() {
   var tickerTrack = document.getElementById('tickerTrack');
   if (!tickerTrack) return;
 
+  // Defer ticker initialization to after page is interactive
+  var initTicker = function() {
+
   var mfSchemes = [
     { code: 119598, name: 'SBI Bluechip Fund' },
     { code: 118989, name: 'HDFC Flexi Cap' },
@@ -344,6 +347,14 @@ function initGoalCalc() {
   renderTicker1(fallbackMFs);
   fetchLiveMFData();
   setInterval(fetchLiveMFData, 5 * 60 * 1000);
+  }; // end initTicker
+
+  // Use requestIdleCallback to defer ticker init (reduces TBT)
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(initTicker, { timeout: 2000 });
+  } else {
+    setTimeout(initTicker, 100);
+  }
 })();
 
 /* ===== ROW 2: Now handled by TradingView widget (no JS needed) ===== */
