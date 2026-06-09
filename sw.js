@@ -1,8 +1,8 @@
-// GroMoney Capital — Service Worker v1.0
-const CACHE_NAME = 'gromoney-v1';
+// GroMoney Capital — Service Worker v2.0 (Performance Optimized)
+const CACHE_NAME = 'gromoney-v2';
 const OFFLINE_URL = '/';
 
-// Core assets to cache on install
+// Core assets to cache on install (critical for fast repeat visits)
 const PRECACHE_ASSETS = [
   '/',
   '/index.html',
@@ -10,8 +10,17 @@ const PRECACHE_ASSETS = [
   '/assets/js/main.js',
   '/assets/icons/favicon.svg',
   '/assets/icons/icon-192x192.png',
-  '/assets/icons/icon-512x512.png',
   '/manifest.json'
+];
+
+// Assets that benefit from long cache (images, icons)
+const CACHE_FIRST_PATTERNS = [
+  /\/assets\/icons\//,
+  /\/assets\/images\//,
+  /\.png$/,
+  /\.svg$/,
+  /\.jpg$/,
+  /\.webp$/
 ];
 
 // Install — precache core assets
@@ -38,38 +47,52 @@ self.addEventListener('activate', (event) => {
   self.clients.claim();
 });
 
-// Fetch — network first, fallback to cache
+// Fetch strategy
 self.addEventListener('fetch', (event) => {
   // Skip non-GET requests
   if (event.request.method !== 'GET') return;
 
-  // Skip external requests (analytics, fonts CDN, etc.)
-  if (!event.request.url.startsWith(self.location.origin)) return;
+  const url = new URL(event.request.url);
 
-  event.respondWith(
-    fetch(event.request)
-      .then((response) => {
-        // Clone and cache successful responses
-        if (response && response.status === 200) {
-          const responseClone = response.clone();
-          caches.open(CACHE_NAME).then((cache) => {
-            cache.put(event.request, responseClone);
-          });
-        }
-        return response;
-      })
-      .catch(() => {
-        // Serve from cache when offline
-        return caches.match(event.request).then((cachedResponse) => {
-          if (cachedResponse) {
-            return cachedResponse;
+  // Skip external requests (analytics, fonts CDN, APIs, etc.)
+  if (url.origin !== self.location.origin) return;
+
+  // Cache-first for static assets (images, icons, fonts)
+  if (CACHE_FIRST_PATTERNS.some(pattern => pattern.test(url.pathname))) {
+    event.respondWith(
+      caches.match(event.request).then((cachedResponse) => {
+        if (cachedResponse) return cachedResponse;
+        return fetch(event.request).then((response) => {
+          if (response && response.status === 200) {
+            const clone = response.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
           }
-          // For navigation requests, serve the offline page
-          if (event.request.mode === 'navigate') {
-            return caches.match(OFFLINE_URL);
-          }
-          return new Response('', { status: 503, statusText: 'Offline' });
+          return response;
         });
       })
+    );
+    return;
+  }
+
+  // Stale-while-revalidate for HTML and CSS/JS (fast load + fresh content)
+  event.respondWith(
+    caches.match(event.request).then((cachedResponse) => {
+      const fetchPromise = fetch(event.request).then((networkResponse) => {
+        if (networkResponse && networkResponse.status === 200) {
+          const clone = networkResponse.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
+        }
+        return networkResponse;
+      }).catch(() => {
+        // Offline fallback for navigation
+        if (event.request.mode === 'navigate') {
+          return caches.match(OFFLINE_URL);
+        }
+        return new Response('', { status: 503, statusText: 'Offline' });
+      });
+
+      // Return cached immediately if available, fetch updates in background
+      return cachedResponse || fetchPromise;
+    })
   );
 });

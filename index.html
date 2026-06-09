@@ -3,8 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-9CZVDNHZ5R"></script>
+<!-- Google Analytics — deferred to not block rendering -->
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -37,12 +36,28 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="GroMoney">
 
-<!-- Fonts -->
+<!-- DNS Prefetch for external resources -->
+<link rel="dns-prefetch" href="https://www.googletagmanager.com">
+<link rel="dns-prefetch" href="https://fonts.googleapis.com">
+<link rel="dns-prefetch" href="https://fonts.gstatic.com">
+<link rel="dns-prefetch" href="https://images.unsplash.com">
+
+<!-- Critical CSS inlined for fastest FCP -->
+<style>
+:root{--color-primary:#0b3d6b;--color-primary-dark:#07294a;--color-primary-light:#1a5a96;--color-accent:#f5a623;--color-accent-dark:#d68910;--color-text:#1f2937;--color-text-soft:#4b5563;--color-muted:#6b7280;--color-bg:#fff;--color-bg-soft:#f7f9fc;--color-bg-alt:#eef3f9;--color-border:#e5e7eb;--shadow-sm:0 2px 6px rgba(15,23,42,.06);--shadow-md:0 8px 24px rgba(15,23,42,.08);--radius-sm:6px;--radius-md:12px;--radius-lg:20px;--container:1180px;--transition:.25s ease;--font-sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:var(--font-sans);font-size:16px;line-height:1.65;color:var(--color-text);background:var(--color-bg);-webkit-font-smoothing:antialiased}img{max-width:100%;height:auto;display:block}a{color:var(--color-primary);text-decoration:none}h1,h2,h3{font-family:var(--font-sans);color:var(--color-primary-dark);line-height:1.25;margin:0 0 .6em;font-weight:700}h1{font-size:clamp(1.9rem,4vw,2.8rem)}.container{max-width:var(--container);margin:0 auto;padding:0 20px}.btn{display:inline-block;padding:12px 26px;border-radius:50px;font-weight:600;font-size:.98rem;text-align:center;cursor:pointer;border:2px solid transparent;transition:all var(--transition);white-space:nowrap}.btn-primary{background:var(--color-accent);color:#fff}.btn-light{background:#fff;color:var(--color-primary)}.site-header{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.97);backdrop-filter:saturate(180%) blur(8px);border-bottom:1px solid var(--color-border)}.nav-bar{display:flex;align-items:center;justify-content:space-between;height:72px}.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.2rem;line-height:1.1;color:var(--color-primary-dark)}.brand-svg{width:50px;height:50px;flex-shrink:0}.brand-text{display:flex;flex-direction:column;gap:2px}.brand-text strong{color:var(--color-primary-dark);font-size:1.18rem;font-weight:800;letter-spacing:-.3px;line-height:1}.brand-text strong em{font-style:normal;color:var(--color-accent-dark)}.brand-text small{font-size:.68rem;font-weight:600;color:var(--color-muted);letter-spacing:.4px;text-transform:uppercase}.nav-links{list-style:none;display:flex;gap:6px;margin:0;padding:0;align-items:center}.nav-links a{display:block;padding:10px 14px;color:var(--color-text);font-weight:500;font-size:.95rem;border-radius:8px}.menu-toggle{display:none;background:none;border:0;width:44px;height:44px;cursor:pointer}.menu-toggle span{display:block;width:26px;height:3px;background:var(--color-primary-dark);margin:5px auto;border-radius:3px}.hero{position:relative;color:#fff;padding:80px 0;overflow:hidden}.hero.has-slider{background:var(--color-primary-dark)}.hero h1{color:#fff;margin-bottom:16px}.hero p.lead{font-size:1.1rem;color:rgba(255,255,255,.92);max-width:640px;margin-bottom:28px}.hero-actions{display:flex;gap:12px;flex-wrap:wrap}.hero>.container{position:relative;z-index:2}.utility-bar{background:linear-gradient(90deg,var(--color-primary-dark),var(--color-primary));color:rgba(255,255,255,.92);font-size:.82rem;border-bottom:1px solid rgba(255,255,255,.08)}.utility-bar .container{display:flex;justify-content:space-between;align-items:center;height:38px;gap:12px;flex-wrap:wrap}.utility-bar a{color:#fff}.reveal{opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s ease}.reveal.in{opacity:1;transform:translateY(0)}@media(max-width:720px){.menu-toggle{display:block}.nav-links{display:none;position:fixed;top:72px;left:0;right:0;background:#fff;flex-direction:column;padding:14px;border-bottom:1px solid var(--color-border);box-shadow:var(--shadow-md);align-items:stretch;max-height:calc(100vh - 72px);overflow-y:auto;z-index:99}.nav-links.open{display:flex}.hero{padding:60px 0}.utility-bar .container{height:auto;padding:8px 16px;flex-direction:column;gap:6px}}
+</style>
+
+<!-- Fonts — non-render-blocking with font-display:swap -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
 
-<link rel="stylesheet" href="assets/css/style.css">
+<!-- Main CSS — deferred load (non-critical styles) -->
+<link rel="preload" href="assets/css/style.css" as="style">
+<link rel="stylesheet" href="assets/css/style.css" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="assets/css/style.css"></noscript>
 <noscript><style>.reveal{opacity:1!important;transform:none!important;}</style></noscript>
 
 <!-- Schema.org structured data for SEO -->
@@ -159,15 +174,9 @@
 </div>
 
 
-<!-- ============== HERO with auto-rotating animated slideshow ============== -->
+<!-- ============== HERO with CSS gradient background (fast LCP) ============== -->
 <section class="hero has-slider">
-  <div class="hero-slider" aria-hidden="true">
-    <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1600&q=70')"></div>
-    <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1579621970590-9d624316904b?auto=format&fit=crop&w=1600&q=70')"></div>
-    <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=1600&q=70')"></div>
-    <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1600&q=70')"></div>
-    <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1565514020179-026b92b84bb6?auto=format&fit=crop&w=1600&q=70')"></div>
-  </div>
+  <div class="hero-bg" aria-hidden="true"></div>
   <span class="float-shape s1"></span>
   <span class="float-shape s2"></span>
   <span class="float-shape s3"></span>
@@ -339,7 +348,7 @@
       <a href="about.html" class="btn btn-secondary">Know More About Us</a>
     </div>
     <div class="reveal">
-      <img class="float-img" src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=900&q=70" alt="Financial advisor consultation">
+      <img class="float-img" src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=600&q=60" alt="Financial advisor consultation" width="600" height="400" loading="lazy" decoding="async">
     </div>
   </div>
 </section>
@@ -379,7 +388,7 @@
         <div class="stars">★★★★★</div>
         <p class="testimonial-text">Started my SIP journey with GroMoney 3 years ago. The personalised advice and quick support made all the difference. Highly recommended!</p>
         <div class="testimonial-author">
-          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=120&q=70" alt="Rahul Sharma">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=120&q=60" alt="Rahul Sharma" width="48" height="48" loading="lazy" decoding="async">
           <div><strong>Rahul Sharma</strong><span>Software Engineer, Pune</span></div>
         </div>
       </div>
@@ -387,7 +396,7 @@
         <div class="stars">★★★★★</div>
         <p class="testimonial-text">Got my term plan and health insurance done through them. They compared 8 insurers and found me the best premium. Saved nearly ₹4,000/year!</p>
         <div class="testimonial-author">
-          <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=120&q=70" alt="Priya Mehta">
+          <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=120&q=60" alt="Priya Mehta" width="48" height="48" loading="lazy" decoding="async">
           <div><strong>Priya Mehta</strong><span>Doctor, Mumbai</span></div>
         </div>
       </div>
@@ -395,7 +404,7 @@
         <div class="stars">★★★★★</div>
         <p class="testimonial-text">Personal loan got approved in 24 hours and the home loan team was patient enough to explain every step. Truly a one-stop solution.</p>
         <div class="testimonial-author">
-          <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=120&q=70" alt="Amit Verma">
+          <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=120&q=60" alt="Amit Verma" width="48" height="48" loading="lazy" decoding="async">
           <div><strong>Amit Verma</strong><span>Business Owner, Delhi</span></div>
         </div>
       </div>
@@ -557,6 +566,7 @@
   </div></div>
 </footer>
 
-<script src="assets/js/main.js"></script>
+<script src="assets/js/main.js" defer></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9CZVDNHZ5R"></script>
 </body>
 </html>

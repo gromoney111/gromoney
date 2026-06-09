@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-9CZVDNHZ5R"></script>
+<!-- GA loaded at end of body -->
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -25,8 +25,13 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="GroMoney">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
+<link rel="preload" href="assets/css/style.css" as="style">
+<link rel="stylesheet" href="assets/css/style.css" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="assets/css/style.css"></noscript>
 <noscript><style>.reveal{opacity:1!important;transform:none!important;}</style></noscript>
 </head>
 <body>
@@ -263,6 +268,7 @@
     Mutual fund investments are subject to market risks. Read all scheme-related documents carefully before investing. Past performance is not indicative of future returns. Insurance is the subject matter of solicitation. GroMoney Capital is an AMFI-registered Mutual Fund Distributor (ARN: 270739) under the NJ Wealth Partner network and a referral partner for insurance &amp; loan products. We do not provide investment advice.
   </div></div>
 </footer>
-<script src="assets/js/main.js"></script>
+<script src="assets/js/main.js" defer></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9CZVDNHZ5R"></script>
 </body>
 </html>
