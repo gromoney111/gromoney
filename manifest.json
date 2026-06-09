@@ -1,0 +1,75 @@
+{
+  "name": "GroMoney Capital - Mutual Funds, Insurance & Loans",
+  "short_name": "GroMoney",
+  "description": "Your trusted financial partner — Mutual Funds, Insurance, Loans, Credit Cards & more. AMFI ARN 270739.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0b3d6b",
+  "theme_color": "#0b3d6b",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "en-IN",
+  "categories": ["finance", "business"],
+  "icons": [
+    {
+      "src": "/assets/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/assets/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/assets/icons/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/icons/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Mutual Funds",
+      "short_name": "MF",
+      "url": "/mutual-funds.html",
+      "description": "Start SIP & invest in mutual funds"
+    },
+    {
+      "name": "Insurance",
+      "short_name": "Insurance",
+      "url": "/insurance.html",
+      "description": "Life, Health, Term & Travel Insurance"
+    },
+    {
+      "name": "Loans & Cards",
+      "short_name": "Loans",
+      "url": "/loans.html",
+      "description": "Credit Cards, Personal & Home Loans"
+    },
+    {
+      "name": "EMI SIP Calculator",
+      "short_name": "Calculator",
+      "url": "/emi-sip-calculator.html",
+      "description": "Calculate EMI recovery through SIP"
+    }
+  ]
+}
