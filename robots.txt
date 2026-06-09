@@ -1,5 +1,7 @@
 User-agent: *
 Allow: /
+
 Disallow: /_build/
+Disallow: /googlef275c03aaae9f186.html
 
 Sitemap: https://gromoneycapital.com/sitemap.xml
