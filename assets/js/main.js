@@ -668,9 +668,9 @@ function initGoalCalc() {
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', function() {
     navigator.serviceWorker.register('/sw.js').then(function(reg) {
-      console.log('SW registered:', reg.scope);
+      console.log('GroMoney SW registered. Scope:', reg.scope);
     }).catch(function(err) {
-      console.log('SW registration failed:', err);
+      console.log('SW failed:', err);
     });
   });
 }
