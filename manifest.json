@@ -1,80 +1,66 @@
 {
-  "id": "/",
+  "id": "gromoney-capital-pwa",
   "name": "GroMoney Capital - Mutual Funds, Insurance & Loans",
   "short_name": "GroMoney",
   "description": "Your trusted financial partner — Mutual Funds, Insurance, Loans, Credit Cards & more. AMFI ARN 270739.",
-  "start_url": "./index.html",
+  "start_url": "/index.html",
   "display": "standalone",
   "background_color": "#0b3d6b",
   "theme_color": "#0b3d6b",
   "orientation": "portrait-primary",
-  "scope": "./",
+  "scope": "/",
   "lang": "en-IN",
+  "dir": "ltr",
   "categories": ["finance", "business"],
+  "prefer_related_applications": false,
   "icons": [
     {
-      "src": "assets/icons/icon-192x192.png",
+      "src": "/assets/icons/icon-192x192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "assets/icons/icon-192x192.png",
+      "src": "/assets/icons/icon-192x192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "maskable"
     },
     {
-      "src": "assets/icons/icon-512x512.png",
+      "src": "/assets/icons/icon-512x512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "assets/icons/icon-512x512.png",
+      "src": "/assets/icons/icon-512x512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
-    },
-    {
-      "src": "assets/icons/favicon-32x32.png",
-      "sizes": "32x32",
-      "type": "image/png"
-    },
-    {
-      "src": "assets/icons/apple-touch-icon.png",
-      "sizes": "180x180",
-      "type": "image/png"
     }
   ],
+  "screenshots": [],
   "shortcuts": [
     {
       "name": "Mutual Funds",
       "short_name": "MF",
-      "url": "./mutual-funds.html",
+      "url": "/mutual-funds.html",
       "description": "Start SIP & invest in mutual funds",
-      "icons": [{ "src": "assets/icons/icon-192x192.png", "sizes": "192x192" }]
+      "icons": [{ "src": "/assets/icons/icon-192x192.png", "sizes": "192x192" }]
     },
     {
       "name": "Insurance",
       "short_name": "Insurance",
-      "url": "./insurance.html",
+      "url": "/insurance.html",
       "description": "Life, Health, Term & Travel Insurance",
-      "icons": [{ "src": "assets/icons/icon-192x192.png", "sizes": "192x192" }]
+      "icons": [{ "src": "/assets/icons/icon-192x192.png", "sizes": "192x192" }]
     },
     {
       "name": "Loans & Cards",
       "short_name": "Loans",
-      "url": "./loans.html",
+      "url": "/loans.html",
       "description": "Credit Cards, Personal & Home Loans",
-      "icons": [{ "src": "assets/icons/icon-192x192.png", "sizes": "192x192" }]
-    },
-    {
-      "name": "EMI SIP Calculator",
-      "short_name": "Calculator",
-      "url": "./emi-sip-calculator.html",
-      "description": "Calculate EMI recovery through SIP",
-      "icons": [{ "src": "assets/icons/icon-192x192.png", "sizes": "192x192" }]
+      "icons": [{ "src": "/assets/icons/icon-192x192.png", "sizes": "192x192" }]
     }
   ]
 }

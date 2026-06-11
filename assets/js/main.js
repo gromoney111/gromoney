@@ -667,36 +667,10 @@ function initGoalCalc() {
 /* ===== PWA Service Worker Registration ===== */
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', function() {
-    // Use relative path for compatibility with any hosting (Hostinger, GitHub Pages, etc.)
-    var swPath = 'sw.js';
-    // If page is at root, use ./sw.js; otherwise compute relative to root
-    if (location.pathname === '/' || location.pathname === '/index.html') {
-      swPath = './sw.js';
-    } else {
-      // For subpages like /about.html, sw.js is at the same level
-      swPath = './sw.js';
-    }
-    navigator.serviceWorker.register(swPath, { scope: './' }).then(function(reg) {
-      console.log('SW registered, scope:', reg.scope);
-      // Check for updates
-      reg.addEventListener('updatefound', function() {
-        var newWorker = reg.installing;
-        newWorker.addEventListener('statechange', function() {
-          if (newWorker.state === 'activated') {
-            console.log('SW updated and active');
-          }
-        });
-      });
+    navigator.serviceWorker.register('/sw.js').then(function(reg) {
+      console.log('GroMoney SW registered. Scope:', reg.scope);
     }).catch(function(err) {
-      console.log('SW registration failed:', err);
+      console.log('SW failed:', err);
     });
   });
 }
-
-/* ===== PWA Install Prompt ===== */
-var deferredPrompt = null;
-window.addEventListener('beforeinstallprompt', function(e) {
-  // Store the event for later use
-  deferredPrompt = e;
-  console.log('PWA install available');
-});
