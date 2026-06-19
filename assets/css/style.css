@@ -127,7 +127,7 @@ p  { margin: 0 0 1em; color: var(--color-text-soft); }
 .nav-links {
   list-style: none;
   display: flex;
-  gap: 6px;
+  gap: 2px;
   margin: 0;
   padding: 0;
   align-items: center;
@@ -135,11 +135,12 @@ p  { margin: 0 0 1em; color: var(--color-text-soft); }
 .nav-links > li { position: relative; }
 .nav-links a {
   display: block;
-  padding: 10px 14px;
+  padding: 8px 10px;
   color: var(--color-text);
   font-weight: 500;
-  font-size: .95rem;
+  font-size: .88rem;
   border-radius: 8px;
+  white-space: nowrap;
 }
 .nav-links a:hover, .nav-links a.active { background: var(--color-bg-alt); color: var(--color-primary-dark); }
 
@@ -164,7 +165,8 @@ p  { margin: 0 0 1em; color: var(--color-text-soft); }
 }
 .submenu a { padding: 8px 12px; font-size: .9rem; }
 
-.nav-cta { margin-left: 12px; }
+.nav-cta { margin-left: 8px; }
+.nav-cta .btn { padding: 9px 18px; font-size: .85rem; }
 
 .menu-toggle {
   display: none;
