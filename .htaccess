@@ -51,3 +51,9 @@
   AddOutputFilterByType DEFLATE application/manifest+json
   AddOutputFilterByType DEFLATE image/svg+xml
 </IfModule>
+
+
+# Block direct access to API key file (SECURITY)
+<Files "chatbot-key.txt">
+  Require all denied
+</Files>
