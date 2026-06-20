@@ -375,8 +375,8 @@ function initGoalCalc() {
   var tickerTrackIndex = document.getElementById('tickerTrackIndex');
   if (!tickerTrackIndex) return;
 
-  var INDIAN_API_KEY = 'sk-live-UATPt3yUVUwWAb82y1wOxJaspUvY1fbZEsdKpJa2';
-  var API_BASE = 'https://stock.indianapi.in/stock?name=';
+  // API key hidden in server-side PHP proxy for security
+  var API_BASE = '/api-proxy.php?stock=';
 
   // Stocks to fetch (key indices via proxy stocks + blue-chips)
   var stocksToFetch = [
@@ -457,13 +457,11 @@ function initGoalCalc() {
       for (var i = 0; i < stocksToFetch.length; i++) {
         var stock = stocksToFetch[i];
         try {
-          var res = await fetch(API_BASE + encodeURIComponent(stock.query), {
-            headers: { 'X-Api-Key': INDIAN_API_KEY }
-          });
+          var res = await fetch(API_BASE + encodeURIComponent(stock.query));
           var data = await res.json();
-          if (data && data.currentPrice) {
-            var price = data.currentPrice.NSE || data.currentPrice.BSE || '—';
-            var pctChange = data.percentChange || 0;
+          if (data && data.price) {
+            var price = data.price.NSE || data.price.BSE || '—';
+            var pctChange = data.change || 0;
             var direction = parseFloat(pctChange) >= 0 ? 'up' : 'down';
             var sign = parseFloat(pctChange) >= 0 ? '+' : '';
             liveData.push({
