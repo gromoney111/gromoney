@@ -50,6 +50,7 @@ file_put_contents($rf, json_encode(['time'=>time(),'count'=>$rc+1]));
 
 $input = json_decode(file_get_contents('php://input'), true);
 $msg = trim($input['message'] ?? '');
+$lang = trim($input['lang'] ?? 'en');
 if (!$msg || strlen($msg) > 500) { echo json_encode(['reply'=>'Please type a valid question.']); exit; }
 
 if (empty($API_KEY)) {
@@ -62,7 +63,10 @@ SERVICES: 1)Mutual Funds/SIP(5000+ schemes, SIP from Rs500/month) 2)PMS(min Rs50
 
 CONTACT: Phone +91 96640 19564 | Email contact@gromoneycapital.com | WhatsApp 919664019564 | Website gromoneycapital.com
 
-RULES: Be concise (max 120 words). Speak Hindi or English based on user language. If user shows interest, ask for name and phone for free callback. Never guarantee returns. Add disclaimer for MF/insurance. Be friendly and helpful. Recommend relevant GroMoney services.";
+RULES: Be concise (max 120 words). Respond in Hindi if lang=hi, otherwise English. If user shows interest, ask for name and phone for free callback. Never guarantee returns. Add disclaimer for MF/insurance. Be friendly and helpful. Recommend relevant GroMoney services.";
+
+$langInstruction = ($lang === 'hi') ? ' IMPORTANT: Reply ONLY in Hindi (Devanagari script).' : ' IMPORTANT: Reply ONLY in English.';
+$systemPrompt .= $langInstruction;
 
 // Gemini API endpoint (using gemini-2.5-flash - latest free model)
 $url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=' . $API_KEY;

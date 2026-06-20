@@ -741,11 +741,21 @@ if ('serviceWorker' in navigator) {
   var chatHTML = '<button class="chatbot-btn" id="chatbotToggle" aria-label="Chat with us"><svg viewBox="0 0 512 512"><circle cx="256" cy="256" r="220" fill="none" stroke="#fff" stroke-width="16"/><circle cx="180" cy="220" r="24" fill="#fff"/><circle cx="332" cy="220" r="24" fill="#fff"/><path d="M180 310 Q256 370 332 310" stroke="#fff" stroke-width="16" fill="none" stroke-linecap="round"/><rect x="220" y="100" width="72" height="40" rx="20" fill="#fff"/><line x1="256" y1="140" x2="256" y2="170" stroke="#fff" stroke-width="12" stroke-linecap="round"/></svg></button>' +
     '<div class="chatbot-box" id="chatbotBox">' +
     '<div class="chatbot-header"><div class="avatar">GM</div><div class="info"><h4>GroMoney AI</h4><small>Financial Assistant - Online</small></div><button class="close-chat" id="chatbotClose">&times;</button></div>' +
+    '<div class="chatbot-lang" id="chatLang"><button class="lang-btn active" data-lang="en">English</button><button class="lang-btn" data-lang="hi">\u0939\u093f\u0928\u094d\u0926\u0940</button></div>' +
     '<div class="chatbot-messages" id="chatMessages"><div class="chat-msg bot">Hi! I am GroMoney AI assistant. Ask me about Mutual Funds, SIP, PMS, AIF, Insurance, Loans & more. How can I help?</div></div>' +
     '<div class="chatbot-input"><input type="text" id="chatInput" placeholder="Type your question..." maxlength="300"><button id="chatSend" aria-label="Send"><svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg></button></div></div>';
   var c = document.createElement('div'); c.innerHTML = chatHTML; document.body.appendChild(c);
   var box = document.getElementById('chatbotBox'), toggle = document.getElementById('chatbotToggle');
   var input = document.getElementById('chatInput'), msgs = document.getElementById('chatMessages');
+  var chatLang = 'en';
+  document.getElementById('chatLang').addEventListener('click', function(e) {
+    var btn = e.target.closest('.lang-btn'); if (!btn) return;
+    chatLang = btn.dataset.lang;
+    document.querySelectorAll('.lang-btn').forEach(function(b){b.classList.remove('active');}); btn.classList.add('active');
+    msgs.innerHTML = '';
+    if (chatLang === 'hi') { addMsg('\u0928\u092e\u0938\u094d\u0924\u0947! \u092e\u0948\u0902 GroMoney AI \u0939\u0942\u0901\u0964 \u092e\u094d\u092f\u0942\u091a\u0941\u0905\u0932 \u092b\u0902\u0921, SIP, PMS, AIF, \u092c\u0940\u092e\u093e, \u0932\u094b\u0928 \u0915\u0947 \u092c\u093e\u0930\u0947 \u092e\u0947\u0902 \u092a\u0942\u091b\u0947\u0902\u0964','bot'); input.placeholder='\u0905\u092a\u0928\u093e \u0938\u0935\u093e\u0932 \u0932\u093f\u0916\u0947\u0902...'; }
+    else { addMsg('Hi! I am GroMoney AI assistant. Ask me about Mutual Funds, SIP, PMS, AIF, Insurance, Loans & more.','bot'); input.placeholder='Type your question...'; }
+  });
   toggle.addEventListener('click', function() { box.classList.toggle('open'); if(box.classList.contains('open')) input.focus(); });
   document.getElementById('chatbotClose').addEventListener('click', function() { box.classList.remove('open'); });
   function addMsg(text, type) { var m=document.createElement('div'); m.className='chat-msg '+type; m.textContent=text; msgs.appendChild(m); msgs.scrollTop=msgs.scrollHeight; return m; }
@@ -753,7 +763,7 @@ if ('serviceWorker' in navigator) {
     var text = input.value.trim(); if(!text) return; input.value=''; addMsg(text,'user');
     var t = addMsg('Typing...','bot typing');
     try {
-      var r = await fetch('/chatbot-api.php', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({message:text})});
+      var r = await fetch('/chatbot-api.php', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({message:text, lang:chatLang})});
       var d = await r.json(); t.remove(); addMsg(d.reply||'Please try again.','bot');
     } catch(e) { t.remove(); addMsg('Connection error. Call +91 96640 19564.','bot'); }
   }
