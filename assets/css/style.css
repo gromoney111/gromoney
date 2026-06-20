@@ -1353,3 +1353,20 @@ textarea.form-control { min-height: 130px; resize: vertical; }
   .tradingview-ticker-wrap { height: 40px; }
   .tradingview-ticker-wrap .tradingview-widget-container { height: 40px; }
 }
+
+/* Ticker Date Display */
+.ticker-date {
+  position: absolute;
+  right: 12px; top: 50%;
+  transform: translateY(-50%);
+  font-size: .68rem;
+  color: rgba(255,255,255,.5);
+  font-weight: 500;
+  z-index: 3;
+  white-space: nowrap;
+  background: #0a1628;
+  padding: 2px 10px;
+}
+@media (max-width: 720px) {
+  .ticker-date { display: none; }
+}

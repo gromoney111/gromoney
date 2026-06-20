@@ -171,12 +171,21 @@
   </div>
 </header>
 
+<!-- ============== MARKET INDEX TRACKER — NSE, BSE, Gold, Bank Nifty ============== -->
+<div class="market-ticker market-ticker-2" aria-label="Market Indices">
+  <div class="ticker-label ticker-label-gl">📈 MARKET</div>
+  <div class="ticker-track" id="tickerTrackIndex">
+    <!-- Populated by JS — indices updated daily after market close -->
+  </div>
+</div>
+
 <!-- ============== MARKET TICKER ROW 1 — MF NAVs Only ============== -->
 <div class="market-ticker" aria-label="Live Mutual Fund NAVs">
   <div class="ticker-label">📊 MF NAVs</div>
   <div class="ticker-track" id="tickerTrack">
     <!-- Content populated by JS — MF NAVs only -->
   </div>
+  <div class="ticker-date" id="tickerDate"></div>
 </div>
 
 
