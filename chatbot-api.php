@@ -64,8 +64,8 @@ CONTACT: Phone +91 96640 19564 | Email contact@gromoneycapital.com | WhatsApp 91
 
 RULES: Be concise (max 120 words). Speak Hindi or English based on user language. If user shows interest, ask for name and phone for free callback. Never guarantee returns. Add disclaimer for MF/insurance. Be friendly and helpful. Recommend relevant GroMoney services.";
 
-// Gemini API endpoint
-$url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=' . $API_KEY;
+// Gemini API endpoint (using gemini-2.5-flash - latest free model)
+$url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=' . $API_KEY;
 
 $payload = json_encode([
     'system_instruction' => ['parts' => [['text' => $systemPrompt]]],
