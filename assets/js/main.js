@@ -338,6 +338,19 @@ function initGoalCalc() {
         localStorage.setItem('gm_prev_navs', JSON.stringify(currentNavs));
       } catch (e) {}
 
+      // Update NAV date from API response
+      var navDate = '';
+      for (var i = 0; i < results.length; i++) {
+        if (results[i] && results[i].status === 'SUCCESS' && results[i].data && results[i].data[0] && results[i].data[0].date) {
+          navDate = results[i].data[0].date;
+          break;
+        }
+      }
+      var tickerDateEl = document.getElementById('tickerDate');
+      if (tickerDateEl && navDate) {
+        tickerDateEl.textContent = 'NAV as on: ' + navDate;
+      }
+
       renderTicker1(liveMFs);
     } catch (e) {
       renderTicker1(fallbackMFs);
@@ -362,37 +375,20 @@ function initGoalCalc() {
   var tickerTrackIndex = document.getElementById('tickerTrackIndex');
   if (!tickerTrackIndex) return;
 
-  // Show date on MF NAV ticker
-  var tickerDate = document.getElementById('tickerDate');
-  if (tickerDate) {
-    var today = new Date();
-    var options = { day: '2-digit', month: 'short', year: 'numeric' };
-    tickerDate.textContent = 'As on: ' + today.toLocaleDateString('en-IN', options);
-  }
-
-  // Market indices data (updated daily after market close via API)
+  // Market indices - indicative data (for display purposes)
+  // Note: Indian stock exchange APIs don't support CORS for client-side fetch
+  // These show last known closing values
   var marketIndices = [
-    { name: 'NIFTY 50', symbol: '^NSEI' },
-    { name: 'SENSEX', symbol: '^BSESN' },
-    { name: 'BANK NIFTY', symbol: '^NSEBANK' },
-    { name: 'NIFTY IT', symbol: 'NIFTY_IT' },
-    { name: 'GOLD (MCX)', symbol: 'GOLD' },
-    { name: 'SILVER (MCX)', symbol: 'SILVER' },
-    { name: 'CRUDE OIL', symbol: 'CRUDE' }
-  ];
-
-  // Fallback data (shown until live data loads)
-  var fallbackIndices = [
-    { name: 'NIFTY 50', price: '24,850.60', change: '+1.12%', direction: 'up' },
-    { name: 'SENSEX', price: '81,765.30', change: '+0.98%', direction: 'up' },
-    { name: 'BANK NIFTY', price: '53,420.15', change: '+0.64%', direction: 'up' },
-    { name: 'NIFTY IT', price: '44,320.80', change: '-0.32%', direction: 'down' },
-    { name: 'GOLD (MCX)', price: '₹74,850/10g', change: '+0.45%', direction: 'up' },
-    { name: 'SILVER (MCX)', price: '₹89,200/kg', change: '+1.02%', direction: 'up' },
-    { name: 'CRUDE OIL', price: '₹6,180/bbl', change: '-0.78%', direction: 'down' },
-    { name: 'NIFTY MIDCAP', price: '58,920.40', change: '+1.45%', direction: 'up' },
-    { name: 'NIFTY SMALLCAP', price: '18,640.25', change: '+1.82%', direction: 'up' },
-    { name: 'USD/INR', price: '₹83.42', change: '-0.08%', direction: 'down' }
+    { name: 'NIFTY 50', price: '24,850', change: '+1.12%', direction: 'up' },
+    { name: 'SENSEX', price: '81,765', change: '+0.98%', direction: 'up' },
+    { name: 'BANK NIFTY', price: '53,420', change: '+0.64%', direction: 'up' },
+    { name: 'NIFTY IT', price: '44,320', change: '-0.32%', direction: 'down' },
+    { name: 'GOLD (MCX)', price: '74,850/10g', change: '+0.45%', direction: 'up' },
+    { name: 'SILVER (MCX)', price: '89,200/kg', change: '+1.02%', direction: 'up' },
+    { name: 'CRUDE OIL', price: '6,180/bbl', change: '-0.78%', direction: 'down' },
+    { name: 'NIFTY MIDCAP', price: '58,920', change: '+1.45%', direction: 'up' },
+    { name: 'NIFTY SMALLCAP', price: '18,640', change: '+1.82%', direction: 'up' },
+    { name: 'USD/INR', price: '83.42', change: '-0.08%', direction: 'down' }
   ];
 
   function buildIndexHTML(data) {
@@ -407,35 +403,8 @@ function initGoalCalc() {
     return html;
   }
 
-  function renderIndexTicker(data) {
-    var content = buildIndexHTML(data);
-    tickerTrackIndex.innerHTML = content + content; // Duplicate for seamless scroll
-  }
-
-  // Try fetching live NSE/BSE data from free API
-  async function fetchLiveIndices() {
-    try {
-      // Using Google Finance scraping alternative - mfapi for Indian market data
-      var niftyRes = await fetch('https://api.mfapi.in/mf/120716/latest').then(function(r){return r.json();}).catch(function(){return null;});
-      
-      // For now, use fallback with today's date
-      var today = new Date();
-      var dateStr = today.toLocaleDateString('en-IN', {day:'2-digit', month:'short', year:'numeric'});
-      
-      if (tickerDate) {
-        tickerDate.textContent = 'Updated: ' + dateStr;
-      }
-      
-      renderIndexTicker(fallbackIndices);
-    } catch(e) {
-      renderIndexTicker(fallbackIndices);
-    }
-  }
-
-  renderIndexTicker(fallbackIndices);
-  fetchLiveIndices();
-  // Refresh every 30 minutes
-  setInterval(fetchLiveIndices, 30 * 60 * 1000);
+  var content = buildIndexHTML(marketIndices);
+  tickerTrackIndex.innerHTML = content + content;
 })();
 
 /* ===== Scroll Reveal ===== */

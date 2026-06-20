@@ -3,7 +3,6 @@
 
 # Correct MIME types for PWA files
 <IfModule mod_mime.c>
-  AddType application/manifest+json .json
   AddType application/javascript .js
   AddType text/javascript .js
   AddType image/svg+xml .svg
@@ -13,7 +12,9 @@
 
 # Specifically set manifest.json content type
 <Files "manifest.json">
-  Header set Content-Type "application/manifest+json"
+  <IfModule mod_headers.c>
+    Header set Content-Type "application/manifest+json"
+  </IfModule>
 </Files>
 
 # Service Worker must be served with correct JS MIME type
