@@ -733,3 +733,30 @@ if ('serviceWorker' in navigator) {
     });
   });
 }
+
+
+
+/* ===== AI CHATBOT WIDGET ===== */
+(function() {
+  var chatHTML = '<button class="chatbot-btn" id="chatbotToggle" aria-label="Chat with us"><svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H5.17L4 17.17V4h16v12z"/><path d="M7 9h2v2H7zm4 0h2v2h-2zm4 0h2v2h-2z"/></svg></button>' +
+    '<div class="chatbot-box" id="chatbotBox">' +
+    '<div class="chatbot-header"><div class="avatar">GM</div><div class="info"><h4>GroMoney AI</h4><small>Financial Assistant - Online</small></div><button class="close-chat" id="chatbotClose">&times;</button></div>' +
+    '<div class="chatbot-messages" id="chatMessages"><div class="chat-msg bot">Hi! I am GroMoney AI assistant. Ask me about Mutual Funds, SIP, PMS, AIF, Insurance, Loans & more. How can I help?</div></div>' +
+    '<div class="chatbot-input"><input type="text" id="chatInput" placeholder="Type your question..." maxlength="300"><button id="chatSend" aria-label="Send"><svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg></button></div></div>';
+  var c = document.createElement('div'); c.innerHTML = chatHTML; document.body.appendChild(c);
+  var box = document.getElementById('chatbotBox'), toggle = document.getElementById('chatbotToggle');
+  var input = document.getElementById('chatInput'), msgs = document.getElementById('chatMessages');
+  toggle.addEventListener('click', function() { box.classList.toggle('open'); if(box.classList.contains('open')) input.focus(); });
+  document.getElementById('chatbotClose').addEventListener('click', function() { box.classList.remove('open'); });
+  function addMsg(text, type) { var m=document.createElement('div'); m.className='chat-msg '+type; m.textContent=text; msgs.appendChild(m); msgs.scrollTop=msgs.scrollHeight; return m; }
+  async function send() {
+    var text = input.value.trim(); if(!text) return; input.value=''; addMsg(text,'user');
+    var t = addMsg('Typing...','bot typing');
+    try {
+      var r = await fetch('/chatbot-api.php', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({message:text})});
+      var d = await r.json(); t.remove(); addMsg(d.reply||'Please try again.','bot');
+    } catch(e) { t.remove(); addMsg('Connection error. Call +91 96640 19564.','bot'); }
+  }
+  document.getElementById('chatSend').addEventListener('click', send);
+  input.addEventListener('keypress', function(e) { if(e.key==='Enter') send(); });
+})();
