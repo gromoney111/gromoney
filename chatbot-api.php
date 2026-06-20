@@ -25,8 +25,20 @@ $input = json_decode(file_get_contents('php://input'), true);
 $msg = trim($input['message'] ?? '');
 if (!$msg || strlen($msg)>500) { echo json_encode(['reply'=>'Please type a valid question.']); exit; }
 
-// === YOUR OPENAI API KEY (from platform.openai.com) ===
-$API_KEY = 'YOUR_OPENAI_API_KEY_HERE';
+// === YOUR OPENAI API KEY ===
+// SECURITY: Read key from a separate file NOT in git repo
+// Create file 'chatbot-key.txt' on Hostinger with ONLY your API key inside
+$keyFile = __DIR__ . '/chatbot-key.txt';
+if (file_exists($keyFile)) {
+    $API_KEY = trim(file_get_contents($keyFile));
+} else {
+    // Fallback: set key directly here ONLY on Hostinger (never push to GitHub)
+    $API_KEY = '';
+}
+
+if (empty($API_KEY)) {
+    echo json_encode(['reply'=>'Chatbot setup incomplete. Please call +91 96640 19564.']); exit;
+}
 
 $system = "You are the AI assistant for GroMoney Capital, AMFI-registered mutual fund distributor (ARN:270739) and IRDA-registered insurance referral partner. NJ Wealth Partner, India.
 
