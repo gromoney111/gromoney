@@ -370,24 +370,37 @@ function initGoalCalc() {
   }
 })();
 
-/* ===== ROW 2: Market Indices — NSE, BSE, Gold, MCX, Bank Nifty ===== */
+/* ===== ROW 2: Market Indices — LIVE via IndianAPI (500 calls/month) ===== */
 (function () {
   var tickerTrackIndex = document.getElementById('tickerTrackIndex');
   if (!tickerTrackIndex) return;
 
-  // Market indices - indicative data (for display purposes)
-  // Note: Indian stock exchange APIs don't support CORS for client-side fetch
-  // These show last known closing values
-  var marketIndices = [
+  var INDIAN_API_KEY = 'sk-live-UATPt3yUVUwWAb82y1wOxJaspUvY1fbZEsdKpJa2';
+  var API_BASE = 'https://stock.indianapi.in/stock?name=';
+
+  // Stocks to fetch (key indices via proxy stocks + blue-chips)
+  var stocksToFetch = [
+    { query: 'Reliance', display: 'RELIANCE' },
+    { query: 'TCS', display: 'TCS' },
+    { query: 'Infosys', display: 'INFOSYS' },
+    { query: 'SBI', display: 'SBI' },
+    { query: 'ICICI Bank', display: 'ICICI BANK' },
+    { query: 'Bharti Airtel', display: 'AIRTEL' },
+    { query: 'ITC', display: 'ITC' },
+    { query: 'Tata Motors', display: 'TATA MOTORS' }
+  ];
+
+  // Fallback (shown before API loads or if API fails)
+  var fallbackIndices = [
     { name: 'NIFTY 50', price: '24,850', change: '+1.12%', direction: 'up' },
     { name: 'SENSEX', price: '81,765', change: '+0.98%', direction: 'up' },
     { name: 'BANK NIFTY', price: '53,420', change: '+0.64%', direction: 'up' },
-    { name: 'NIFTY IT', price: '44,320', change: '-0.32%', direction: 'down' },
+    { name: 'RELIANCE', price: '1,456', change: '+0.82%', direction: 'up' },
+    { name: 'TCS', price: '4,128', change: '+0.86%', direction: 'up' },
+    { name: 'INFOSYS', price: '1,892', change: '-0.34%', direction: 'down' },
+    { name: 'SBI', price: '842', change: '+2.45%', direction: 'up' },
+    { name: 'ICICI BANK', price: '1,285', change: '+0.72%', direction: 'up' },
     { name: 'GOLD (MCX)', price: '74,850/10g', change: '+0.45%', direction: 'up' },
-    { name: 'SILVER (MCX)', price: '89,200/kg', change: '+1.02%', direction: 'up' },
-    { name: 'CRUDE OIL', price: '6,180/bbl', change: '-0.78%', direction: 'down' },
-    { name: 'NIFTY MIDCAP', price: '58,920', change: '+1.45%', direction: 'up' },
-    { name: 'NIFTY SMALLCAP', price: '18,640', change: '+1.82%', direction: 'up' },
     { name: 'USD/INR', price: '83.42', change: '-0.08%', direction: 'down' }
   ];
 
@@ -396,15 +409,104 @@ function initGoalCalc() {
     data.forEach(function(item) {
       html += '<div class="ticker-item ticker-index">' +
         '<span class="ticker-name">' + item.name + '</span>' +
-        '<span class="ticker-price">' + item.price + '</span>' +
+        '<span class="ticker-price">' + (item.price || '') + '</span>' +
         '<span class="ticker-change ' + item.direction + '">' + item.change + '</span>' +
         '</div>';
     });
     return html;
   }
 
-  var content = buildIndexHTML(marketIndices);
-  tickerTrackIndex.innerHTML = content + content;
+  function renderIndexTicker(data) {
+    var content = buildIndexHTML(data);
+    tickerTrackIndex.innerHTML = content + content;
+  }
+
+  // Rate limit: only fetch once per hour (stored in localStorage)
+  function shouldFetchLive() {
+    try {
+      var lastFetch = localStorage.getItem('gm_stock_last_fetch');
+      if (lastFetch) {
+        var elapsed = Date.now() - parseInt(lastFetch);
+        // Only fetch every 60 minutes to stay within 500/month limit
+        // 8 stocks x 1 call/hr x 12 hrs/day x 22 days = 2112 → TOO HIGH
+        // Better: fetch every 4 hours = 8 x 3 x 22 = 528 → CLOSE TO LIMIT
+        // Safest: fetch every 6 hours = 8 x 2 x 22 = 352 → SAFE
+        if (elapsed < 6 * 60 * 60 * 1000) return false; // 6 hours
+      }
+    } catch(e) {}
+    return true;
+  }
+
+  async function fetchLiveStocks() {
+    if (!shouldFetchLive()) {
+      // Use cached data
+      try {
+        var cached = localStorage.getItem('gm_stock_data');
+        if (cached) {
+          renderIndexTicker(JSON.parse(cached));
+          return;
+        }
+      } catch(e) {}
+      renderIndexTicker(fallbackIndices);
+      return;
+    }
+
+    try {
+      var liveData = [];
+      // Fetch stocks sequentially to be gentle on API
+      for (var i = 0; i < stocksToFetch.length; i++) {
+        var stock = stocksToFetch[i];
+        try {
+          var res = await fetch(API_BASE + encodeURIComponent(stock.query), {
+            headers: { 'X-Api-Key': INDIAN_API_KEY }
+          });
+          var data = await res.json();
+          if (data && data.currentPrice) {
+            var price = data.currentPrice.NSE || data.currentPrice.BSE || '—';
+            var pctChange = data.percentChange || 0;
+            var direction = parseFloat(pctChange) >= 0 ? 'up' : 'down';
+            var sign = parseFloat(pctChange) >= 0 ? '+' : '';
+            liveData.push({
+              name: stock.display,
+              price: parseFloat(price).toLocaleString('en-IN'),
+              change: sign + parseFloat(pctChange).toFixed(2) + '%',
+              direction: direction
+            });
+          }
+        } catch(e) {
+          liveData.push(fallbackIndices[i + 3] || fallbackIndices[0]);
+        }
+      }
+
+      if (liveData.length > 0) {
+        // Add static index items at beginning
+        var fullData = [
+          { name: 'NIFTY 50', price: '—', change: '—', direction: 'up' },
+          { name: 'SENSEX', price: '—', change: '—', direction: 'up' },
+          { name: 'BANK NIFTY', price: '—', change: '—', direction: 'up' }
+        ].concat(liveData);
+
+        renderIndexTicker(fullData);
+        // Cache results
+        try {
+          localStorage.setItem('gm_stock_data', JSON.stringify(fullData));
+          localStorage.setItem('gm_stock_last_fetch', Date.now().toString());
+        } catch(e) {}
+      } else {
+        renderIndexTicker(fallbackIndices);
+      }
+    } catch(e) {
+      renderIndexTicker(fallbackIndices);
+    }
+  }
+
+  // Render fallback immediately, then try live
+  renderIndexTicker(fallbackIndices);
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(fetchLiveStocks, { timeout: 5000 });
+  } else {
+    setTimeout(fetchLiveStocks, 2000);
+  }
 })();
 
 /* ===== Scroll Reveal ===== */
