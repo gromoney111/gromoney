@@ -738,7 +738,7 @@ if ('serviceWorker' in navigator) {
 
 /* ===== AI CHATBOT WIDGET ===== */
 (function() {
-  var chatHTML = '<button class="chatbot-btn" id="chatbotToggle" aria-label="Chat with us"><svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H5.17L4 17.17V4h16v12z"/><path d="M7 9h2v2H7zm4 0h2v2h-2zm4 0h2v2h-2z"/></svg></button>' +
+  var chatHTML = '<button class="chatbot-btn" id="chatbotToggle" aria-label="Chat with us"><svg viewBox="0 0 512 512"><circle cx="256" cy="256" r="220" fill="none" stroke="#fff" stroke-width="16"/><circle cx="180" cy="220" r="24" fill="#fff"/><circle cx="332" cy="220" r="24" fill="#fff"/><path d="M180 310 Q256 370 332 310" stroke="#fff" stroke-width="16" fill="none" stroke-linecap="round"/><rect x="220" y="100" width="72" height="40" rx="20" fill="#fff"/><line x1="256" y1="140" x2="256" y2="170" stroke="#fff" stroke-width="12" stroke-linecap="round"/></svg></button>' +
     '<div class="chatbot-box" id="chatbotBox">' +
     '<div class="chatbot-header"><div class="avatar">GM</div><div class="info"><h4>GroMoney AI</h4><small>Financial Assistant - Online</small></div><button class="close-chat" id="chatbotClose">&times;</button></div>' +
     '<div class="chatbot-messages" id="chatMessages"><div class="chat-msg bot">Hi! I am GroMoney AI assistant. Ask me about Mutual Funds, SIP, PMS, AIF, Insurance, Loans & more. How can I help?</div></div>' +

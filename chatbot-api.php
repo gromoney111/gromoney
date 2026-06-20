@@ -4,8 +4,8 @@
  * POST /chatbot-api.php with JSON body: {"message":"user question"}
  */
 header('Content-Type: application/json');
-header('Access-Control-Allow-Origin: https://gromoneycapital.com');
-header('Access-Control-Allow-Methods: POST');
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: POST, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type');
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') exit;
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -36,20 +36,51 @@ CONTACT: +91 96640 19564 | contact@gromoneycapital.com | WhatsApp: 919664019564 
 
 RULES: Be concise(max 120 words). Speak Hindi or English per user. If interested, ask name+phone for free callback. Never guarantee returns. Add disclaimer for MF/insurance. Be friendly.";
 
+$payload = json_encode([
+    'model' => 'gpt-4o-mini',
+    'messages' => [['role'=>'system','content'=>$system],['role'=>'user','content'=>$msg]],
+    'max_tokens' => 250, 'temperature' => 0.7
+]);
+
 $ch = curl_init('https://api.openai.com/v1/chat/completions');
 curl_setopt_array($ch, [
-    CURLOPT_RETURNTRANSFER => true, CURLOPT_POST => true, CURLOPT_TIMEOUT => 25,
-    CURLOPT_HTTPHEADER => ['Content-Type: application/json', 'Authorization: Bearer '.$API_KEY],
-    CURLOPT_POSTFIELDS => json_encode([
-        'model' => 'gpt-4o-mini',
-        'messages' => [['role'=>'system','content'=>$system],['role'=>'user','content'=>$msg]],
-        'max_tokens' => 250, 'temperature' => 0.7
-    ])
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_POST => true,
+    CURLOPT_TIMEOUT => 30,
+    CURLOPT_SSL_VERIFYPEER => true,
+    CURLOPT_SSL_VERIFYHOST => 2,
+    CURLOPT_HTTPHEADER => [
+        'Content-Type: application/json',
+        'Authorization: Bearer ' . $API_KEY
+    ],
+    CURLOPT_POSTFIELDS => $payload
 ]);
-$res = curl_exec($ch); $code = curl_getinfo($ch, CURLINFO_HTTP_CODE); curl_close($ch);
 
-if ($code !== 200 || !$res) {
+$res = curl_exec($ch);
+$err = curl_error($ch);
+$code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+curl_close($ch);
+
+// Debug: if you need to troubleshoot, uncomment below
+// file_put_contents(sys_get_temp_dir().'/gm_chatbot_debug.log', date('Y-m-d H:i:s')." Code:$code Err:$err Res:".substr($res,0,500)."\n", FILE_APPEND);
+
+if ($err) {
     echo json_encode(['reply'=>'I am currently unavailable. Please call +91 96640 19564 or WhatsApp.']); exit;
 }
+if ($code !== 200) {
+    $errData = json_decode($res, true);
+    $errMsg = $errData['error']['message'] ?? 'API error';
+    // If quota/key issue, show helpful message
+    if (strpos($errMsg, 'quota') !== false || strpos($errMsg, 'billing') !== false) {
+        echo json_encode(['reply'=>'I am currently unavailable. Please call +91 96640 19564 or WhatsApp.']); exit;
+    }
+    echo json_encode(['reply'=>'I am currently unavailable. Please call +91 96640 19564 or WhatsApp.']); exit;
+}
+
 $data = json_decode($res, true);
-echo json_encode(['reply' => $data['choices'][0]['message']['content'] ?? 'Please call +91 96640 19564.']);
+$reply = $data['choices'][0]['message']['content'] ?? null;
+if ($reply) {
+    echo json_encode(['reply' => $reply]);
+} else {
+    echo json_encode(['reply'=>'I am currently unavailable. Please call +91 96640 19564 or WhatsApp.']);
+}

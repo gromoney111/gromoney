@@ -1377,16 +1377,21 @@ textarea.form-control { min-height: 130px; resize: vertical; }
 .chatbot-btn {
   position: fixed;
   bottom: 24px; right: 24px;
-  width: 60px; height: 60px;
-  background: linear-gradient(135deg, #0b3d6b, #f5a623);
+  width: 64px; height: 64px;
+  background: linear-gradient(135deg, #f5a623, #d68910);
   border: none; border-radius: 50%;
   cursor: pointer; z-index: 9990;
   display: grid; place-items: center;
-  box-shadow: 0 6px 20px rgba(11,61,107,.4);
+  box-shadow: 0 6px 24px rgba(245,166,35,.5), 0 0 0 4px rgba(245,166,35,.2);
   transition: all .3s ease;
+  animation: chatPulse 2s ease-in-out infinite;
 }
-.chatbot-btn:hover { transform: scale(1.1); }
-.chatbot-btn svg { width: 28px; height: 28px; fill: #fff; }
+.chatbot-btn:hover { transform: scale(1.12); animation: none; box-shadow: 0 8px 30px rgba(245,166,35,.6); }
+.chatbot-btn svg { width: 34px; height: 34px; fill: #fff; }
+@keyframes chatPulse {
+  0%,100% { box-shadow: 0 6px 24px rgba(245,166,35,.5), 0 0 0 4px rgba(245,166,35,.2); }
+  50% { box-shadow: 0 6px 24px rgba(245,166,35,.5), 0 0 0 12px rgba(245,166,35,.08); }
+}
 .chatbot-box {
   position: fixed;
   bottom: 96px; right: 24px;
