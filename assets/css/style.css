@@ -195,7 +195,7 @@ p  { margin: 0 0 1em; color: var(--color-text-soft); }
 .hero h1 { color: #fff; margin-bottom: 16px; }
 .hero p.lead { font-size: 1.1rem; color: rgba(255,255,255,.92); max-width: 640px; margin-bottom: 28px; }
 .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
-.hero-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 50px; max-width: 640px; }
+.hero-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 50px; max-width: 720px; }
 .hero-stat { background: rgba(255,255,255,.1); padding: 18px; border-radius: 12px; backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,.18); }
 .hero-stat strong { display: block; font-size: 1.6rem; color: var(--color-accent); }
 .hero-stat span { font-size: .85rem; color: rgba(255,255,255,.85); }
